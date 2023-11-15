@@ -1,0 +1,8 @@
+# sửa lại tên file hiện tại thành .env
+PORT = port
+
+DB_HOST = localhost
+DB_NAME = name
+DB_USER = user
+DB_PORT = portdb
+DB_PASSWORD = password
