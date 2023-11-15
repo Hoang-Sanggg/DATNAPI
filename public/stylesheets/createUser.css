@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    background-color: #eeeeee;
+  }
+  
+  legend {
+    background-color: gray;
+    color: white;
+    padding: 5px 10px;
+  }
+  
+  input {
+    margin: 5px;
+    padding: 5px;
+  }
+label{
+    margin-left: 10px;
+}
+.form-group{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+}

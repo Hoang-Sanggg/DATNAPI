@@ -1,0 +1,165 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+</head>
+<style>
+
+</style>
+
+<body>
+
+    <ul>
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/add-user">Create-user</a></li>
+        <li><a href="/edit/1">Edit</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+    <form action="/create-user" class="form-group" method="POST">
+        <fieldset>
+            <legend>Add user:</legend>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required><br><br>
+            <label for="name">Name:</label>
+            <input type="text" name="name"><br><br>
+            <label for="city">City:</label>
+            <input type="text" name="city"><br><br>
+            <input type="submit" value="Add">
+        </fieldset>
+    </form>
+    <div class="container">
+        <h1>list User</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+
+            <% listUsers.forEach(function(User,index) { %>
+                <tr>
+                    <!-- <td>
+                        <%= User.id %>
+                    </td>
+                    <td>
+                        <p id="p1<%= User.id%>">
+                            <%= User.email %>
+                        </p>
+                        <input style="display: none;" type="email" id="input1<%= User.id%>" name="email"
+                            value="<%= User.email %>">
+                    </td>
+                    <td>
+                        <p id="p2<%= User.id%>">
+                            <%= User.name %>
+                        </p>
+                        <input style="display: none;" type="email" id="input2<%= User.id%>" name="email"
+                            value="<%= User.name %>">
+
+
+                    </td>
+                    <td>
+                        <p id="p3<%= User.id%>">
+                            <%= User.city %>
+                        </p>
+                        <input style="display: none;" type="email" id="input3<%= User.id%>" name="email"
+                            value="<%= User.city %>">
+
+                    </td> -->
+                    <form action="/update-user" class="form-group" method="POST" id="form-input">
+                        <input style="display: none;" type="text" name="userId" value="<%= User.id %>">
+                        <td>
+                            <%= User.id %>
+                        </td>
+                        <td>
+                            <p id="p1<%= User.id%>">
+                                <%= User.email %>
+                            </p>
+                            <input style="display: none;" type="email" id="input1<%= User.id%>" name="email"
+                                value="<%= User.email %>">
+                        </td>
+                        <td>
+                            <p id="p2<%= User.id%>">
+                                <%= User.name %>
+                            </p>
+                            <input style="display: none;" type="text" id="input2<%= User.id%>" name="name"
+                                value="<%= User.name %>">
+
+
+                        </td>
+                        <td>
+                            <p id="p3<%= User.id%>">
+                                <%= User.city %>
+                            </p>
+                            <input style="display: none;" type="text" id="input3<%= User.id%>" name="city"
+                                value="<%= User.city %>">
+
+                        </td>
+
+                        <!-- 
+                        <td>
+                            <button type="submit" value="<%= User.id%>" id="brandName" onclick="multiple(this.value);"
+                                style="padding: 2px;background-color: blue;color: white;">Save</button>
+
+
+
+                        </td> -->
+
+                    </form>
+                    <td>
+                        <button value="<%= User.id%>" id="btn<%= User.id%>" onclick="multiple(this.value);"
+                            style="padding: 2px;background-color: blue;color: white;display: inline-block;">
+                            Edit
+                        </button>
+                        <button form="form-input" value="<%= User.id%>" id="btn1<%= User.id%>"
+                            onclick="multiple(this.value);"
+                            style="padding: 2px;background-color: blue;color: white; display: none;">
+                            Save
+                        </button>
+                        <button style="padding: 2px;background-color: red;color: white;" value="<%= User.id%>"><a
+                                style="text-decoration: none;color: white;" href="/delete/<%= User.id%>"
+                                onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                        </button>
+
+
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
+
+</body>
+<script>
+    function showList(id) {
+
+        var aText = document.getElementById("a" + id);
+        var btnText = document.getElementById("btn" + id);
+        var btn1Text = document.getElementById("btn1" + id);
+
+        for (let i = 1; i <= 3; i++) {
+            var pDisplay = document.getElementById("p" + i + id);
+            var inputDisplay = document.getElementById("input" + i + id);
+            inputDisplay.style.display = (inputDisplay.style.display == 'inline-block') ? 'none' : 'inline-block';
+            pDisplay.style.display = (inputDisplay.style.display == 'inline-block') ? 'none' : 'inline-block';
+            console.log("p" + i + id);
+
+        }
+        btnText.style.display = (btnText.style.display == 'inline-block') ? 'none' : 'inline-block';
+        btn1Text.style.display = (btn1Text.style.display == 'inline-block') ? 'none' : 'inline-block';
+
+
+    }// a div id = "id" is hidden on this page, clicking will make it becomes visible.
+
+    function multiple(value) {
+        showList(value);
+        console.log(value);
+    }
+
+</script>
+
+</html>
