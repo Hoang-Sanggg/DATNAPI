@@ -1,5 +1,12 @@
 const db = require('../models/index')
 
+const bcrypt = require('bcrypt');
+const salt = bcrypt.genSaltSync(10);
+const hashPassword = (userPassword) => {
+    let hashPassword = bcrypt.hashSync(userPassword, salt)
+    return hashPassword;
+}
+
 const getAllUsers = async () => {
     const users = await db.User.findAll();
     return users;
@@ -15,12 +22,12 @@ const getById = async (userId) => {
 }
 
 const postUser = async (email, name, password, phone, reputation) => {
-
+    let hashPass = hashPassword(password);
     try {
         await db.User.create({
             email: email,
             name: name,
-            password: password,
+            password: hashPass,
             phone: phone,
             reputation: reputation
 
