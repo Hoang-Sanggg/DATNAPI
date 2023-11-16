@@ -1,26 +1,16 @@
-const Users = require('../service/userService')
+const userService = require('../service/userService')
 
 const getAllUsers = async (req, res) => {
-    const users = await Users.getAllUsers();
-    return res.render('home', { listUsers: users });
+    const users = await userService.getAllUsers();
+    return res.render('home', { listUsers: users, title: '' });
 }
 
 const postUser = async (req, res) => {
-    // const email = req.body.email;
-    // const name = req.body.name;
-    // const city = req.body.city;
-    const { email, name, city } = req.body;
-    if (email != '' && name != '' && city != '') {
-        const user = await Users.postUser(email, name, city);
-        console.log('check user:', user.affectedRows)
-        // if (user.affectedRows == 1) {
-        //     return res.render('createUser', { title: 'Tạo mới thành công' });
-        // } else {
-        //     return res.render('createUser', { title: 'Tạo mới thất bại' });
-        // }
+    const { email, name, password, phone, reputation } = req.body;
+    if (email != '' && name != '' && reputation != '' && password != '' && phone != '') {
+        const user = await userService.postUser(email, name, password, phone, reputation);
+        console.log('check user:', user)
     }
-    // return res.render('createUser', { title: 'Tạo mới thất bại' });
-
     return res.redirect('/');
 }
 
@@ -32,33 +22,24 @@ const getUserById = async (req, res) => {
     console.log('>>>>>>>>>>>.: ', req.params)
     const { userId } = req.params;
     if (userId != null) {
-        const users = await Users.getById(userId);
+        const users = await userService.getById(userId);
         console.log('user : ', users);
-        return res.render('updateUser', { user: users[0], title: '' });
+        return res.render('updateUser', { user: users, title: '' });
 
     }
 }
 
 const updateUser = async (req, res) => {
-    // const { userId } = req.params;
-    const { userId, email, name, city } = req.body;
-    console.log(userId, email, name, city);
-    if (email != '' && name != '' && city != '' && userId != '') {
-        const user = await Users.updateUser(userId, email, name, city);
-        console.log('check user:', user.changedRows)
-        if (user.changedRows == 1) {
-            // return res.redirect('/edit/'+userId+'/1');
-            // return res.render('updateUser', { user: {userId, email, name, city }, title: 'Cập nhật thành công' });
-        }
-
-    }
+    const { userId, email, name, phone, reputation } = req.body;
+    console.log(userId, email, name, phone, reputation);
+    await userService.updateUser(userId, email, name, phone, reputation);
     return res.redirect('/');
 }
 
 const deleteById = async (req, res) => {
     const { userId } = req.params;
     if (userId != null) {
-        const users = await Users.deleteById(userId);
+        const users = await userService.deleteById(userId);
     }
     return res.redirect('/');
 

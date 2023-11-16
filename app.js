@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var connection = require('./config/database');
+// var connection = require('./config/database');
 var userRouter = require('./routes/web');
+const connection = require('./config/connectDB');
 
 var app = express();
 
@@ -27,6 +28,9 @@ app.use('/', userRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+//test connection
+connection();
 
 // error handler
 app.use(function (err, req, res, next) {

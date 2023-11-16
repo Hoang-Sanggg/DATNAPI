@@ -1,29 +1,59 @@
-const connection = require('../config/database')
-const User = {};
+const db = require('../models/index')
 
-User.getAllUsers = async () => {
-    const [results, fields] = await connection.execute('SELECT * FROM Users');
-    return results;
-};
-  
-User.getById = async(id)=>{
-    const [results, fields] = await connection.execute('SELECT * FROM Users WHERE id = ?',[id]);
-    return results;
-}
-
-User.postUser = async (email, name, city)=>{
-    const [results,fields] = await connection.execute('INSERT INTO Users (email, name, city) VALUES (?,?,?)',[email, name, city]);
-    return results;
+const getAllUsers = async () => {
+    const users = await db.User.findAll();
+    return users;
 };
 
-User.updateUser = async (id,email, name, city) =>{
-    const [results,fields] = await connection.execute('UPDATE Users SET email = ?, name = ?, city = ? WHERE id = ?',[email, name, city,id]);
-    return results;
+const getById = async (userId) => {
+    try {
+        const users = await db.User.findOne({ id: userId });
+        return users.get({ plain: true });
+    } catch (error) {
+        console.log(">>>> check error", error);
+    }
 }
 
-User.deleteById = async (id) =>{
-    const [results,fields] = await connection.execute('DELETE FROM Users  WHERE id = ?',[id]);
-    return results;
+const postUser = async (email, name, password, phone, reputation) => {
+
+    try {
+        await db.User.create({
+            email: email,
+            name: name,
+            password: password,
+            phone: phone,
+            reputation: reputation
+
+        })
+
+    } catch (error) {
+        console.log(">>>> check error", error);
+    }
+};
+
+const updateUser = async (id, email, name, phone, reputation) => {
+
+    try {
+        await db.User.update({
+            email: email,
+            name: name,
+            phone: phone,
+            reputation: reputation
+        }, { where: { id: id } });
+
+    } catch (error) {
+        console.log(">>>> check error", error);
+    }
 }
 
-module.exports = User;
+const deleteById = async (userId) => {
+    try {
+        await db.User.destroy({ where: { id: userId } });
+    } catch (error) {
+        console.log(">>>>> check error :", error);
+    }
+}
+
+module.exports = {
+    getAllUsers, deleteById, updateUser, postUser, getById
+};
