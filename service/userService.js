@@ -21,7 +21,7 @@ const getById = async (userId) => {
     }
 }
 
-const postUser = async (email, name, password, phone, reputation) => {
+const createUser = async (email, name, password, phone, reputation) => {
     let hashPass = hashPassword(password);
     try {
         await db.User.create({
@@ -62,5 +62,5 @@ const deleteById = async (userId) => {
 }
 
 module.exports = {
-    getAllUsers, deleteById, updateUser, postUser, getById
+    getAllUsers, deleteById, updateUser, createUser, getById
 };

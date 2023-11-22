@@ -4,7 +4,7 @@ tạo bảng User
 npx sequelize-cli model:generate --name User --attributes email:string,name:string,phone:string,reputation:string
 
 
-chạy môi trường developer trong config.json
+tạo bảng migrations
 npx sequelize-cli db:migrate
-tạo lại bảng
+xoa bảng trong migrations
 npx sequelize-cli db:migrate:undo

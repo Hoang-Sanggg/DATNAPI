@@ -7,10 +7,10 @@ const getAllUsers = async (req, res) => {
 
 }
 
-const postUser = async (req, res) => {
+const createUser = async (req, res) => {
     const { email, name, password, phone, reputation } = req.body;
     if (email != '' && name != '' && reputation != '' && password != '' && phone != '') {
-        const user = await userService.postUser(email, name, password, phone, reputation);
+        const user = await userService.createUser(email, name, password, phone, reputation);
         console.log('check user:', user)
     }
     return res.redirect('/');
@@ -47,5 +47,5 @@ const deleteById = async (req, res) => {
 
 }
 module.exports = {
-    getAllUsers, postUser, addUser, getUserById, updateUser, deleteById
+    getAllUsers, createUser, addUser, getUserById, updateUser, deleteById
 }
