@@ -49,37 +49,12 @@
             <%= title %>
                 <% listUsers.forEach(function(User,index) { %>
                     <tr>
-                        <!-- <td>
-                        <%= User.id %>
-                    </td>
-                    <td>
-                        <p id="p1<%= User.id%>">
-                            <%= User.email %>
-                        </p>
-                        <input style="display: none;" type="email" id="input1<%= User.id%>" name="email"
-                            value="<%= User.email %>">
-                    </td>
-                    <td>
-                        <p id="p2<%= User.id%>">
-                            <%= User.name %>
-                        </p>
-                        <input style="display: none;" type="email" id="input2<%= User.id%>" name="email"
-                            value="<%= User.name %>">
 
+                        <form action="/update-user" class="form-group" method="POST" id="form-input<%= index %>">
 
-                    </td>
-                    <td>
-                        <p id="p3<%= User.id%>">
-                            <%= User.reputation %>
-                        </p>
-                        <input style="display: none;" type="email" id="input3<%= User.id%>" name="email"
-                            value="<%= User.reputation %>">
-
-                    </td> -->
-                        <form action="/update-user" class="form-group" method="POST" id="form-input">
-                            <input style="display: none;" type="text" name="userId" value="<%= User.id %>">
                             <td>
                                 <%= User.id %>
+                                    <input style="display: none;" type="text" name="userId" value="<%= User.id %>">
                             </td>
                             <td>
                                 <p id="p1<%= User.id%>">
@@ -126,7 +101,7 @@
                                 style="padding: 2px;background-color: blue;color: white;display: inline-block;">
                                 Edit
                             </button>
-                            <button form="form-input" value="<%= User.id%>" id="btn1<%= User.id%>"
+                            <button form="form-input<%= index %>" value="<%= User.id%>" id="btn1<%= User.id%>"
                                 onclick="multiple(this.value);"
                                 style="padding: 2px;background-color: blue;color: white; display: none;">
                                 Save

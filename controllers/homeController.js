@@ -2,7 +2,6 @@ const userService = require('../service/userService')
 
 const getAllUsers = async (req, res) => {
     const users = await userService.getAllUsers();
-    console.log('check user:', users)
     return res.render('home', { listUsers: users, title: '' });
 
 }

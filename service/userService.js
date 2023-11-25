@@ -47,7 +47,7 @@ const updateUser = async (id, email, name, phone, reputation) => {
             phone: phone,
             reputation: reputation
         }, { where: { id: id } });
-
+        console.log(id, email, name, phone, reputation);
     } catch (error) {
         console.log(">>>> check error", error);
     }
