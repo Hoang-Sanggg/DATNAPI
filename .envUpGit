@@ -1,9 +1,8 @@
-# sửa lại tên file hiện tại thành .env
-PORT = port
+PORT = 8080
 
-DB_HOST = localhost
-DB_NAME = name
-DB_USER = user
-DB_PORT = portdb
-DB_PASSWORD = password
+DB_HOST = sql12.freesqldatabase.com
+DB_NAME = sql12665012
+DB_USER = sql12665012
+DB_PORT = 3306
+DB_PASSWORD = ZXwxAmgrTv
 DB_DIALECT = mysql
