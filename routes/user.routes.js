@@ -3,7 +3,6 @@ const userController = require("../controller/user.controller");
 
 const router = express.Router();
 
-// Tuyến đường API cho tất cả các users
 router.get("/", userController.findAll);
 router.post("/", userController.create);
 router.get("/:userId", userController.findOne);

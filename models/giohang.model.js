@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Định nghĩa schema cho bảng GioHang
 const GioHangSchema = new mongoose.Schema(
   {
     status: Boolean,
@@ -10,6 +9,5 @@ const GioHangSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Tạo model từ schema và xuất nó
 const GioHang = mongoose.model("GioHang", GioHangSchema);
 module.exports = GioHang;

@@ -23,6 +23,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Routes
 app.use("/api/users", userRoutes);
 app.use("/api/giohang", giohangRoutes);
 app.use("/api/history", historyRoutes);
