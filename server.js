@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoutes = require("./routes/user.routes");
-const giohangRoutes = require("./routes/giohang.routes");
+const giohangRoutes = require("./routes/cart.routes");
 const historyRoutes = require("./routes/history.routes");
 
 const app = express();
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //Routes
 app.use("/api/users", userRoutes);
-app.use("/api/giohang", giohangRoutes);
+app.use("/api/cart", giohangRoutes);
 app.use("/api/history", historyRoutes);
 
 app.get("/", (req, res) => {
