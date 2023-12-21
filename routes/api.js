@@ -16,13 +16,13 @@ router.post('/add-user', userController.addUser);
 // Cart routes
 router.get('/cart', cartController.getAllCarts);
 router.post('/add-cart', cartController.addCart);
-router.put('/update-cart', cartController.updateCart);
+router.post('/update-cart', cartController.updateCart);
 router.delete('/delete-cart', cartController.deleteCart);
 
 // History routes
 router.get('/history', historyController.getAllHistory);
 router.post('/add-history', historyController.addHistory);
-router.put('/update-history', historyController.updateHistory);
+router.post('/update-history', historyController.updateHistory);
 router.delete('/delete-history', historyController.deleteHistory);
 
 module.exports = router

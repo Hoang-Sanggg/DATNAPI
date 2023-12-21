@@ -23,10 +23,10 @@ const addHistory = async (historyData) => {
 };
 
 // sửa lịch sử
-const updateHistory = async (historyId, updatedHistoryData) => {
+const updateHistory = async (id, updatedHistoryData) => {
     try {
         const updatedHistoryRecord = await HistoryModel.findOneAndUpdate(
-            { _id: historyId },
+            { _id: id },
             { $set: updatedHistoryData },
             { new: true } 
         );
@@ -38,9 +38,9 @@ const updateHistory = async (historyId, updatedHistoryData) => {
 };
 
 // xóa lịch sử
-const deleteHistory = async (historyId) => {
+const deleteHistory = async (id) => {
     try {
-        const deletedHistoryRecord = await HistoryModel.findOneAndDelete({ _id: historyId });
+        const deletedHistoryRecord = await HistoryModel.findOneAndDelete({ _id: id });
 
         return deletedHistoryRecord;
     } catch (error) {

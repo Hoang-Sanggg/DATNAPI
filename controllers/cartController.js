@@ -23,9 +23,9 @@ const addCart = async (req, res, next) => {
 
 const updateCart = async (req, res, next) => {
     try {
-        const cartId = req.params.cartId;
+        const id = req.params.id;
         const updatedCartData = req.body;
-        const updatedCart = await cartService.updateCart(cartId, updatedCartData);
+        const updatedCart = await cartService.updateCart(id, updatedCartData);
         return res.status(200).json({ result: true, message: 'Update Cart Successful', cart: updatedCart });
     } catch (error) {
         console.error('Error in updateCart:', error);
@@ -35,8 +35,8 @@ const updateCart = async (req, res, next) => {
 
 const deleteCart = async (req, res, next) => {
     try {
-        const cartId = req.params.cartId;
-        const deletedCart = await cartService.deleteCart(cartId);
+        const id = req.params.id;
+        const deletedCart = await cartService.deleteCart(id);
         return res.status(200).json({ result: true, message: 'Delete Cart Successful', cart: deletedCart });
     } catch (error) {
         console.error('Error in deleteCart:', error);

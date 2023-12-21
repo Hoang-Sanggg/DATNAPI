@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const UserSchema = new mongoose.Schema({
-    userId: { type: ObjectId, required: true },
+  id :{type: ObjectId},
+    //userId: { type: ObjectId, required: true},
     password: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: Number, required: true },

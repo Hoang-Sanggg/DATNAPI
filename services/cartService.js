@@ -23,10 +23,10 @@ const addCart = async (cartData) => {
 };
 
 // sửa giỏ hàng
-const updateCart = async (cartId, updatedCartData) => {
+const updateCart = async (id, updatedCartData) => {
     try {
         const updatedCart = await CartModel.findOneAndUpdate(
-            { _id: cartId },
+            { _id: id },
             { $set: updatedCartData },
             { new: true }
         );
@@ -38,9 +38,9 @@ const updateCart = async (cartId, updatedCartData) => {
 };
 
 //xóa giỏ hàng
-const deleteCart = async (cartId) => {
+const deleteCart = async (id) => {
     try {
-        const deletedCart = await CartModel.findOneAndDelete({ _id: cartId });
+        const deletedCart = await CartModel.findOneAndDelete({ _id: id });
 
         return deletedCart;
     } catch (error) {

@@ -23,9 +23,9 @@ const addUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-        const userId = req.params.userId;
+        const id = req.params.id;
         const updatedUserData = req.body;
-        const updatedUser = await userService.updateUser(userId, updatedUserData);
+        const updatedUser = await userService.updateUser(id, updatedUserData);
         return res.status(200).json({ result: true, message: 'Update User Successful', user: updatedUser });
     } catch (error) {
         console.error('Error in updateUser:', error);
@@ -35,8 +35,8 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     try {
-        const userId = req.params.userId;
-        const deletedUser = await userService.deleteUser(userId);
+        const id = req.params.id;
+        const deletedUser = await userService.deleteUser(id);
         return res.status(200).json({ result: true, message: 'Delete User Successful', user: deletedUser });
     } catch (error) {
         console.error('Error in deleteUser:', error);
