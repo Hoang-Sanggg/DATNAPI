@@ -9,6 +9,16 @@ const getAllHistory = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error in getAllHistory' });
     }
 };
+const getHistoryByUserID = async (req, res, next) => {
+    try {
+        const UserID = req.query.userID;
+        const historyRecords = await historyService.getHistoryByUserID(UserID);
+        return res.status(200).json({ result: true, message: 'GetAll History Successful', historyRecords: historyRecords });
+    } catch (error) {
+        console.error('Error in getAllHistory:', error);
+        return res.status(500).json({ result: false, message: 'Error in getAllHistory' });
+    }
+};
 
 const addHistory = async (req, res, next) => {
     try {
@@ -23,7 +33,7 @@ const addHistory = async (req, res, next) => {
 
 const updateHistory = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const id = req.body.id;
         const updatedHistoryData = req.body;
         const updatedHistoryRecord = await historyService.updateHistory(id, updatedHistoryData);
         return res.status(200).json({ result: true, message: 'Update History Successful', historyRecord: updatedHistoryRecord });
@@ -35,7 +45,7 @@ const updateHistory = async (req, res, next) => {
 
 const deleteHistory = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const id = req.query.id;
         const deletedHistoryRecord = await historyService.deleteHistory(id);
         return res.status(200).json({ result: true, message: 'Delete History Successful', historyRecord: deletedHistoryRecord });
     } catch (error) {
@@ -45,5 +55,5 @@ const deleteHistory = async (req, res, next) => {
 };
 
 module.exports = {
-    getAllHistory,addHistory,updateHistory,deleteHistory
+    getAllHistory, addHistory, updateHistory, deleteHistory, getHistoryByUserID,
 };

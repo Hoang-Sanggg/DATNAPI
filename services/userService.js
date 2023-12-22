@@ -26,9 +26,8 @@ const addUser = async (userData) => {
 const updateUser = async (id, updatedUserData) => {
     try {
         const updatedUser = await UserModel.findOneAndUpdate(
-            { id: id },
-            { $set: updatedUserData },
-            { new: true }
+            { _id: id },
+            { $set: updatedUserData }
         );
         return updatedUser;
     } catch (error) {
@@ -40,8 +39,7 @@ const updateUser = async (id, updatedUserData) => {
 // xóa user
 const deleteUser = async (id) => {
     try {
-        const deletedUser = await UserModel.findOneAndRemove({ id: id });
-
+        const deletedUser = await UserModel.findOneAndDelete({ _id: id });
         return deletedUser;
     } catch (error) {
         console.error('Error in deleteUser:', error);

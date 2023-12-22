@@ -23,7 +23,7 @@ const addUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const id = req.body.id;
         const updatedUserData = req.body;
         const updatedUser = await userService.updateUser(id, updatedUserData);
         return res.status(200).json({ result: true, message: 'Update User Successful', user: updatedUser });
@@ -35,7 +35,7 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const id = req.query.id;
         const deletedUser = await userService.deleteUser(id);
         return res.status(200).json({ result: true, message: 'Delete User Successful', user: deletedUser });
     } catch (error) {

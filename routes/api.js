@@ -12,6 +12,8 @@ router.post('/add-test', testController.addTest);
 // User routes
 router.get('/user', userController.getAllUsers);
 router.post('/add-user', userController.addUser);
+router.post('/update-user', userController.updateUser);
+router.delete('/delete-user', userController.deleteUser);
 
 // Cart routes
 router.get('/cart', cartController.getAllCarts);
@@ -21,6 +23,7 @@ router.delete('/delete-cart', cartController.deleteCart);
 
 // History routes
 router.get('/history', historyController.getAllHistory);
+router.get('/user/history', historyController.getHistoryByUserID);
 router.post('/add-history', historyController.addHistory);
 router.post('/update-history', historyController.updateHistory);
 router.delete('/delete-history', historyController.deleteHistory);

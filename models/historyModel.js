@@ -5,6 +5,7 @@ const ObjectId = mongoose.ObjectId;
 const HistorySchema = new mongoose.Schema({
   id: { type: ObjectId },
   role: { type: String, required: true },
+  userId: { type: ObjectId, ref: "user" }
   //userId: { type: ObjectId, required: true },
 });
 

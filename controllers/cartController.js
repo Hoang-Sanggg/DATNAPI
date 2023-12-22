@@ -35,7 +35,7 @@ const updateCart = async (req, res, next) => {
 
 const deleteCart = async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const id = req.query.id;
         const deletedCart = await cartService.deleteCart(id);
         return res.status(200).json({ result: true, message: 'Delete Cart Successful', cart: deletedCart });
     } catch (error) {

@@ -10,6 +10,19 @@ const getAllHistory = async () => {
         throw error;
     }
 };
+// lấy lịch sử theo userID
+const getHistoryByUserID = async (userID) => {
+    try {
+        const historyRecords = await HistoryModel.findOne({
+            userId:userID
+        });
+        console.log(historyRecords,'historyRecords');
+        return historyRecords;
+    } catch (error) {
+        console.error('Error in getAllHistory:', error);
+        throw error;
+    }
+};
 
 // thêm lịch sử
 const addHistory = async (historyData) => {
@@ -27,8 +40,7 @@ const updateHistory = async (id, updatedHistoryData) => {
     try {
         const updatedHistoryRecord = await HistoryModel.findOneAndUpdate(
             { _id: id },
-            { $set: updatedHistoryData },
-            { new: true } 
+            { $set: updatedHistoryData }
         );
         return updatedHistoryRecord;
     } catch (error) {
@@ -41,7 +53,6 @@ const updateHistory = async (id, updatedHistoryData) => {
 const deleteHistory = async (id) => {
     try {
         const deletedHistoryRecord = await HistoryModel.findOneAndDelete({ _id: id });
-
         return deletedHistoryRecord;
     } catch (error) {
         console.error('Error in deleteHistory:', error);
@@ -50,5 +61,5 @@ const deleteHistory = async (id) => {
 };
 
 module.exports = {
-    getAllHistory,addHistory,updateHistory,deleteHistory
+    getAllHistory,addHistory,updateHistory,deleteHistory,getHistoryByUserID
 };

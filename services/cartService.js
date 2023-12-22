@@ -41,7 +41,6 @@ const updateCart = async (id, updatedCartData) => {
 const deleteCart = async (id) => {
     try {
         const deletedCart = await CartModel.findOneAndDelete({ _id: id });
-
         return deletedCart;
     } catch (error) {
         console.error('Error in deleteCart:', error);
