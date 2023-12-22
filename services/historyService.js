@@ -3,7 +3,7 @@ const HistoryModel = require('../models/historyModel');
 // lấy all lịch sử
 const getAllHistory = async () => {
     try {
-        const historyRecords = await HistoryModel.find();
+        const historyRecords = await HistoryModel.find().populate('userId');
         return historyRecords;
     } catch (error) {
         console.error('Error in getAllHistory:', error);
@@ -14,9 +14,9 @@ const getAllHistory = async () => {
 const getHistoryByUserID = async (userID) => {
     try {
         const historyRecords = await HistoryModel.findOne({
-            userId:userID
+            userId: userID
         });
-        console.log(historyRecords,'historyRecords');
+        console.log(historyRecords, 'historyRecords');
         return historyRecords;
     } catch (error) {
         console.error('Error in getAllHistory:', error);
@@ -61,5 +61,5 @@ const deleteHistory = async (id) => {
 };
 
 module.exports = {
-    getAllHistory,addHistory,updateHistory,deleteHistory,getHistoryByUserID
+    getAllHistory, addHistory, updateHistory, deleteHistory, getHistoryByUserID
 };
