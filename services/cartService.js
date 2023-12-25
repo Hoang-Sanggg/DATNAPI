@@ -3,7 +3,7 @@ const CartModel = require('../models/cartModel');
 // lấy tất cả giỏ hàng
 const getAllCarts = async () => {
     try {
-        const carts = await CartModel.find();
+        const carts = await CartModel.find().populate('userId');
         return carts;
     } catch (error) {
         console.error('Error in getAllCarts:', error);
@@ -27,8 +27,7 @@ const updateCart = async (id, updatedCartData) => {
     try {
         const updatedCart = await CartModel.findOneAndUpdate(
             { _id: id },
-            { $set: updatedCartData },
-            { new: true }
+            { $set: updatedCartData }
         );
         return updatedCart;
     } catch (error) {
