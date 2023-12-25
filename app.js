@@ -7,8 +7,8 @@ var logger = require('morgan');
 const testRouter = require('./routes/api');
 const productRouter = require('./routes/ProductApi');
 const DetailRouter = require('./routes/DetailAPI');
-const ChitietGiaoDichRouter = require('./routes/ChitietGiaoDichAPI');
 const NotificationRouter = require('./routes/NotificationAPI.js');
+const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
 
 
 var app = express();
@@ -29,8 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', testRouter);
 app.use('/api/products', productRouter)
 app.use('/api/detail', DetailRouter)
-app.use('/api/ChitietGiaoDich', ChitietGiaoDichRouter)
 app.use('/api/Notification', NotificationRouter)
+app.use('/api/DetailsPurchase', DetailsPurchaseRouter)
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

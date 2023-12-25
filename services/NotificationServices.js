@@ -1,20 +1,40 @@
 const NotificationModel = require('../models/NotificationModels');
 
 const getNotification = async () => {
-    const Notification = await NotificationModel.find();
-    return Notification
+  try{
+   const Notification = await NotificationModel.find().populate('Productid');
+   return Notification
+  }
+  catch(error){
+       throw new Error(error)
+  }
 }
 const addNotification = async (Productid, title, content, userid) => {
+   try{
     const Notification = await NotificationModel.create({ Productid, title, content, userid });
     return Notification
+   }
+   catch(error){
+        throw new Error(error)
+   }
 }
 const DeleteNotification = async (id) => {
+   try{
     const Notification = await NotificationModel.findByIdAndDelete(id);
     return Notification
+   }
+   catch(error){
+        throw new Error(error)
+   }
 }
 const UpdateNotification = async (id, Productid, title, content, userid) => {
-    const Notification = await NotificationModel.findByIdAndUpdate(id, { Productid, title, content, userid });
-    return Notification
+   try{
+       const Notification = await NotificationModel.findByIdAndUpdate(id, { Productid, title, content, userid });
+       return Notification
+   }
+   catch(error){
+        throw new Error(error)
+   }
 }
 module.exports = {
     getNotification,

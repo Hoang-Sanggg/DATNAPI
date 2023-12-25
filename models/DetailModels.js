@@ -4,8 +4,8 @@ const ObjectId = Schema.ObjectId;
 
 const detailSchema = new Schema({
     id: { type: ObjectId },
-    Productid: { type: String, require: true },
-    gioHangid: { type: String, require: true },
+    Productid: { type:ObjectId, ref: 'Product' },
+    gioHangid: { type:ObjectId, ref: 'GioHang' },
 }); 
 
 module.exports = mongoose.model.detail || mongoose.model('detail', detailSchema);

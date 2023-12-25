@@ -9,12 +9,12 @@ const getDetail = async (req, res, next) => {
         return res.status(400).json({ result: false, message: 'getDetail null' })
 
     } catch (error) {
-        console.log(">>>>>>>>>>>>>>>>>> 12 ", error)
         return res.status(500).json({ result: false, message: 'Error getDetail' })
     }
 }
 const addDetail = async (req, res, next) => {
     try {
+
         const { Productid, gioHangid } = req.body;
         const detail = await DetailService.addDetail(Productid, gioHangid);
         if (detail) {
@@ -23,6 +23,7 @@ const addDetail = async (req, res, next) => {
         return res.status(400).json({ result: false, message: 'addDetail null' })
 
     } catch (error) {
+        console.log(">>>>>>>>>>>>>>>>>> 12 ", error)
         return res.status(500).json({ result: false, message: 'Error addDetail' })
     }
 }
@@ -53,10 +54,24 @@ const UpdateDetail = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error UpdateDetail' })
     }
 }
+const getDetailById = async (req, res, next) => {
+    try {
+        const { Productid } = req.params;
+        const detail = await detailModel.findOne({ Productid });  
+        if (detail) {
+            return res.status(200).json({ result: true, message: 'getDetailById Successful', detail: detail });
+        }
+        return res.status(400).json({ result: false, message: 'getDetailById null' });
+    } catch (error) {
+        console.error("Error in getDetailById:", error);
+        return res.status(500).json({ result: false, message: 'Error in getDetailById' });
+    }
+};
 
 module.exports = {
     getDetail,
     addDetail,
     DeleteDetail,
-    UpdateDetail
+    UpdateDetail,
+    getDetailById
 }
