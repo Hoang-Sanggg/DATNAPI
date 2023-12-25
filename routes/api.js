@@ -1,14 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const testController = require('../controllers/testController')
 const userController = require('../controllers/userController')
 const cartController = require('../controllers/cartController')
 const historyController = require('../controllers/historyController')
-
-
-//test
-router.get('/test', testController.getAllTest);
-router.post('/add-test', testController.addTest);
 
 // User routes
 router.get('/user', userController.getAllUsers);
