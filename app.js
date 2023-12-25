@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const testRouter = require('./routes/api');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 const productRouter = require('./routes/ProductApi');
 const DetailRouter = require('./routes/DetailAPI');
 const ChitietGiaoDichRouter = require('./routes/ChitietGiaoDichAPI');
@@ -31,9 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 //tạo đường dẫn tới file trong router
 app.use('/api', testRouter);
