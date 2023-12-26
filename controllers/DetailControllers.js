@@ -57,7 +57,7 @@ const UpdateDetail = async (req, res, next) => {
 const getDetailById = async (req, res, next) => {
     try {
         const { Productid } = req.params;
-        const detail = await detailModel.findOne({ Productid });  
+        const detail = await detailModel.findOne({ Productid });
         if (detail) {
             return res.status(200).json({ result: true, message: 'getDetailById Successful', detail: detail });
         }
