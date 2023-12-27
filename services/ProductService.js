@@ -4,7 +4,39 @@ const getProduct = async () => {
     const product = await productModel.find();
     return product
 }
+//add
+const addProduct = async (productData) => {
+    try {
+        const newProduct = new productModel(productData);
+        const savedProduct = await newProduct.save();
+        return savedProduct;
+    } catch (error) {
+        throw error;
+    }
+};
+// edit
+const updateProduct = async (id, nameProduct, title, status, detail, location, price, created_AT, file, role) => {
+    try {
+        const updatedProduct = await productModel.findByIdAndUpdate(
+            id,
+            { nameProduct, title, status, detail, location, price, created_AT, file, role },{ new: true }
+        );
+        return updatedProduct;
+    } catch (error) {
+        throw new Error('Error updating product');
+    }
+};
 
+  const deleteProduct = async (id) => {
+    try {
+        const deletedProduct = await productModel.findByIdAndDelete(id);
+        return deletedProduct;
+    } catch (error) {
+        throw new Error('Error deleting product');
+    }
+};
+
+  
 module.exports = {
-    getProduct
+    getProduct, addProduct, updateProduct,deleteProduct
 }
