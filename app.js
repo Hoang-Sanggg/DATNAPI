@@ -7,12 +7,12 @@ var logger = require('morgan');
 const testRouter = require('./routes/api');
 const productRouter = require('./routes/ProductApi');
 const DetailRouter = require('./routes/DetailAPI');
+const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI.js');
 const NotificationRouter = require('./routes/NotificationAPI.js');
 const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
 const typeRouter = require('./routes/TypeApi');
 const productdetailRouter = require('./routes/ProductDetailApi');
 const adRouter = require('./routes/AdApi')
-
 
 
 var app = express();
@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', testRouter);
 app.use('/api/products', productRouter)
 app.use('/api/detail', DetailRouter)
+app.use('/api/DetailsPurchaseRouter', DetailsPurchaseRouter)
 app.use('/api/Notification', NotificationRouter)
 app.use('/api/DetailsPurchase', DetailsPurchaseRouter)
 app.use('/api/products', productRouter);
