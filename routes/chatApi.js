@@ -7,7 +7,7 @@ const chatsController = require('../controllers/chatController');
 
 //conversationApi
 router.get('/get-conversation', conversationController.getConversation);
-router.get('/get-conversation-by-members', conversationController.getConversationByMembers);
+router.post('/get-conversation-by-members', conversationController.getConversationByMembers);
 router.post('/add-conversation', conversationController.addConversation);
 
 
