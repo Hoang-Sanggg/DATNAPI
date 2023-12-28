@@ -17,6 +17,7 @@ const getConversation = async (req, res) => {
 const getConversationByMembers = async (req, res) => {
     try {
         const { members } = req.body
+        console.log("check members: ", members)
         const conversation = await conversationService.getConversationByMembers(members);
         if (conversation) {
             return res.status(200).json({ result: true, message: 'getConversation Succesful', conversation: conversation })
