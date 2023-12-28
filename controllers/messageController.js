@@ -2,8 +2,9 @@ const messageService = require('../services/messageService')
 
 const getMessage = async (req, res) => {
     try {
-        const { conversationId } = req.body;
-        const messages = await messageService.getMessage(conversationId);
+        const { conversationId } = req.params;
+        console.log("check data : ", JSON.parse(conversationId))
+        const messages = await messageService.getMessage(JSON.parse(conversationId));
         if (messages) {
             return res.status(200).json({ result: true, message: 'getMessage Succesful', messages: messages })
         }
