@@ -14,7 +14,7 @@ const loginUser = async (email, password) => {
         }
         return user;
     } catch (error) {
-        throw error;
+        return false;
     }
 };
 
@@ -36,7 +36,7 @@ const registerUser = async ({ email, password, phone, name }) => {
         await newUser.save();
         return newUser;
     } catch (error) {
-        throw error;
+        return false;
     }
 };
 
@@ -46,7 +46,7 @@ const getUserByEmail = async (email) => {
         const user = await UserModel.findOne({ email });
         return user;
     } catch (error) {
-        throw error;
+        return false;
     }
 };
 
