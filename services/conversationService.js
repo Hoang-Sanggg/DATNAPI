@@ -15,8 +15,12 @@ const getConversationByMembers = async (members) => {
     try {
 
         const conversation = await conversationModel.find({ members: members });
+        if (conversation == []) {
+            return false;
 
+        }
         return conversation;
+
     } catch (error) {
         return false
     }
