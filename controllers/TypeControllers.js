@@ -16,6 +16,7 @@ const addType = async (req, res) => {
         const typeData = req.body;
         const saveType = await typeService.addType(typeData);
         res.status(200).json({ result: true, message: 'Type added successfully', data: saveType });
+        return res.status(400).json({ result: false, message: 'Type null' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ result: false, message: 'Error adding Type' });
@@ -30,6 +31,7 @@ const updateType = async (req, res, next) => {
         if (updateType) {
             return res.status(200).json({ result: true, message: 'Update Type Successful', data: updateType });
         }
+        return res.status(400).json({ result: false, message: 'Type null' })
     } catch (error) {
         console.error('Error updating Type:', error.message);
         return res.status(500).json({ result: false, message: 'Error updating Type' });
@@ -45,7 +47,6 @@ const deleteType = async (req, res, next) => {
         if (deleteTypes) {
             return res.status(200).json({ result: true, message: 'Delete Type Successful' });
         }
-
         return res.status(400).json({ result: false, message: 'Type not found for delete' });
     } catch (error) {
         console.error('Error deleting Type:', error.message);
