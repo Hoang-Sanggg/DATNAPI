@@ -17,7 +17,8 @@ const getMessage = async (req, res) => {
 
 const addMessage = async (req, res) => {
     try {
-        const messageData = req.body;
+        const messageData = req.params;
+        console.log(req.params)
         const messages = await messageService.addMessage(messageData);
         if (messages) {
             return res.status(200).json({ result: true, message: 'addMessage Succesful' })

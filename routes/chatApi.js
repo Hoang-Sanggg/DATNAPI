@@ -8,11 +8,11 @@ const chatsController = require('../controllers/chatController');
 //conversationApi
 router.get('/get-conversation', conversationController.getConversation);
 router.get('/get-conversation-by-members/:members', conversationController.getConversationByMembers);
-router.post('/add-conversation', conversationController.addConversation);
+router.post('/add-conversation/:members', conversationController.addConversation);
 
 
 //messageApi
 router.get('/get-message/:conversationId', messageController.getMessage);
-router.post('/add-message', messageController.addMessage);
+router.post('/add-message/:conversationId/:senderId/:content', messageController.addMessage);
 
 module.exports = router;

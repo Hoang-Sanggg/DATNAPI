@@ -23,9 +23,9 @@ const getConversationByMembers = async (members) => {
 }
 const addConversation = async (conversationData) => {
     try {
-        console.log(conversationData)
-        const conversation = await conversationModel.create(conversationData);
 
+        const conversation = await conversationModel.create({ members: ['6587edd36c13142ab0adcd86', '6587eeda6c13142ab0adcd96'] });
+        console.log(conversation)
         return true;
     } catch (error) {
         return false
