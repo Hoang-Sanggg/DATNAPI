@@ -35,7 +35,7 @@ const addConversation = async (req, res) => {
 
         const conversation = await conversationService.addConversation(JSON.parse(members));
         if (conversation) {
-            return res.status(200).json({ result: true, message: 'addConversation Succesful' })
+            return res.status(200).json({ result: true, message: 'addConversation Succesful', conversation: conversation })
         }
         return res.status(400).json({ result: false, message: 'addConversation null' })
 
