@@ -12,6 +12,7 @@ const NotificationRouter = require('./routes/NotificationAPI.js');
 const typeRouter = require('./routes/TypeApi');
 const productdetailRouter = require('./routes/ProductDetailApi');
 const adRouter = require('./routes/AdApi')
+const chatsRouter = require('./routes/chatApi.js')
 
 
 
@@ -39,6 +40,7 @@ app.use('/api/Notification', NotificationRouter)
 app.use('/api/types', typeRouter);
 app.use('/api/productdetails', productdetailRouter);
 app.use('/api/ads', adRouter);
+app.use('/api/chat', chatsRouter);
 
 
 
