@@ -19,12 +19,28 @@ const loginUser = async (req, res, next) => {
 const registerUser = async (req, res) => {
     try {
         const { email, password, phone, name } = req.body;
+
         if (!email || !password || !phone || !name) {
             return res.status(400).json({ success: false, message: 'Vui lòng điền đầy đủ thông tin đăng ký' });
         }
+        if (!email.includes('@') || !email.includes('.')) {
+            return res.status(400).json({ success: false, message: 'Email không hợp lệ' });
+        }
+        if (password.length < 6) {
+            return res.status(400).json({ success: false, message: 'Mật khẩu phải ít nhất 6 ký tự' });
+        }
+        const phoneStr = phone.toString();
+        if (phoneStr.length < 10 || phoneStr.length > 11) {
+            return res.status(400).json({ success: false, message: 'Số điện thoại phải từ 10 tới 11 số' });
+        }
+
         const newUser = await UserService.registerUser({ email, password, phone, name });
+        if (!newUser) {
+            return res.status(400).json({ success: false, message: 'Đăng ký không thành công, kiểm tra lại thông tin' });
+        }
         return res.status(201).json({ success: true, message: 'Đăng ký thành công', user: newUser });
     } catch (error) {
+        console.error(error); // Log the error for debugging
         return res.status(500).json({ success: false, message: 'Lỗi khi đăng ký người dùng' });
     }
 };
