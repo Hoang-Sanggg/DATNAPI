@@ -6,8 +6,7 @@ const getAllHistory = async () => {
         const historyRecords = await HistoryModel.find().populate('userId');
         return historyRecords;
     } catch (error) {
-        console.error('Error in getAllHistory:', error);
-        throw error;
+        return false;
     }
 };
 // lấy lịch sử theo userID
@@ -19,8 +18,7 @@ const getHistoryByUserID = async (userID) => {
         console.log(historyRecords, 'historyRecords');
         return historyRecords;
     } catch (error) {
-        console.error('Error in getAllHistory:', error);
-        throw error;
+        return false;
     }
 };
 
@@ -30,8 +28,7 @@ const addHistory = async (historyData) => {
         const newHistoryRecord = await HistoryModel.create(historyData);
         return newHistoryRecord;
     } catch (error) {
-        console.error('Error in addHistory:', error);
-        throw error;
+        return false;
     }
 };
 
@@ -44,8 +41,7 @@ const updateHistory = async (id, updatedHistoryData) => {
         );
         return updatedHistoryRecord;
     } catch (error) {
-        console.error('Error in updateHistory:', error);
-        throw error;
+        return false;
     }
 };
 
@@ -55,8 +51,7 @@ const deleteHistory = async (id) => {
         const deletedHistoryRecord = await HistoryModel.findOneAndDelete({ _id: id });
         return deletedHistoryRecord;
     } catch (error) {
-        console.error('Error in deleteHistory:', error);
-        throw error;
+        return false;
     }
 };
 
