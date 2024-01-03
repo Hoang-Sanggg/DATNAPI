@@ -1,5 +1,5 @@
 {
-  "name": "datn-webadmin",
+  "name": "datnapi",
   "version": "0.0.0",
   "private": true,
   "scripts": {
