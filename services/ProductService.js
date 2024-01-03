@@ -11,7 +11,7 @@ const addProduct = async (productData) => {
         const savedProduct = await newProduct.save();
         return savedProduct;
     } catch (error) {
-        throw error;
+        return false;
     }
 };
 // edit
@@ -23,7 +23,7 @@ const updateProduct = async (id, nameProduct, title, status, detail, location, p
         );
         return updatedProduct;
     } catch (error) {
-        throw new Error('Error updating product');
+        return false;
     }
 };
 
@@ -32,7 +32,7 @@ const updateProduct = async (id, nameProduct, title, status, detail, location, p
         const deletedProduct = await productModel.findByIdAndDelete(id);
         return deletedProduct;
     } catch (error) {
-        throw new Error('Error deleting product');
+        return false;
     }
 };
 
