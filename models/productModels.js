@@ -12,6 +12,8 @@ const productSchema = new Schema({
     created_AT: {type: String, require: true},
     file: {type: String, require: true},
     role:{type: String, require: true},
+    userid: { type: ObjectId, ref: 'User' },
+
 });
 
 module.exports = mongoose.model.product || mongoose.model('product', productSchema);
