@@ -11,16 +11,16 @@ const addType = async (typeData) => {
         const savedtype = await newType.save();
         return savedtype;
     } catch (error) {
-        throw error;
+        return false;
     }
 };
 // edit
-const updateType = async (id, nameType,description,row) => {
+const updateType = async (id, nameType,description) => {
     try {
-        const updateType = await typeModel.findByIdAndUpdate(id, { nameType, description, row }, { new: true });
+        const updateType = await typeModel.findByIdAndUpdate(id, { nameType, description }, { new: true });
         return updateType;
     } catch (error) {
-        throw new Error('Error updating type');
+        return false;
     }
 };
 //delete
@@ -29,7 +29,7 @@ const deleteType = async (id) => {
         const deleteType= await typeModel.findByIdAndDelete(id);
         return deleteType;
     } catch (error) {
-        throw new Error('Error deleting type');
+        return false;
     }
 };
 
