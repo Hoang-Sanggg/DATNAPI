@@ -11,10 +11,8 @@ const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
 const NotificationRouter = require('./routes/NotificationAPI');
 const typeRouter = require('./routes/TypeApi');
 const productdetailRouter = require('./routes/ProductDetailApi');
-const adRouter = require('./routes/AdApi');
-const chatsRouter = require('./routes/chatApi.js');
-const categoryRouter = require('./routes/CategoryApi.js');
-const categoryDetailRouter = require('./routes/CategoryDetailApi.js');
+const adRouter = require('./routes/AdApi')
+const chatsRouter = require('./routes/chatApi.js')
 
 
 var app = express();
@@ -47,8 +45,8 @@ app.use('/api/types', typeRouter);
 app.use('/api/productdetails', productdetailRouter);
 app.use('/api/ads', adRouter);
 app.use('/api/chat', chatsRouter);
-app.use('/api/categories', categoryRouter);
-app.use('/api/categories-detail', categoryDetailRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

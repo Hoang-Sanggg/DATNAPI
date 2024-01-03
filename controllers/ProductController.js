@@ -30,7 +30,6 @@ const updateProduct = async (req, res, next) => {
         if (updatedProduct) {
             return res.status(200).json({ result: true, message: 'Update Product Successful', data: updatedProduct });
         }
-        return res.status(400).json({ result: false, message: 'null' })
     } catch (error) {
         console.error('Error updating product:', error.message);
         return res.status(500).json({ result: false, message: 'Error updating product' });
@@ -44,7 +43,6 @@ const deleteProduct = async (req, res, next) => {
         if (deletedProduct) {
             return res.status(200).json({ result: true, message: 'Delete Product Successful' });
         }
-        return res.status(400).json({ result: false, message: 'getMessage null' })
     } catch (error) {
         console.error('Error deleting product:', error.message);
         return res.status(500).json({ result: false, message: 'Error deleting product' });

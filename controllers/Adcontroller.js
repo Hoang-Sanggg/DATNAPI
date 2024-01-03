@@ -17,8 +17,6 @@ const addAds = async (req, res) => {
         const adsData = req.body;
         const saveAds = await adService.addAds(adsData);
         res.status(200).json({ result: true, message: 'Ads added successfully', data: saveAds });
-        return res.status(400).json({ result: false, message: 'null' });
-
     } catch (error) {
         console.error(error);
         res.status(500).json({ result: false, message: 'Error adding Ads' });
@@ -33,7 +31,6 @@ const deleteAds = async (req, res, next) => {
         if (deleteAds) {
             return res.status(200).json({ result: true, message: 'Delete Ads Successful' });
         }
-        return res.status(400).json({ result: false, message: 'null' });
     } catch (error) {
         console.error('Error deleting Type:', error.message);
         return res.status(500).json({ result: false, message: 'Error deleting Ads' });
@@ -45,11 +42,10 @@ const updateAds = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { typeAd } = req.body;
-        const updateAds = await adService.updateAds(id, typeAd);
+        const updateAds = await adService.updateAds(id,typeAd);
         if (updateAds) {
             return res.status(200).json({ result: true, message: 'Update Ads Successful', data: updateAds });
         }
-        return res.status(400).json({ result: false, message: 'null' });
     } catch (error) {
         console.error('Error updating Ads:', error.message);
         return res.status(500).json({ result: false, message: 'Error updating Ads' });
@@ -57,5 +53,5 @@ const updateAds = async (req, res, next) => {
 };
 
 module.exports = {
-    getAd, addAds, deleteAds, updateAds
+    getAd, addAds, deleteAds,updateAds
 };

@@ -12,7 +12,7 @@ const addAds = async (adsData) => {
         const savedads = await newAds.save();
         return savedads;
     } catch (error) {
-        return false;
+        throw error;
     }
 };
 
@@ -31,7 +31,7 @@ const deleteAds = async (id) => {
         const deleteAds= await adModel.findByIdAndDelete(id);
         return deleteAds;
     } catch (error) {
-        return false;
+        throw new Error('Error deleting Ads');
     }
 };
 
@@ -41,7 +41,7 @@ const updateAds = async (id, typeAd) => {
         const updateAds = await adModel.findByIdAndUpdate(id, { typeAd }, { new: true });
         return updateAds;
     } catch (error) {
-        return false;
+        throw new Error('Error updating Ads');
     }
 };
 

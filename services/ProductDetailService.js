@@ -12,7 +12,7 @@ const addProducdetail = async (producdetailData) => {
         const savedProductDetail = await newproducdetailData.save();
         return savedProductDetail;
     } catch (error) {
-        return false;
+        throw error;
     }
 };
 
@@ -31,7 +31,7 @@ const deleteProductDetail = async (id) => {
         const deleteProductDetail = await producdetailtModel.findByIdAndDelete(id);
         return deleteProductDetail;
     } catch (error) {
-        return false;
+        throw new Error('Error deleting Productdetail');
     }
 };
 
@@ -41,7 +41,7 @@ const updateProductDetail = async (id, row) => {
         const updateProductDetails = await producdetailtModel.findByIdAndUpdate(id, { row }, { new: true });
         return updateProductDetails;
     } catch (error) {
-        return false;
+        throw new Error('Error updating ProductDetails');
     }
 };
 
