@@ -8,6 +8,7 @@
     "vercel-build": "echo hello"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
