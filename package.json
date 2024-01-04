@@ -9,6 +9,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
+    "crypto-js": "^4.2.0",
     "debug": "~2.6.9",
     "dotenv": "^16.3.1",
     "ejs": "~2.6.1",
@@ -16,6 +17,7 @@
     "http-errors": "~1.6.3",
     "mongoose": "^8.0.3",
     "morgan": "~1.9.1",
+    "nodemailer": "^6.9.8",
     "nodemon": "^3.0.2"
   }
 }

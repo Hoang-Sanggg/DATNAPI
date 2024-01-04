@@ -1,5 +1,7 @@
 const UserModel = require('../models/userModel');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 //Đăng nhập
 const loginUser = async (email, password) => {
@@ -49,6 +51,75 @@ const registerUser = async ({ email, password, phone, name }) => {
     } catch (error) {
         console.error("Error registering user:", error.message);
         return false;
+    }
+};
+
+const forgotPassword = async (email) => {
+    try {
+        const user = await UserModel.findOne({ email });
+        if (!user) {
+            throw new Error('Không tồn tại người dùng với email này');
+        }
+
+        // Tạo token ngẫu nhiên
+        const resetToken = crypto.randomBytes(20).toString('hex');
+        console.log(resetToken);
+
+        // Cập nhật người dùng với token và thời gian hết hạn
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour from now
+        await user.save();
+
+        // Cấu hình transporter cho nodemailer
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail', 
+            auth: {
+                user: 'duy768366@gmail.com',
+                pass: 'pdfaiovzkizuvbpd' 
+            }
+        });
+
+        // Tạo mail
+        const mailOptions = {
+            to: user.email,
+            from: 'noreply@yourapp.com',
+            subject: 'Quên Mật Khẩu',
+            text: `Bạn nhận được email này vì bạn đã yêu cầu đặt lại mật khẩu cho tài khoản của bạn.\n\n` +
+                  `Vui lòng nhấp vào link sau hoặc dán vào trình duyệt của bạn để hoàn thành quá trình đặt lại mật khẩu:\n\n` +
+                  `http://yourapp.com/reset/${resetToken}\n\n` +
+                  `Nếu bạn không yêu cầu điều này, vui lòng bỏ qua email này và mật khẩu của bạn sẽ không thay đổi.\n`
+        };
+
+        // Gửi email
+        await transporter.sendMail(mailOptions);
+        return { success: true, message: "Email đặt lại mật khẩu đã được gửi.", resetToken };
+    } catch (error) {
+        return false;
+    }
+};
+
+const resetPassword = async (resetToken, newPassword) => {
+    try {
+        // Tìm người dùng từ cơ sở dữ liệu bằng reset token và kiểm tra thời gian hết hạn
+        const user = await UserModel.findOne({
+            resetPasswordToken: resetToken,
+            resetPasswordExpires: { $gt: Date.now() }  // Kiểm tra token vẫn còn hạn
+        });
+
+        if (!user) {
+            throw new Error('Token đặt lại mật khẩu không hợp lệ hoặc đã hết hạn');
+        }
+
+        // Băm mật khẩu mới và cập nhật vào cơ sở dữ liệu
+        const hashedPassword = await bcrypt.hash(newPassword, 12);
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;  // Xóa token đặt lại mật khẩu
+        user.resetPasswordExpires = undefined;  // Xóa thời gian hết hạn của token
+        await user.save();
+
+        return { success: true, message: "Mật khẩu đã được đặt lại thành công" };
+    } catch (error) {
+        throw error;
     }
 };
 
@@ -108,5 +179,5 @@ const deleteUser = async (id) => {
 
 
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser,forgotPassword,resetPassword
 };
