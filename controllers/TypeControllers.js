@@ -6,6 +6,7 @@ const getType = async (res) => {
         if (type) {
             return res.status(200).json({ result: true, message: 'getType Successful', data: type });
         }
+        return res.status(400).json({ result: false, message: 'null' });
     } catch (error) {
         return res.status(500).json({ result: false, message: 'Error getType' });
     }
@@ -25,11 +26,12 @@ const addType = async (req, res) => {
 const updateType = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { nameType,description,row } = req.body;
-        const updateType = await typeService.updateType(id,nameType,description,row);
+        const { nameType,description } = req.body;
+        const updateType = await typeService.updateType(id,nameType,description);
         if (updateType) {
             return res.status(200).json({ result: true, message: 'Update Type Successful', data: updateType });
         }
+        return res.status(400).json({ result: false, message: 'Type null' })
     } catch (error) {
         console.error('Error updating Type:', error.message);
         return res.status(500).json({ result: false, message: 'Error updating Type' });
@@ -45,7 +47,6 @@ const deleteType = async (req, res, next) => {
         if (deleteTypes) {
             return res.status(200).json({ result: true, message: 'Delete Type Successful' });
         }
-
         return res.status(400).json({ result: false, message: 'Type not found for delete' });
     } catch (error) {
         console.error('Error deleting Type:', error.message);

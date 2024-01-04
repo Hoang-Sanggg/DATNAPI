@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   phone: { type: Number, required: true },
   name: { type: String, required: true },
-  uytin: { type: String, default:'0%' },
+  uytin: { type: String, required: true, default: 0 },
 });
 
 module.exports = mongoose.model.user || mongoose.model('user', UserSchema);
