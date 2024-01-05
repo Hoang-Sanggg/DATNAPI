@@ -20,4 +20,8 @@ router.post('/edit/:id', adController.updateAds);
 //up load img
 router.post('/upload-img', upload.single('image'), adController.upLoadImg)
 
+router.get('/test-get-img', (req, res) => {
+    return res.render('index')
+});
+
 module.exports = router
