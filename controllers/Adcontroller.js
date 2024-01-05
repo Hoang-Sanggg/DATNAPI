@@ -56,6 +56,20 @@ const updateAds = async (req, res, next) => {
     }
 };
 
+const upLoadImg = (req, res, next) => {
+    try {
+
+        const tempPath = req.file;
+        // const targetPath = path.join(__dirname, "./uploads/image.png");
+        console.log("check upload image: ", tempPath);
+        // path.save();
+        return res.status(200).json({ result: true, message: 'upload image Successful' });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ result: false, message: 'Error updating Ads' });
+    }
+}
+
 module.exports = {
-    getAd, addAds, deleteAds, updateAds
+    getAd, addAds, deleteAds, updateAds, upLoadImg
 };

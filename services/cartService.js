@@ -6,8 +6,7 @@ const getAllCarts = async () => {
         const carts = await CartModel.find().populate('userId');
         return carts;
     } catch (error) {
-        console.error('Error in getAllCarts:', error);
-        throw error;
+        return false;
     }
 };
 
@@ -17,8 +16,7 @@ const addCart = async (cartData) => {
         const newCart = await CartModel.create(cartData);
         return newCart;
     } catch (error) {
-        console.error('Error in addCart:', error);
-        throw error;
+        return false;
     }
 };
 
@@ -31,8 +29,7 @@ const updateCart = async (id, updatedCartData) => {
         );
         return updatedCart;
     } catch (error) {
-        console.error('Error in updateCart:', error);
-        throw error;
+        return false;
     }
 };
 
@@ -42,11 +39,10 @@ const deleteCart = async (id) => {
         const deletedCart = await CartModel.findOneAndDelete({ _id: id });
         return deletedCart;
     } catch (error) {
-        console.error('Error in deleteCart:', error);
-        throw error;
+        return false;
     }
 };
 
 module.exports = {
-    getAllCarts,addCart,updateCart,deleteCart
+    getAllCarts, addCart, updateCart, deleteCart
 };

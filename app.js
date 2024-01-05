@@ -7,16 +7,14 @@ var logger = require('morgan');
 const testRouter = require('./routes/api');
 const productRouter = require('./routes/ProductApi');
 const DetailRouter = require('./routes/DetailAPI');
-const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI.js');
-const NotificationRouter = require('./routes/NotificationAPI.js');
+const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
+const NotificationRouter = require('./routes/NotificationAPI');
 const typeRouter = require('./routes/TypeApi');
 const productdetailRouter = require('./routes/ProductDetailApi');
 const adRouter = require('./routes/AdApi');
 const chatsRouter = require('./routes/chatApi.js');
 const categoryRouter = require('./routes/CategoryApi.js');
 const categoryDetailRouter = require('./routes/CategoryDetailApi.js');
-
-
 
 
 var app = express();
@@ -33,12 +31,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.send("hello world");
+});
+
 //tạo đường dẫn tới file trong router
 app.use('/api', testRouter);
 app.use('/api/products', productRouter)
 app.use('/api/detail', DetailRouter)
 app.use('/api/DetailsPurchaseRouter', DetailsPurchaseRouter)
 app.use('/api/Notification', NotificationRouter)
+app.use('/api/DetailsPurchase', DetailsPurchaseRouter)
+app.use('/api/products', productRouter);
 app.use('/api/types', typeRouter);
 app.use('/api/productdetails', productdetailRouter);
 app.use('/api/ads', adRouter);

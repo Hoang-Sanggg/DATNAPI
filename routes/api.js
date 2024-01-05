@@ -6,6 +6,8 @@ const historyController = require('../controllers/historyController')
 
 // User routes
 router.get('/user', userController.getAllUsers);
+router.post('/login-user', userController.loginUser);
+router.post('/register-user', userController.registerUser );
 router.post('/add-user', userController.addUser);
 router.post('/update-user', userController.updateUser);
 router.delete('/delete-user', userController.deleteUser);
