@@ -18,6 +18,6 @@ router.delete('/delete/:id', adController.deleteAds);
 router.post('/edit/:id', adController.updateAds);
 
 //up load img
-router.post('/upload-img', upload.single('image'), adController.upLoadImg)
+router.post('/upload-img', upload.single('image'), adController.upLoadImg);
 
 module.exports = router

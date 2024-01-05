@@ -51,7 +51,22 @@ const deleteCategory = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error deleting Category' });
     }
 };
-
+// upload img
+const upLoadImg = (req, res, next) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ result: false, message: 'No file uploaded.' });
+        }
+        const tempPath = req.file;
+        const targetPath = path.join(__dirname, './public/uploads', req.file.filename);
+        console.log("check upload image: ", tempPath);
+        path.save();
+        return res.status(200).json({ result: true, message: 'upload image Successful' });
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ result: false, message: 'Error updating Ads' });
+    }
+}
 module.exports = {
-    getCategory,addCategory,updateCategory,deleteCategory
+    getCategory,addCategory,updateCategory,deleteCategory,upLoadImg
 };
