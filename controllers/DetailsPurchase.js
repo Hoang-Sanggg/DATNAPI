@@ -1,13 +1,12 @@
 const DetailsPurchaseServices = require('../services/DetailsPurchase');
 
 const getDetailsPurchase = async (req, res, next) => {
-    try {
+    try { 
         const DetailsPurchase = await DetailsPurchaseServices.getDetailsPurchase();
         if (DetailsPurchase) {
             return res.status(200).json({ result: true, message: 'getDetailsPurchase Succesful', DetailsPurchase: DetailsPurchase })
         }
         return res.status(400).json({ result: false, message: 'getDetailsPurchase null' })
-
     } catch (error) {
         return res.status(500).json({ result: false, message: 'Error getDetailsPurchase' })
     }
