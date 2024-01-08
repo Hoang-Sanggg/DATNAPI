@@ -36,9 +36,9 @@ const deleteCategoryDetail = async (id) => {
 };
 
 // edit
-const updateCategoryDetails = async (id, name,img) => {
+const updateCategoryDetails = async (id, name,img,icon) => {
     try {
-        const updateCategoryDetails = await categoryDetailModel.findByIdAndUpdate(id, { name,img }, { new: true });
+        const updateCategoryDetails = await categoryDetailModel.findByIdAndUpdate(id, { name,img,icon }, { new: true });
         return updateCategoryDetails;
     } catch (error) {
         return false;

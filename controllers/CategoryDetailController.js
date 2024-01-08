@@ -43,8 +43,8 @@ const deleteCategoryDetail = async (req, res, next) => {
 const updateCategoryDetail = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name, img,  } = req.body;
-        const updateCategoryDetails = await categoryDetailtService.updateCategoryDetails(id,name,img);
+        const { name, img, icon } = req.body;
+        const updateCategoryDetails = await categoryDetailtService.updateCategoryDetails(id,name,img,icon);
         if (updateCategoryDetails) {
             return res.status(200).json({ result: true, message: 'Update Ads Categorydetail', data: updateCategoryDetails });
         }

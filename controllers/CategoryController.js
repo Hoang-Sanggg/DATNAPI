@@ -26,8 +26,8 @@ const addCategory = async (req, res) => {
 const updateCategory = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name,img} = req.body;
-        const updatedCategory = await categoryService.updateCategory(id, name, img);
+        const { name,img, icon} = req.body;
+        const updatedCategory = await categoryService.updateCategory(id, name, img,icon);
         if (updatedCategory) {
             return res.status(200).json({ result: true, message: 'Update Category Successful', data: updatedCategory });
         }
