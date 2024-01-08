@@ -12,6 +12,7 @@ const typeRouter = require('./routes/TypeApi');
 const productdetailRouter = require('./routes/ProductDetailApi');
 const adRouter = require('./routes/AdApi')
 const detailCartRouter = require('./routes/detailCartAPI');
+const InforRouter = require('./routes/InforAPI');
 
 
 var app = express();
@@ -38,6 +39,7 @@ app.use('/api/products', productRouter);
 app.use('/api/types', typeRouter);
 app.use('/api/productdetails', productdetailRouter);
 app.use('/api/ads', adRouter);
+app.use('/api/infors', InforRouter);
 
 
 
