@@ -4,10 +4,10 @@ const ObjectId = Schema.ObjectId;
 
 const NotificationSchema = new Schema({
     id: { type: ObjectId },
-    Productid: { type: ObjectId, ref: 'Product' },
+    Productid: { type: ObjectId, ref: 'product' },
     title: { type: String, require: true },
     content: { type: String, require: true },
-    userid: { type: ObjectId, ref: 'User' },
+    userid: { type: ObjectId, ref: 'user' },
 });
 
 module.exports = mongoose.model.Notification || mongoose.model('Notification', NotificationSchema);
