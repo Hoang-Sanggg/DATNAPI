@@ -19,6 +19,12 @@ const categoryDetailRouter = require('./routes/CategoryDetailApi.js');
 
 var app = express();
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
+
 require('./config/DBConnection')
 
 // view engine setup
@@ -29,7 +35,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.send("hello world");

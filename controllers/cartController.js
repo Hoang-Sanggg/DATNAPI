@@ -1,4 +1,4 @@
-const CartService = require('../services/CartService');
+const CartService = require('../services/cartService')
 
 const getAllCarts = async (req, res, next) => {
     try {
@@ -45,5 +45,5 @@ const deleteCart = async (req, res, next) => {
 };
 
 module.exports = {
-    getAllCarts,addCart,updateCart,deleteCart
+    getAllCarts, addCart, updateCart, deleteCart
 };
