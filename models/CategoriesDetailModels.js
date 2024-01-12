@@ -6,6 +6,7 @@ const categorydetailSchema = new Schema({
     id: { type: ObjectId },
     name: { type: String, required: true }, 
     img: { type: String, required: true},
+    icon: { type: String, required: true},
     idCategory: {type: ObjectId, ref: 'category'},
 
 });

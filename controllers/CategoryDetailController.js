@@ -1,8 +1,8 @@
-const categoryDetailtService = require('../services/CategoryDetailServices')
+const categoryDetailService = require('../services/CategoryDetailServices');
 
 const getCategorydetail = async (req, res, next) => {
     try {
-        const categorydetail = await categoryDetailtService.getCategoryDetail();
+        const categorydetail = await categoryDetailService.getCategoryDetail();
         if (categorydetail) {
             return res.status(200).json({ result: true, message: 'getcategorydetail Succesful', data: categorydetail })
         }
@@ -13,11 +13,24 @@ const getCategorydetail = async (req, res, next) => {
     }
 }
 
+const getCategorydetailbyid = async (req, res, next) => {
+    try {
+        const { idCategory } = req.params; // Update the variable name to idCategory
+        const categoriesDetailByCategoryId = await categoryDetailService.getCategoryDetailByCategoryId(idCategory);
+        if (categoriesDetailByCategoryId) {
+            return res.status(200).json({ result: true, message: 'getcategorydetailByid Successful', data: categoriesDetailByCategoryId });
+        }
+        return res.status(400).json({ result: false, message: 'getcategorydetailbyid null' });
+    } catch (error) {
+        return res.status(500).json({ result: false, message: 'Error getcategorydetailbyid' });
+    }
+};
+
 //add
 const addCategoryDetail = async (req, res) => {
     try {
         const categoryDetailData = req.body;
-        const saveCategoryDetail = await categoryDetailtService.addCategoryDetail(categoryDetailData);
+        const saveCategoryDetail = await categoryDetailService.addCategoryDetail(categoryDetailData);
         res.status(200).json({ result: true, message: 'Save Categorydetail successfully', data: saveCategoryDetail });
     } catch (error) {
         console.error(error);
@@ -29,7 +42,7 @@ const addCategoryDetail = async (req, res) => {
 const deleteCategoryDetail = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deleteCategoryDetail = await categoryDetailtService.deleteCategoryDetail(id);
+        const deleteCategoryDetail = await categoryDetailService.deleteCategoryDetail(id);
         if (deleteCategoryDetail) {
             return res.status(200).json({ result: true, message: 'Delete Categorydetail Successful' });
         }
@@ -43,8 +56,8 @@ const deleteCategoryDetail = async (req, res, next) => {
 const updateCategoryDetail = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name, img,  } = req.body;
-        const updateCategoryDetails = await categoryDetailtService.updateCategoryDetails(id,name,img);
+        const { name, img, icon } = req.body;
+        const updateCategoryDetails = await categoryDetailtService.updateCategoryDetails(id, name, img, icon);
         if (updateCategoryDetails) {
             return res.status(200).json({ result: true, message: 'Update Ads Categorydetail', data: updateCategoryDetails });
         }
@@ -56,5 +69,5 @@ const updateCategoryDetail = async (req, res, next) => {
 
 
 module.exports = {
-    getCategorydetail,addCategoryDetail,updateCategoryDetail,deleteCategoryDetail
+    getCategorydetail, addCategoryDetail, updateCategoryDetail, deleteCategoryDetail, getCategorydetailbyid
 }
