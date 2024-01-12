@@ -5,6 +5,16 @@ const getCategoryDetail = async () => {
     return categoryDetail
 }
 
+const getCategoryDetailByCategoryId = async (idCategory) => {
+    try {
+        const categoryDetail = await categoryDetailModel.find({ idCategory });
+        return categoryDetail;
+    } catch (error) {
+        return false;
+    }
+};
+
+
 // //add
 const addCategoryDetail = async (categoryDetailData) => {
     try {
@@ -47,5 +57,5 @@ const updateCategoryDetails = async (id, name,img,icon) => {
 
 
 module.exports = {
-    getCategoryDetail,addCategoryDetail,updateCategoryDetails,deleteCategoryDetail
+    getCategoryDetail,addCategoryDetail,updateCategoryDetails,deleteCategoryDetail,getCategoryDetailByCategoryId
 }
