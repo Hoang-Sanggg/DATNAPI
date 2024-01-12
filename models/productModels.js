@@ -10,7 +10,7 @@ const productSchema = new Schema({
     location: {type: String, require: true},
     price: {type: Number, require: true},
     created_AT: {type: String, require: true},
-    files: {type: String, require: true},
+    file: {type: String, require: true},
     role:{type: String, require: true},
     userid: { type: ObjectId, ref: 'User' },
 

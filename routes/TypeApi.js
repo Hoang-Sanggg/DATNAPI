@@ -7,8 +7,6 @@ const typeController = require('../controllers/TypeControllers');
 router.get('/', async (req, res) => {
     await typeController.getType(res);
 });
-//byid
-router.get('/:idCategoryDetail', typeController.getTypebyCategorydetailid);
 
 // add product
 router.post('/add', typeController.addType);

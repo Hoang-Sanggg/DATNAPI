@@ -58,6 +58,7 @@ const updateAds = async (req, res, next) => {
 
 const upLoadImg = (req, res, next) => {
     try {
+
         const tempPath = req.file;
         // const targetPath = path.join(__dirname, "./uploads/image.png");
         console.log("check upload image: ", tempPath);

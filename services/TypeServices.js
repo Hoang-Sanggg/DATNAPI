@@ -4,17 +4,6 @@ const getType = async () => {
     const type = await typeModel.find();
     return type;
 }
-
-// getType Byid Categorydetails
-const getTypegByCategoryDetailId = async (idCategoryDetail) => {
-    try {
-        const type = await typeModel.find({ idCategoryDetail });
-        return type;
-    } catch (error) {
-        return false;
-    }
-};
-
 //add
 const addType = async (typeData) => {
     try {
@@ -47,6 +36,6 @@ const deleteType = async (id) => {
 
 
 module.exports = {
-    getType, addType,updateType,deleteType,getTypegByCategoryDetailId
+    getType, addType,updateType,deleteType
 }
 

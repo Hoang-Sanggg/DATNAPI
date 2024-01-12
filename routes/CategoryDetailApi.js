@@ -4,8 +4,6 @@ const categorydetailController = require('../controllers/CategoryDetailControlle
 
 //test
 router.get('/', categorydetailController.getCategorydetail);
-//byid
-router.get('/:idCategory', categorydetailController.getCategorydetailbyid);
 // add Ads
 router.post('/add', categorydetailController.addCategoryDetail);
 // // delete

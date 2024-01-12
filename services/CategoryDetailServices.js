@@ -5,16 +5,6 @@ const getCategoryDetail = async () => {
     return categoryDetail
 }
 
-const getCategoryDetailByCategoryId = async (idCategory) => {
-    try {
-        const categoryDetail = await categoryDetailModel.find({ idCategory });
-        return categoryDetail;
-    } catch (error) {
-        return false;
-    }
-};
-
-
 // //add
 const addCategoryDetail = async (categoryDetailData) => {
     try {
@@ -46,9 +36,9 @@ const deleteCategoryDetail = async (id) => {
 };
 
 // edit
-const updateCategoryDetails = async (id, name,img,icon) => {
+const updateCategoryDetails = async (id, name,img) => {
     try {
-        const updateCategoryDetails = await categoryDetailModel.findByIdAndUpdate(id, { name,img,icon }, { new: true });
+        const updateCategoryDetails = await categoryDetailModel.findByIdAndUpdate(id, { name,img }, { new: true });
         return updateCategoryDetails;
     } catch (error) {
         return false;
@@ -57,5 +47,5 @@ const updateCategoryDetails = async (id, name,img,icon) => {
 
 
 module.exports = {
-    getCategoryDetail,addCategoryDetail,updateCategoryDetails,deleteCategoryDetail,getCategoryDetailByCategoryId
+    getCategoryDetail,addCategoryDetail,updateCategoryDetails,deleteCategoryDetail
 }

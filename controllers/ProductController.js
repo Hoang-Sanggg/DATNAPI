@@ -25,8 +25,8 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { nameProduct, title, status, detail, location, price, created_AT, files, role } = req.body;
-        const updatedProduct = await productService.updateProduct(id, nameProduct, title, status, detail, location, price, created_AT, files, role);
+        const { nameProduct, title, status, detail, location, price, created_AT, file, role } = req.body;
+        const updatedProduct = await productService.updateProduct(id, nameProduct, title, status, detail, location, price, created_AT, file, role);
         if (updatedProduct) {
             return res.status(200).json({ result: true, message: 'Update Product Successful', data: updatedProduct });
         }

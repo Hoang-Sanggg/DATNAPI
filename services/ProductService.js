@@ -15,11 +15,11 @@ const addProduct = async (productData) => {
     }
 };
 // edit
-const updateProduct = async (id, nameProduct, title, status, detail, location, price, created_AT, files, role) => {
+const updateProduct = async (id, nameProduct, title, status, detail, location, price, created_AT, file, role) => {
     try {
         const updatedProduct = await productModel.findByIdAndUpdate(
             id,
-            { nameProduct, title, status, detail, location, price, created_AT, files, role },{ new: true }
+            { nameProduct, title, status, detail, location, price, created_AT, file, role },{ new: true }
         );
         return updatedProduct;
     } catch (error) {

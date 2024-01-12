@@ -11,20 +11,6 @@ const getType = async (res) => {
         return res.status(500).json({ result: false, message: 'Error getType' });
     }
 };
-
-// get type by categoryid
-const getTypebyCategorydetailid = async (req, res, next) => {
-    try {
-        const { idCategoryDetail } = req.params;
-        const typeByCategorydetailId = await typeService.getTypegByCategoryDetailId(idCategoryDetail);
-        if (typeByCategorydetailId) {
-            return res.status(200).json({ result: true, message: 'getTypeByidCategory Successful', data: typeByCategorydetailId });
-        }
-        return res.status(400).json({ result: false, message: 'getTypeByidCategory null' });
-    } catch (error) {
-        return res.status(500).json({ result: false, message: 'Error getTypeByidCategory' });
-    }
-};
 //add
 const addType = async (req, res) => {
     try {
@@ -71,5 +57,5 @@ const deleteType = async (req, res, next) => {
 
 
 module.exports = {
-    getType, addType,updateType,deleteType,getTypebyCategorydetailid
+    getType, addType,updateType,deleteType
 };
