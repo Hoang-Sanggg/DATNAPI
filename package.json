@@ -3,14 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "vercel-build": "echo hello"
-=======
-    "start": "nodemon ./bin/www",
-    "dev": "nodemon ./bin/www"
->>>>>>> cfe3677eb396782703d8f0f3e1a3bcb4ded4d699
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.0.2",
