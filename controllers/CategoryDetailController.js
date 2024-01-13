@@ -16,7 +16,7 @@ const getCategorydetail = async (req, res, next) => {
 const getCategorydetailbyid = async (req, res, next) => {
     try {
         const { idCategory } = req.params; // Update the variable name to idCategory
-        const categoriesDetailByCategoryId = await categoryDetailService.getCategoryDetailByCategoryId(idCategory);
+        const categoriesDetailByCategoryId = await categoryDetailService.getCategoryDetailByCtegaoryId(idCategory);
         if (categoriesDetailByCategoryId) {
             return res.status(200).json({ result: true, message: 'getcategorydetailByid Successful', data: categoriesDetailByCategoryId });
         }

@@ -1,5 +1,4 @@
 const categoryDetailModel = require('../models/CategoriesDetailModels');
-
 const getCategoryDetail = async () => {
     const categoryDetail = await categoryDetailModel.find();
     return categoryDetail
