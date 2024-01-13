@@ -6,15 +6,16 @@ var logger = require('morgan');
 
 const testRouter = require('./routes/api');
 const productRouter = require('./routes/ProductApi');
-const DetailRouter = require('./routes/DetailAPI');
-const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
 const NotificationRouter = require('./routes/NotificationAPI');
+const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
 const typeRouter = require('./routes/TypeApi');
 const productdetailRouter = require('./routes/ProductDetailApi');
-const adRouter = require('./routes/AdApi');
 const chatsRouter = require('./routes/chatApi.js');
 const categoryRouter = require('./routes/CategoryApi.js');
 const categoryDetailRouter = require('./routes/CategoryDetailApi.js');
+const adRouter = require('./routes/AdApi')
+const detailCartRouter = require('./routes/detailCartAPI');
+const InforRouter = require('./routes/InforAPI');
 
 
 var app = express();
@@ -44,10 +45,9 @@ app.get('/', (req, res) => {
 //tạo đường dẫn tới file trong router
 app.use('/api', testRouter);
 app.use('/api/products', productRouter)
-app.use('/api/detail', DetailRouter)
+app.use('/api/detailCart', detailCartRouter);
 app.use('/api/DetailsPurchaseRouter', DetailsPurchaseRouter)
 app.use('/api/Notification', NotificationRouter)
-app.use('/api/DetailsPurchase', DetailsPurchaseRouter)
 app.use('/api/products', productRouter);
 app.use('/api/types', typeRouter);
 app.use('/api/productdetails', productdetailRouter);
@@ -55,10 +55,13 @@ app.use('/api/ads', adRouter);
 app.use('/api/chat', chatsRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/categories-detail', categoryDetailRouter);
+app.use('/api/infors', InforRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
+
 });
 
 // error handler
