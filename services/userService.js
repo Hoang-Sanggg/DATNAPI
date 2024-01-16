@@ -1,6 +1,6 @@
 const UserModel = require('../models/userModel');
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
 //Đăng nhập
@@ -133,7 +133,7 @@ const getUserByEmail = async (email) => {
     }
 };
 
-//lấy user
+// Lấy tất cả users
 const getAllUsers = async () => {
     try {
         const users = await UserModel.find();
@@ -143,7 +143,7 @@ const getAllUsers = async () => {
     }
 };
 
-//thêm user
+// Thêm user
 const addUser = async (userData) => {
     try {
         const newUser = await UserModel.create(userData);
@@ -153,12 +153,13 @@ const addUser = async (userData) => {
     }
 };
 
-// sửa user
+// Sửa user
 const updateUser = async (id, updatedUserData) => {
     try {
         const updatedUser = await UserModel.findOneAndUpdate(
             { _id: id },
-            { $set: updatedUserData }
+            { $set: updatedUserData },
+            { new: true } 
         );
         return updatedUser;
     } catch (error) {
@@ -166,7 +167,7 @@ const updateUser = async (id, updatedUserData) => {
     }
 };
 
-// xóa user
+// Xóa user
 const deleteUser = async (id) => {
     try {
         const deletedUser = await UserModel.findOneAndDelete({ _id: id });

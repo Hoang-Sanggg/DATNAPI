@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   phone: { type: Number, required: true },
   name: { type: String, required: true },
   uytin: { type: String, required: true, default: 0 },
+  vip: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model.user || mongoose.model('user', UserSchema);
