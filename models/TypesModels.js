@@ -11,4 +11,4 @@ const categorydetailSchema = new Schema({
 
 });
 
-module.exports = mongoose.model.categorydetail || mongoose.model('categorydetail', categorydetailSchema);
+module.exports = mongoose.model.type || mongoose.model('type', categorydetailSchema);

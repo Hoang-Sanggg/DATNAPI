@@ -1,8 +1,8 @@
-const typeService = require('../services/TypeServices');
+const brandService = require('../services/BrandService');
 
 const getType = async (res) => {
     try {
-        const type = await typeService.getType();
+        const type = await brandService.getType();
         if (type) {
             return res.status(200).json({ result: true, message: 'getType Successful', data: type });
         }
@@ -15,8 +15,8 @@ const getType = async (res) => {
 // get type by categoryid
 const getTypebyCategorydetailid = async (req, res, next) => {
     try {
-        const { idCategoryDetail } = req.params;
-        const typeByCategorydetailId = await typeService.getTypegByCategoryDetailId(idCategoryDetail);
+        const { idtype } = req.params;
+        const typeByCategorydetailId = await brandService.getTypegByCategoryDetailId(idtype);
         if (typeByCategorydetailId) {
             return res.status(200).json({ result: true, message: 'getTypeByidCategory Successful', data: typeByCategorydetailId });
         }
@@ -26,28 +26,28 @@ const getTypebyCategorydetailid = async (req, res, next) => {
     }
 };
 //add
-const addType = async (req, res) => {
+const addBrandController = async (req, res) => {
     try {
-        const typeData = req.body;
-        const saveType = await typeService.addType(typeData);
-        res.status(200).json({ result: true, message: 'Type added successfully', data: saveType });
+        const brandData = req.body;
+        const Data = await brandService.addBrandService(brandData);
+        res.status(200).json({ result: true, message: 'Save Brand  successfully', data: Data });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ result: false, message: 'Error adding Type' });
+        res.status(500).json({ result: false, message: 'Error savedProductDetail Brand' });
     }
 };
 //edit
 const updateType = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { nameType,description } = req.body;
-        const updateType = await typeService.updateType(id,nameType,description);
+        const { nameBrand,description } = req.body;
+        const updateType = await brandService.updateType(id,nameBrand,description);
         if (updateType) {
             return res.status(200).json({ result: true, message: 'Update Type Successful', data: updateType });
         }
         return res.status(400).json({ result: false, message: 'Type null' })
     } catch (error) {
-        console.error('Error updating Type:', error.message);
+        // console.error('Error updating Type:', error.message);
         return res.status(500).json({ result: false, message: 'Error updating Type' });
     }
 };
@@ -56,7 +56,7 @@ const updateType = async (req, res, next) => {
 const deleteType = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deleteTypes = await typeService.deleteType(id);
+        const deleteTypes = await brandService.deleteType(id);
 
         if (deleteTypes) {
             return res.status(200).json({ result: true, message: 'Delete Type Successful' });
@@ -71,5 +71,5 @@ const deleteType = async (req, res, next) => {
 
 
 module.exports = {
-    getType, addType,updateType,deleteType,getTypebyCategorydetailid
+    getType, addBrandController,updateType,deleteType,getTypebyCategorydetailid
 };

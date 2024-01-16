@@ -1,8 +1,8 @@
-const categoryDetailService = require('../services/CategoryDetailServices');
+const typesService = require('../services/TypesServices');
 
 const getCategorydetail = async (req, res, next) => {
     try {
-        const categorydetail = await categoryDetailService.getCategoryDetail();
+        const categorydetail = await typesService.getCategoryDetail();
         if (categorydetail) {
             return res.status(200).json({ result: true, message: 'getcategorydetail Succesful', data: categorydetail })
         }
@@ -16,7 +16,7 @@ const getCategorydetail = async (req, res, next) => {
 const getCategorydetailbyid = async (req, res, next) => {
     try {
         const { idCategory } = req.params; // Update the variable name to idCategory
-        const categoriesDetailByCategoryId = await categoryDetailService.getCategoryDetailByCtegaoryId(idCategory);
+        const categoriesDetailByCategoryId = await typesService.getCategoryDetailByCategoryId(idCategory);
         if (categoriesDetailByCategoryId) {
             return res.status(200).json({ result: true, message: 'getcategorydetailByid Successful', data: categoriesDetailByCategoryId });
         }
@@ -30,7 +30,7 @@ const getCategorydetailbyid = async (req, res, next) => {
 const addCategoryDetail = async (req, res) => {
     try {
         const categoryDetailData = req.body;
-        const saveCategoryDetail = await categoryDetailService.addCategoryDetail(categoryDetailData);
+        const saveCategoryDetail = await typesService.addCategoryDetail(categoryDetailData);
         res.status(200).json({ result: true, message: 'Save Categorydetail successfully', data: saveCategoryDetail });
     } catch (error) {
         console.error(error);
@@ -42,7 +42,7 @@ const addCategoryDetail = async (req, res) => {
 const deleteCategoryDetail = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deleteCategoryDetail = await categoryDetailService.deleteCategoryDetail(id);
+        const deleteCategoryDetail = await typesService.deleteCategoryDetail(id);
         if (deleteCategoryDetail) {
             return res.status(200).json({ result: true, message: 'Delete Categorydetail Successful' });
         }
@@ -57,7 +57,7 @@ const updateCategoryDetail = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { name, img, icon } = req.body;
-        const updateCategoryDetails = await categoryDetailtService.updateCategoryDetails(id, name, img, icon);
+        const updateCategoryDetails = await typesService.updateCategoryDetails(id, name, img, icon);
         if (updateCategoryDetails) {
             return res.status(200).json({ result: true, message: 'Update Ads Categorydetail', data: updateCategoryDetails });
         }
