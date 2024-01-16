@@ -1,14 +1,23 @@
-const categoryDetailModel = require('../models/CategoriesDetailModels');
-
+const TypesModel = require('../models/TypesModels');
 const getCategoryDetail = async () => {
-    const categoryDetail = await categoryDetailModel.find();
+    const categoryDetail = await TypesModel.find();
     return categoryDetail
 }
 
-// //add
+const getCategoryDetailByCategoryId = async (idCategory) => {
+    try {
+        const categoryDetail = await TypesModel.find({ idCategory });
+        return categoryDetail;
+    } catch (error) {
+        return false;
+    }
+};
+
+
+//add
 const addCategoryDetail = async (categoryDetailData) => {
     try {
-        const newCategoryDetailData = new categoryDetailModel(categoryDetailData);
+        const newCategoryDetailData = new TypesModel(categoryDetailData);
         const saveCategoryDetailData = await newCategoryDetailData.save();
         return saveCategoryDetailData;
     } catch (error) {
@@ -19,7 +28,7 @@ const addCategoryDetail = async (categoryDetailData) => {
 //delete
 const deleteCategoryDetail = async (id) => {
     try {
-        const categoryadlDelete = await categoryDetailModel.findById(id);
+        const categoryadlDelete = await TypesModel.findById(id);
 
         if (!categoryadlDelete) {
             throw new Error('Không tìm thấy');
@@ -36,9 +45,9 @@ const deleteCategoryDetail = async (id) => {
 };
 
 // edit
-const updateCategoryDetails = async (id, name,img) => {
+const updateCategoryDetails = async (id, name,img,icon) => {
     try {
-        const updateCategoryDetails = await categoryDetailModel.findByIdAndUpdate(id, { name,img }, { new: true });
+        const updateCategoryDetails = await TypesModel.findByIdAndUpdate(id, { name,img,icon }, { new: true });
         return updateCategoryDetails;
     } catch (error) {
         return false;
@@ -47,5 +56,5 @@ const updateCategoryDetails = async (id, name,img) => {
 
 
 module.exports = {
-    getCategoryDetail,addCategoryDetail,updateCategoryDetails,deleteCategoryDetail
+    getCategoryDetail,addCategoryDetail,updateCategoryDetails,deleteCategoryDetail,getCategoryDetailByCategoryId
 }

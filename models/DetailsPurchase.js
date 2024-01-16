@@ -4,8 +4,8 @@ const ObjectId = Schema.ObjectId;
 
 const getDetailsPurchaseSchema = new Schema({
     id: { type: ObjectId },
-    userid: { type: ObjectId, ref: 'User' },
-    Productid: { type: ObjectId, ref: 'Product' },
+    userid: { type: ObjectId, ref: 'user' },
+    Productid: { type: ObjectId, ref: 'product' },
     role: { type: String, require: true },
 });
 

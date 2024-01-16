@@ -20,11 +20,11 @@ const addCategories = async (categoryData) => {
      }
  };
  // edit
- const updateCategory = async (id, name,img) => {
+ const updateCategory = async (id, name,img,icon) => {
      try {
          const updateCategorys = await categorylModel.findByIdAndUpdate(
              id,
-             { name, img},{ new: true }
+             { name, img, icon},{ new: true }
          );
          return updateCategorys;
      } catch (error) {
