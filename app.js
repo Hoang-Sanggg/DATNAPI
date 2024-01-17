@@ -7,13 +7,11 @@ var logger = require('morgan');
 const testRouter = require('./routes/api');
 const postnewsRouter = require('./routes/PostnewsApi.js');
 const NotificationRouter = require('./routes/NotificationAPI');
-const DetailsPurchaseRouter = require('./routes/DetailsPurchaseAPI');
 const BrandRouter = require('./routes/BrandApi');
 const chatsRouter = require('./routes/chatApi.js');
 const categoryRouter = require('./routes/CategoryApi.js');
 const typesRouter = require('./routes/TypesApi.js');
 const adRouter = require('./routes/AdApi');
-const detailCartRouter = require('./routes/detailCartAPI');
 const InforRouter = require('./routes/InforAPI');
 
 
@@ -43,8 +41,6 @@ app.get('/', (req, res) => {
 
 //tạo đường dẫn tới file trong router
 app.use('/api', testRouter);
-app.use('/api/detailCart', detailCartRouter);
-app.use('/api/DetailsPurchaseRouter', DetailsPurchaseRouter)
 app.use('/api/Notification', NotificationRouter)
 app.use('/api/postnews', postnewsRouter);
 app.use('/api/brands', BrandRouter);

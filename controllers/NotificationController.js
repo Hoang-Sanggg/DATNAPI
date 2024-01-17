@@ -15,17 +15,20 @@ const getNotification = async (req, res, next) => {
 }
 const addNotification = async (req, res, next) => {
     try {
-        const { Productid, title, content, userid } = req.body;
-        const Notification = await NotificationServices.addNotification(Productid, title, content, userid);
-        if (Notification) {
-            return res.status(200).json({ result: true, message: 'addNotification Succesful', Notification: Notification })
-        }
-        return res.status(400).json({ result: false, message: 'addNotification null' })
+        const addNotifi = req.body;
+        const saveNotifi = await NotificationServices.addNotification(addNotifi);
 
+        if (saveNotifi) {
+            return res.status(200).json({ result: true, message: 'addNotification Succesful', Notification: saveNotifi });
+        } else {
+            return res.status(400).json({ result: false, message: 'addNotification null' });
+        }
     } catch (error) {
-        return res.status(500).json({ result: false, message: 'Error addNotification' })
+        console.log(">>>>>>>>>>>>>> 255555", error);
+        return res.status(500).json({ result: false, message: 'Error addNotification' });
     }
 }
+
 const DeleteNotification = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -42,8 +45,8 @@ const DeleteNotification = async (req, res, next) => {
 const UpdateNotification = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { Productid, title, content, userid } = req.body;
-        const Notification = await NotificationServices.UpdateNotification(id, Productid, title, content, userid);
+        const { title, content, userid } = req.body;
+        const Notification = await NotificationServices.UpdateNotification(id, title, content, userid);
         if (Notification) {
             return res.status(200).json({ result: true, message: 'UpdateNotification Succesful', Notification: Notification })
         }

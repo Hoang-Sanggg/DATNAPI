@@ -2,17 +2,18 @@ const NotificationModel = require('../models/NotificationModels');
 
 const getNotification = async () => {
      try {
-          const Notification = await NotificationModel.find().populate('Productid').populate('userid');
+          const Notification = await NotificationModel.find().populate('userid');
           return Notification
      }
      catch (error) {
           return false
      }
 }
-const addNotification = async (Productid, title, content, userid) => {
+const addNotification = async (data) => {
      try {
-          const Notification = await NotificationModel.create({ Productid, title, content, userid });
-          return Notification
+          const newNotification = new NotificationModel(data);
+          const savedNotification = await newNotification.save();
+          return savedNotification;
      }
      catch (error) {
           return false
@@ -27,9 +28,9 @@ const DeleteNotification = async (id) => {
           return false
      }
 }
-const UpdateNotification = async (id, Productid, title, content, userid) => {
+const UpdateNotification = async (id,  title, content, userid) => {
      try {
-          const Notification = await NotificationModel.findByIdAndUpdate(id, { Productid, title, content, userid });
+          const Notification = await NotificationModel.findByIdAndUpdate(id, {  title, content, userid });
           return Notification
      }
      catch (error) {
