@@ -11,6 +11,19 @@ const getCategory = async (res) => {
         return res.status(500).json({ result: false, message: 'Error getCategory' });
     }
 };
+// get CategoryById Parentid
+const getCategoryByparentId = async (req, res, next) => {
+    try {
+        const { parentId } = req.params; 
+        const categoriesbyparentid = await categoryService.getCategoryByparentId(parentId);
+        if (categoriesbyparentid) {
+            return res.status(200).json({ result: true, message: 'getcategoryparentId Successful', data: categoriesbyparentid });
+        }
+        return res.status(400).json({ result: false, message: 'getcategoryparentId null' });
+    } catch (error) {
+        return res.status(500).json({ result: false, message: 'Error getcategoryparentId' });
+    }
+};
 
 const addCategory = async (req, res) => {
     try {
@@ -26,8 +39,8 @@ const addCategory = async (req, res) => {
 const updateCategory = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name,img, icon} = req.body;
-        const updatedCategory = await categoryService.updateCategory(id, name, img,icon);
+        const { name,img, icon,avaliable} = req.body;
+        const updatedCategory = await categoryService.updateCategory(id, name, img,icon,avaliable);
         if (updatedCategory) {
             return res.status(200).json({ result: true, message: 'Update Category Successful', data: updatedCategory });
         }
@@ -68,5 +81,5 @@ const upLoadImg = (req, res, next) => {
     }
 }
 module.exports = {
-    getCategory,addCategory,updateCategory,deleteCategory,upLoadImg
+    getCategory,addCategory,updateCategory,deleteCategory,upLoadImg,getCategoryByparentId
 };

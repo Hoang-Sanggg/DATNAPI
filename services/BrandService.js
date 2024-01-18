@@ -6,9 +6,9 @@ const getType = async () => {
 }
 
 // getType Byid types
-const getTypegByCategoryDetailId = async (idtype) => {
+const getBrandgByCategoryId = async (idCategory) => {
     try {
-        const type = await brandmodel.find({ idtype });
+        const type = await brandmodel.find({ idCategory });
         return type;
     } catch (error) {
         return false;
@@ -27,9 +27,9 @@ const addBrandService = async (brandData) => {
     }
 };
 // edit
-const updateType = async (id, nameBrand,description) => {
+const updateType = async (id, nameBrand,description,avaliable) => {
     try {
-        const updateType = await brandmodel.findByIdAndUpdate(id, { nameBrand, description }, { new: true });
+        const updateType = await brandmodel.findByIdAndUpdate(id, { nameBrand, description,avaliable }, { new: true });
         return updateType;
     } catch (error) {
         return false;
@@ -48,6 +48,6 @@ const deleteType = async (id) => {
 
 
 module.exports = {
-    getType, addBrandService,updateType,deleteType,getTypegByCategoryDetailId
+    getType, addBrandService,updateType,deleteType,getBrandgByCategoryId
 }
 

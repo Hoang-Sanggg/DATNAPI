@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     await brandController.getType(res);
 });
 //byid
-router.get('/:idtype', brandController.getTypebyCategorydetailid);
+router.get('/:idCategory', brandController.getBrandbyCategorylid);
 
 // add product
 router.post('/add', brandController.addBrandController);

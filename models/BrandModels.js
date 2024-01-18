@@ -6,7 +6,8 @@ const brandSchema = new Schema({
     id: { type: ObjectId },
     nameBrand: { type: String, required: true },
     description: { type: String, required: true },
-    idtype: { type: ObjectId, ref: 'type' },
+    avaliable: { type: Boolean, required: true},
+    idCategory: { type: ObjectId, ref: 'category' },
     idpostnew: { type: ObjectId, ref: 'postnew' },
 });
 
