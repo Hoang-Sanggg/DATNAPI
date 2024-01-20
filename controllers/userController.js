@@ -100,7 +100,7 @@ const updateUser = async (req, res, next) => {
         const id = req.body.id;
         const updatedUserData = req.body;
         const updatedUser = await UserService.updateUser(id, updatedUserData);
-        return res.status(200).json({ result: true, message: 'Sửa người dùng thành công', user: updatedUser });
+        return res.status(200).json({ result: true, message: 'Sửa người dùng thành công', user: updatedUser, status: 200 });
     } catch (error) {
         return res.status(500).json({ result: false, message: 'Lỗi khi sửa người dùng' });
     }

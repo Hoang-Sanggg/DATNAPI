@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+const cors = require('cors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -16,7 +17,7 @@ const InforRouter = require('./routes/InforAPI');
 
 
 var app = express();
-
+app.use(cors()); // Kích hoạt CORS cho tất cả các yêu cầu
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');

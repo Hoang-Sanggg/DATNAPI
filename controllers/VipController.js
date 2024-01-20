@@ -13,7 +13,7 @@ const createVip = async (req, res) => {
 // lấy vip theo id
 const getVipById = async (req, res) => {
   try {
-    const vip = await vipService.getVipById(req.params.id);
+    const vip = await vipService.getVipById(req.query.id);
     if (!vip) {
       return res.status(404).json({ message: 'Vip not found' });
     }
@@ -36,7 +36,7 @@ const getAllVips = async (req, res) => {
 // cập nhật vip
 const updateVip = async (req, res) => {
   try {
-    const updatedVip = await vipService.updateVip(req.params.id, req.body);
+    const updatedVip = await vipService.updateVip(req.query.id, req.body);
     if (!updatedVip) {
       return res.status(404).json({ message: 'Vip not found' });
     }
@@ -49,7 +49,7 @@ const updateVip = async (req, res) => {
 //xóa vip
 const deleteVip = async (req, res) => {
   try {
-    await vipService.deleteVip(req.params.id);
+    await vipService.deleteVip(req.query.id);
     res.status(200).json({ message: 'Vip deleted' });
   } catch (error) {
     res.status(500).

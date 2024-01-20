@@ -1,7 +1,7 @@
 const Vip = require('../models/VipModel');
 
 // thêm vip
-const addVip = async (vipData) => {
+const createVip = async (vipData) => {
     const vip = new Vip(vipData);
     await vip.save();
     return vip;
@@ -28,7 +28,7 @@ const deleteVip = async (id) => {
 };
 
 module.exports = {
-    addVip,
+    createVip,
     getVipById,
     getAllVips,
     updateVip,

@@ -7,11 +7,11 @@ const createTransaction = async (transactionData) => {
 };
 
 const getTransactionById = async (id) => {
-  return await TransactionHistoryModel.findById(id).populate('userId').populate('vipuId');
+  return await TransactionHistoryModel.findById(id).populate('userId').populate('vipId');
 };
 
 const getAllTransactions = async () => {
-  return await TransactionHistoryModel.find().populate('userId').populate('vipuId');
+  return await TransactionHistoryModel.find().populate('userId').populate('vipId');
 };
 
 const updateTransaction = async (id, transactionData) => {

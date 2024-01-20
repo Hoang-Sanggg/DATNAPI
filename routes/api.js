@@ -13,8 +13,8 @@ router.post('/register-user', userController.registerUser);
 router.post('/forgotPassword-user', userController.forgotPassword);
 router.post('/resetPassword-user', userController.resetPassword);
 router.post('/add-user', userController.addUser);
-router.post('/update-user/:id', userController.updateUser);
-router.delete('/delete-user/:id', userController.deleteUser);
+router.post('/update-user', userController.updateUser);
+router.delete('/delete-user', userController.deleteUser);
 
 // Cart routes
 router.get('/carts', cartController.getAllCarts);
@@ -33,7 +33,7 @@ router.delete('/delete-history', historyController.deleteHistory);
 router.get('/transactions', TransactionHistory.getAllTransactions);
 router.post('/add-transactions', TransactionHistory.createTransaction);
 router.post('/update-transactions/:id', TransactionHistory.updateTransaction);
-router.delete('/delete-transactions/:id', TransactionHistory.deleteTransaction);
+router.delete('/delete-transactions', TransactionHistory.deleteTransaction);
 
 // VipController routes
 router.get('/vips', VipController.getAllVips);

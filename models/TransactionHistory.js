@@ -6,7 +6,7 @@ const TransactionHistorySchema = new mongoose.Schema({
   id: { type: ObjectId },
   create_at: { type: String, required: true },
   description: { type: String, required: true },
-  vipuId: { type: ObjectId, ref: "vip" },
+  vipId: { type: ObjectId, ref: "vip" },
   userId: { type: ObjectId, ref: "user" }
 });
 
