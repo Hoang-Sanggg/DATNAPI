@@ -11,6 +11,9 @@ router.get('/', async (req, res) => {
 // add Ads
 router.post('/add', categoryController.addCategory);
 
+//byParentId
+router.get('/:parentId', categoryController.getCategoryByparentId);
+
 // delete
 router.delete('/delete/:id', categoryController.deleteCategory);
 
