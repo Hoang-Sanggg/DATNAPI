@@ -13,10 +13,10 @@ const getType = async (res) => {
 };
 
 // get type by categoryid
-const getTypebyCategorydetailid = async (req, res, next) => {
+const getBrandbyCategorylid = async (req, res, next) => {
     try {
-        const { idtype } = req.params;
-        const typeByCategorydetailId = await brandService.getTypegByCategoryDetailId(idtype);
+        const { idCategory } = req.params;
+        const typeByCategorydetailId = await brandService.getBrandgByCategoryId(idCategory);
         if (typeByCategorydetailId) {
             return res.status(200).json({ result: true, message: 'getTypeByidCategory Successful', data: typeByCategorydetailId });
         }
@@ -40,8 +40,8 @@ const addBrandController = async (req, res) => {
 const updateType = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { nameBrand,description } = req.body;
-        const updateType = await brandService.updateType(id,nameBrand,description);
+        const { nameBrand,description,avaliable } = req.body;
+        const updateType = await brandService.updateType(id,nameBrand,description,avaliable);
         if (updateType) {
             return res.status(200).json({ result: true, message: 'Update Type Successful', data: updateType });
         }
@@ -71,5 +71,5 @@ const deleteType = async (req, res, next) => {
 
 
 module.exports = {
-    getType, addBrandController,updateType,deleteType,getTypebyCategorydetailid
+    getType, addBrandController,updateType,deleteType,getBrandbyCategorylid
 };

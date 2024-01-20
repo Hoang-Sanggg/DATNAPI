@@ -9,6 +9,15 @@ const getCategory = async () => {
           return false
      }
 }
+// get id by parentId
+const getCategoryByparentId = async (parentId) => {
+    try {
+        const categoryparentId = await categorylModel.find({ parentId });
+        return categoryparentId;
+    } catch (error) {
+        return false;
+    }
+};
 //add
 const addCategories = async (categoryData) => {
      try {
@@ -20,11 +29,11 @@ const addCategories = async (categoryData) => {
      }
  };
  // edit
- const updateCategory = async (id, name,img,icon) => {
+ const updateCategory = async (id, name,img,icon,avaliable) => {
      try {
          const updateCategorys = await categorylModel.findByIdAndUpdate(
              id,
-             { name, img, icon},{ new: true }
+             { name, img, icon,avaliable},{ new: true }
          );
          return updateCategorys;
      } catch (error) {
@@ -42,5 +51,5 @@ const addCategories = async (categoryData) => {
  };
 
 module.exports = {
-    getCategory,addCategories,updateCategory,deleteCategory
+    getCategory,addCategories,updateCategory,deleteCategory,getCategoryByparentId
 }

@@ -37,8 +37,8 @@ const deleteCategoryDetail = async (id) => {
         if (categoryadlDelete.idCategory) {
             throw new Error('Không thể xóa khi có idCategory');
         }
-        const deleteCategoryDetail = await categoryDetailModel.findByIdAndDelete(id);
-        return deleteCategoryDetail;
+        const deleteCategoryDetailss = await categoryDetailModel.findByIdAndDelete(id);
+        return deleteCategoryDetailss;
     } catch (error) {
         return false;
     }
