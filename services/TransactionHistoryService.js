@@ -1,31 +1,30 @@
 const TransactionHistoryModel = require('../models/TransactionHistory');
 
-const createTransaction = async (transactionData) => {
-  const transaction = new TransactionHistoryModel(transactionData);
-  await transaction.save();
-  return transaction;
+const createTransactionHistory = async (data) => {
+  const transactionHistory = new TransactionHistory(data);
+  return transactionHistory.save();
 };
 
-const getTransactionById = async (id) => {
-  return await TransactionHistoryModel.findById(id).populate('userId').populate('vipId');
+const getAllTransactionHistories = async () => {
+  return TransactionHistory.find();
 };
 
-const getAllTransactions = async () => {
-  return await TransactionHistoryModel.find().populate('userId').populate('vipId');
+const getTransactionHistoryById = async (id) => {
+  return TransactionHistory.findById(id);
 };
 
-const updateTransaction = async (id, transactionData) => {
-  return await TransactionHistoryModel.findByIdAndUpdate(id, transactionData, { new: true });
+const updateTransactionHistory = async (id, updateData) => {
+  return TransactionHistory.findByIdAndUpdate(id, updateData, { new: true });
 };
 
-const deleteTransaction = async (id) => {
-  return await TransactionHistoryModel.findByIdAndDelete(id);
+const deleteTransactionHistory = async (id) => {
+  return TransactionHistory.findByIdAndDelete(id);
 };
 
 module.exports = {
-  createTransaction,
-  getTransactionById,
-  getAllTransactions,
-  updateTransaction,
-  deleteTransaction
+  createTransactionHistory,
+  getAllTransactionHistories,
+  getTransactionHistoryById,
+  updateTransactionHistory,
+  deleteTransactionHistory
 };

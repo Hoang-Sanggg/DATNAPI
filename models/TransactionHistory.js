@@ -4,10 +4,9 @@ const ObjectId = mongoose.ObjectId;
 
 const TransactionHistorySchema = new mongoose.Schema({
   id: { type: ObjectId },
-  create_at: { type: String, required: true },
+  amount: { type: Number, required: true ,default:0},
   description: { type: String, required: true },
-  vipId: { type: ObjectId, ref: "vip" },
   userId: { type: ObjectId, ref: "user" }
 });
 
-module.exports = mongoose.model.TransactionHistory || mongoose.model('TransactionHistory', TransactionHistorySchema);
+module.exports = mongoose.model.TransactionHistory || mongoose.model('Transactions', TransactionHistorySchema);

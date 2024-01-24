@@ -30,10 +30,10 @@ router.post('/update-history', historyController.updateHistory);
 router.delete('/delete-history', historyController.deleteHistory);
 
 // TransactionHistory routes
-router.get('/transactions', TransactionHistory.getAllTransactions);
-router.post('/add-transactions', TransactionHistory.createTransaction);
-router.post('/update-transactions/:id', TransactionHistory.updateTransaction);
-router.delete('/delete-transactions', TransactionHistory.deleteTransaction);
+router.get('/transactions', TransactionHistory.getAllTransactionHistories);
+router.post('/add-transactions', TransactionHistory.createTransactionHistory);
+router.post('/update-transactions/:id', TransactionHistory.updateTransactionHistory);
+router.delete('/delete-transactions', TransactionHistory.deleteTransactionHistory);
 
 // VipController routes
 router.get('/vips', VipController.getAllVips);

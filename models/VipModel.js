@@ -4,9 +4,11 @@ const ObjectId = mongoose.ObjectId;
 
 const VipSchema = new mongoose.Schema({
   id: { type: ObjectId },
-  create_at: { type: String, required: true },
-  timeVip:{ type: String, required: true },
-  userId: { type: ObjectId, ref: "user" }
+  createAT: { type: Date, required: false },
+  start: { type: Date, required: false },
+  end: { type: Date, required: false },
+  userId: { type: ObjectId, ref: "user" },
+  vipTypeId: { type: ObjectId, ref: "vipType" }
 });
 
 module.exports = mongoose.model.vip || mongoose.model('vip', VipSchema);

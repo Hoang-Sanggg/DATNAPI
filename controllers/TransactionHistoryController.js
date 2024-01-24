@@ -1,62 +1,63 @@
 const transactionHistoryService = require('../services/TransactionHistoryService');
 
-const createTransaction = async (req, res) => {
-  try {
-    const transaction = await transactionHistoryService.createTransaction(req.body);
-    res.status(201).json(transaction);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-const getTransactionById = async (req, res) => {
-  try {
-    const transaction = await transactionHistoryService.getTransactionById(req.query.id);
-    if (!transaction) {
-      return res.status(404).json({ message: 'TransactionHistory not found' });
+const createTransactionHistory = async (req, res) => {
+    try {
+        const transactionHistory = await transactionHistoryService.createTransactionHistory(req.body);
+        res.status(201).json(transactionHistory);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    res.json(transaction);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 };
 
-const getAllTransactions = async (req, res) => {
-  try {
-    const transactions = await transactionHistoryService.getAllTransactions();
-    res.json(transactions);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-const updateTransaction = async (req, res) => {
-  try {
-    const updatedTransaction = await transactionHistoryService.updateTransaction(req.query.id, req.body);
-    if (!updatedTransaction) {
-      return res.status(404).json({ message: 'TransactionHistory not found' });
+const getAllTransactionHistories = async (req, res) => {
+    try {
+        const transactionHistories = await transactionHistoryService.getAllTransactionHistories();
+        res.json(transactionHistories);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    res.json(updatedTransaction);
-  } catch (error) {
-    res.status
-      (500).json({ message: error.message });
-  }
 };
 
-const deleteTransaction = async (req, res) => {
-  try {
-    await transactionHistoryService.deleteTransaction(req.query.id);
-    console.log(3);
-    res.status(200).json({ message: 'TransactionHistory deleted' });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+const getTransactionHistoryById = async (req, res) => {
+    try {
+        const transactionHistory = await transactionHistoryService.getTransactionHistoryById(req.query.id);
+        if (!transactionHistory) {
+            return res.status(404).json({ message: 'Transaction history not found' });
+        }
+        res.json(transactionHistory);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+const updateTransactionHistory = async (req, res) => {
+    try {
+        const updatedTransactionHistory = await transactionHistoryService.updateTransactionHistory(req.query.id, req.body);
+        if (!updatedTransactionHistory) {
+            return res.status(404).json({ message: 'Transaction history not found' });
+        }
+        res.json(updatedTransactionHistory);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+const deleteTransactionHistory = async (req, res) => {
+    try {
+        const transactionHistory = await transactionHistoryService.deleteTransactionHistory(req.query.id);
+        if (!transactionHistory) {
+            return res.status(404).json({ message: 'Transaction history not found' });
+        }
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
 module.exports = {
-  createTransaction,
-  getTransactionById,
-  getAllTransactions,
-  updateTransaction,
-  deleteTransaction
+    createTransactionHistory,
+    getAllTransactionHistories,
+    getTransactionHistoryById,
+    updateTransactionHistory,
+    deleteTransactionHistory
 };
