@@ -12,7 +12,7 @@ const chatsRouter = require('./routes/chatApi.js');
 const categoryRouter = require('./routes/CategoryApi.js');
 const typesRouter = require('./routes/TypesApi.js');
 const adRouter = require('./routes/AdApi');
-const InforRouter = require('./routes/InforAPI');
+const SaveRouter = require('./routes/SaveAPi.js');
 
 
 var app = express();
@@ -48,7 +48,8 @@ app.use('/api/ads', adRouter);
 app.use('/api/chat', chatsRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/types', typesRouter);
-app.use('/api/infors', InforRouter);
+app.use('/api/save', SaveRouter);
+
 
 
 // catch 404 and forward to error handler
