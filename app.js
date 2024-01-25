@@ -11,8 +11,6 @@ const NotificationRouter = require('./routes/NotificationAPI');
 const BrandRouter = require('./routes/BrandApi');
 const chatsRouter = require('./routes/chatApi.js');
 const categoryRouter = require('./routes/CategoryApi.js');
-const typesRouter = require('./routes/TypesApi.js');
-const adRouter = require('./routes/AdApi');
 const InforRouter = require('./routes/InforAPI');
 
 
@@ -45,10 +43,8 @@ app.use('/api', testRouter);
 app.use('/api/Notification', NotificationRouter)
 app.use('/api/postnews', postnewsRouter);
 app.use('/api/brands', BrandRouter);
-app.use('/api/ads', adRouter);
 app.use('/api/chat', chatsRouter);
 app.use('/api/categories', categoryRouter);
-app.use('/api/types', typesRouter);
 app.use('/api/infors', InforRouter);
 
 
