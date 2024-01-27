@@ -15,7 +15,7 @@ const productSchema = new Schema({
     activable: {type: Boolean},
     userid: { type: ObjectId, ref: 'User' },
     brandid: { type: ObjectId, ref: 'brand' },
-   
+
 
 });
 
