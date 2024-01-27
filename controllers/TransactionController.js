@@ -1,8 +1,8 @@
-const transactionHistoryService = require('../services/TransactionHistoryService');
+const transactionService = require('../services/TransactionService');
 
 const createTransactionHistory = async (req, res) => {
     try {
-        const transactionHistory = await transactionHistoryService.createTransactionHistory(req.body);
+        const transactionHistory = await transactionService.createTransactionHistory(req.body);
         res.status(201).json(transactionHistory);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -11,7 +11,7 @@ const createTransactionHistory = async (req, res) => {
 
 const getAllTransactionHistories = async (req, res) => {
     try {
-        const transactionHistories = await transactionHistoryService.getAllTransactionHistories();
+        const transactionHistories = await transactionService.getAllTransactionHistories();
         res.json(transactionHistories);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -20,7 +20,7 @@ const getAllTransactionHistories = async (req, res) => {
 
 const getTransactionHistoryById = async (req, res) => {
     try {
-        const transactionHistory = await transactionHistoryService.getTransactionHistoryById(req.query.id);
+        const transactionHistory = await transactionService.getTransactionHistoryById(req.query.id);
         if (!transactionHistory) {
             return res.status(404).json({ message: 'Transaction history not found' });
         }
@@ -32,7 +32,7 @@ const getTransactionHistoryById = async (req, res) => {
 
 const updateTransactionHistory = async (req, res) => {
     try {
-        const updatedTransactionHistory = await transactionHistoryService.updateTransactionHistory(req.query.id, req.body);
+        const updatedTransactionHistory = await transactionService.updateTransactionHistory(req.query.id, req.body);
         if (!updatedTransactionHistory) {
             return res.status(404).json({ message: 'Transaction history not found' });
         }
@@ -44,7 +44,7 @@ const updateTransactionHistory = async (req, res) => {
 
 const deleteTransactionHistory = async (req, res) => {
     try {
-        const transactionHistory = await transactionHistoryService.deleteTransactionHistory(req.query.id);
+        const transactionHistory = await transactionService.deleteTransactionHistory(req.query.id);
         if (!transactionHistory) {
             return res.status(404).json({ message: 'Transaction history not found' });
         }

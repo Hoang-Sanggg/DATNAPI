@@ -4,7 +4,7 @@ const userController = require('../controllers/userController')
 const cartController = require('../controllers/cartController')
 const historyController = require('../controllers/historyController')
 const VipController = require('../controllers/VipController')
-const TransactionHistory = require('../controllers/TransactionHistoryController')
+const TransactionHistory = require('../controllers/TransactionController')
 
 // User routes
 router.get('/users', userController.getAllUsers);
@@ -18,7 +18,7 @@ router.delete('/delete-user', userController.deleteUser);
 
 // Cart routes
 router.get('/carts', cartController.getAllCarts);
-router.post('/add-cart', cartController.addCart);   
+router.post('/add-cart', cartController.addCart);
 router.post('/update-cart', cartController.updateCart);
 router.delete('/delete-cart', cartController.deleteCart);
 
