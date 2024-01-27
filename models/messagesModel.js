@@ -4,10 +4,12 @@ const ObjectId = mongoose.ObjectId;
 
 const messageSchema = new mongoose.Schema({
     id: { type: ObjectId },
-    conversationId: { type: ObjectId, ref: 'conversation' },
     senderId: { type: ObjectId, ref: 'user' },
+    receiverId: { type: ObjectId, ref: 'user' },
     content: { type: String, required: true },
-    timeStamp: { type: Date, default: Date.now },
+    createAt: { type: Date, default: Date.now },
+    seen: { type: Boolean, default: false }
+
 });
 
 module.exports = mongoose.model.message || mongoose.model('message', messageSchema);

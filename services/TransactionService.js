@@ -1,24 +1,24 @@
-const TransactionHistoryModel = require('../models/TransactionHistory');
+const TransactionModel = require('../models/Transaction');
 
 const createTransactionHistory = async (data) => {
-  const transactionHistory = new TransactionHistory(data);
+  const transactionHistory = new TransactionModel(data);
   return transactionHistory.save();
 };
 
 const getAllTransactionHistories = async () => {
-  return TransactionHistory.find();
+  return TransactionModel.find();
 };
 
 const getTransactionHistoryById = async (id) => {
-  return TransactionHistory.findById(id);
+  return TransactionModel.findById(id);
 };
 
 const updateTransactionHistory = async (id, updateData) => {
-  return TransactionHistory.findByIdAndUpdate(id, updateData, { new: true });
+  return TransactionModel.findByIdAndUpdate(id, updateData, { new: true });
 };
 
 const deleteTransactionHistory = async (id) => {
-  return TransactionHistory.findByIdAndDelete(id);
+  return TransactionModel.findByIdAndDelete(id);
 };
 
 module.exports = {

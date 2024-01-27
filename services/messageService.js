@@ -1,9 +1,9 @@
 const messageModel = require('../models/messagesModel')
 
-const getMessage = async (conversationId) => {
+const getMessage = async (senderId, receiverId) => {
     try {
-        console.log(conversationId)
-        const message = await messageModel.find({ conversationId: conversationId });
+        console.log(senderId, receiverId)
+        const message = await messageModel.find({ senderId, receiverId });
 
         return message;
     } catch (error) {
@@ -11,11 +11,10 @@ const getMessage = async (conversationId) => {
     }
 }
 
-const addMessage = async (messageData) => {
-
+const newMessage = async (messageData) => {
     try {
         const message = await messageModel.create(messageData);
-        console.log("check data message : ", message)
+        // console.log("check data message : ", message)
         return true;
     } catch (error) {
         console.log(error)
@@ -24,5 +23,5 @@ const addMessage = async (messageData) => {
 }
 
 module.exports = {
-    addMessage, getMessage
+    getMessage, newMessage
 }
