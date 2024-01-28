@@ -3,8 +3,13 @@ const messageModel = require('../models/messagesModel')
 const getMessage = async (senderId, receiverId) => {
     try {
         console.log(senderId, receiverId)
-        const message = await messageModel.find({ senderId, receiverId });
+        const messageSender = await messageModel.find({ senderId, receiverId });
+        const messageReceiver = await messageModel.find({ senderId: receiverId, receiverId: senderId });
 
+        const message = messageSender.concat(messageReceiver);
+        message.sort(function (a, b) {
+            return new Date(a.createAt) - new Date(b.createAt);
+        });
         return message;
     } catch (error) {
         return false
