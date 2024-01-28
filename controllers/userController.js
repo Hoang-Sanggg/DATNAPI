@@ -45,6 +45,37 @@ const registerUser = async (req, res) => {
     }
 };
 
+const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const resetToken = await UserService.forgotPassword(email);
+        res.status(200).json({
+            success: true,
+            message: 'Hướng dẫn đặt lại mật khẩu đã được gửi đến email của bạn.',
+            token: resetToken  // You might not want to send this back in a real application
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Có lỗi xảy ra'
+        });
+    }
+};
+
+const resetPassword = async (req, res) => {
+    try {
+        const { resetToken, newPassword } = req.body;
+        const result = await UserService.resetPassword(resetToken, newPassword);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Có lỗi xảy ra khi đặt lại mật khẩu'
+        });
+    }
+};
+
+
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await UserService.getAllUsers();
@@ -69,7 +100,7 @@ const updateUser = async (req, res, next) => {
         const id = req.body.id;
         const updatedUserData = req.body;
         const updatedUser = await UserService.updateUser(id, updatedUserData);
-        return res.status(200).json({ result: true, message: 'Sửa người dùng thành công', user: updatedUser });
+        return res.status(200).json({ result: true, message: 'Sửa người dùng thành công', user: updatedUser, status: 200 });
     } catch (error) {
         return res.status(500).json({ result: false, message: 'Lỗi khi sửa người dùng' });
     }
@@ -86,5 +117,5 @@ const deleteUser = async (req, res, next) => {
 };
 
 module.exports = {
-    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser
+    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword
 };

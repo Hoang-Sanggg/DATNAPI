@@ -1,22 +1,21 @@
 var createError = require('http-errors');
+const cors = require('cors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const testRouter = require('./routes/api');
+const apiRouter = require('./routes/api');
 const postnewsRouter = require('./routes/PostnewsApi.js');
 const NotificationRouter = require('./routes/NotificationAPI');
 const BrandRouter = require('./routes/BrandApi');
-const chatsRouter = require('./routes/chatApi.js');
 const categoryRouter = require('./routes/CategoryApi.js');
-const typesRouter = require('./routes/TypesApi.js');
-const adRouter = require('./routes/AdApi');
-const SaveRouter = require('./routes/SaveAPi.js');
+const InforRouter = require('./routes/InforAPI');
+const messageRouter = require('./routes/messageApi.js');
 
 
 var app = express();
-
+app.use(cors()); // Kích hoạt CORS cho tất cả các yêu cầu
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -40,16 +39,13 @@ app.get('/', (req, res) => {
 });
 
 //tạo đường dẫn tới file trong router
-app.use('/api', testRouter);
+app.use('/api', apiRouter);
 app.use('/api/Notification', NotificationRouter)
 app.use('/api/postnews', postnewsRouter);
 app.use('/api/brands', BrandRouter);
-app.use('/api/ads', adRouter);
-app.use('/api/chat', chatsRouter);
 app.use('/api/categories', categoryRouter);
-app.use('/api/types', typesRouter);
-app.use('/api/save', SaveRouter);
-
+app.use('/api/infors', InforRouter);
+app.use('/api/message', messageRouter);
 
 
 // catch 404 and forward to error handler
