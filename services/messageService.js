@@ -2,7 +2,6 @@ const messageModel = require('../models/messagesModel')
 
 const getMessage = async (senderId, receiverId) => {
     try {
-        console.log(senderId, receiverId)
         const messageSender = await messageModel.find({ senderId, receiverId });
         const messageReceiver = await messageModel.find({ senderId: receiverId, receiverId: senderId });
 
