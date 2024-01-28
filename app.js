@@ -12,6 +12,7 @@ const BrandRouter = require('./routes/BrandApi');
 const categoryRouter = require('./routes/CategoryApi.js');
 const InforRouter = require('./routes/InforAPI');
 const messageRouter = require('./routes/messageApi.js');
+const uploadImageRouter = require('./routes/uploadImages.js');
 
 
 var app = express();
@@ -46,6 +47,7 @@ app.use('/api/brands', BrandRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/infors', InforRouter);
 app.use('/api/message', messageRouter);
+app.use('/upload-image', uploadImageRouter);
 
 
 // catch 404 and forward to error handler
