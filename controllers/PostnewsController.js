@@ -25,8 +25,8 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { title, status, detail, location, price, created_AT, files, role, activable } = req.body;
-        const updatedProduct = await postServices.updateProduct(id, title, status, detail, location, price, created_AT, files, role, activable);
+        const { title, status, detail, location, price, created_AT, files, role, activable,properties } = req.body;
+        const updatedProduct = await postServices.updateProduct(id, title, status, detail, location, price, created_AT, files, role, activable, properties);
         if (updatedProduct) {
             return res.status(200).json({ result: true, message: 'Update Product Successful', data: updatedProduct });
         }
@@ -50,9 +50,25 @@ const deleteProduct = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error deleting product' });
     }
 };
+ // tiềm kiếm theo title
+const searchProductByTitle = async (req, res, next) => {
+    try {
+        const title = req.params.title;
+        const products = await postServices.searchProductByTitle(title);
+
+        if (products.length > 0) {
+            return res.status(200).json({ result: true, message: 'Search successful', data: products });
+        } else {
+            return res.status(400).json({ result: false, message: 'No products found with the given title' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ result: false, message: 'Internal Server Error' });
+    }
+};
 
 
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct
+    getProduct, addProduct, updateProduct, deleteProduct,searchProductByTitle
 }
