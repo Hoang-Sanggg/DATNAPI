@@ -15,11 +15,11 @@ const addProduct = async (productData) => {
     }
 };
 // edit
-const updateProduct = async (id, title, status, detail, location, price, created_AT, files, role, activable) => {
+const updateProduct = async (id, title, status, detail, location, price, created_AT, files, role, activable,properties) => {
     try {
         const updatedProduct = await postModel.findByIdAndUpdate(
             id,
-            {  title, status, detail, location, price, created_AT, files, role, activable }, { new: true }
+            {  title, status, detail, location, price, created_AT, files, role, activable,properties }, { new: true }
         );
         return updatedProduct;
     } catch (error) {
@@ -36,7 +36,19 @@ const deleteProduct = async (id) => {
     }
 };
 
+// tiềm kiếm theo title
+const searchProductByTitle = async (title) => {
+    try {
+        const products = await postModel.find({ title: { $regex: new RegExp(title, 'i') } }); 
+        return products;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+};
+
+
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct
+    getProduct, addProduct, updateProduct, deleteProduct,searchProductByTitle
 }
