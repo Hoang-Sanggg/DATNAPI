@@ -8,6 +8,7 @@ const TransactionHistory = require('../controllers/TransactionController')
 
 // User routes
 router.get('/users', userController.getAllUsers);
+router.get('/get-user-byId/:id', userController.getUserById);
 router.post('/login-user', userController.loginUser);
 router.post('/register-user', userController.registerUser);
 router.post('/forgotPassword-user', userController.forgotPassword);

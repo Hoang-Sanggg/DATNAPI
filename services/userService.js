@@ -133,6 +133,16 @@ const getUserByEmail = async (email) => {
     }
 };
 
+// Lấy user theo id
+const getUserById = async (id) => {
+    try {
+        const user = await UserModel.findById(id);
+        return user;
+    } catch (error) {
+        return false;
+    }
+};
+
 // Lấy tất cả users
 const getAllUsers = async () => {
     try {
@@ -180,5 +190,5 @@ const deleteUser = async (id) => {
 
 
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser,forgotPassword,resetPassword
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser,forgotPassword,resetPassword,getUserById
 };
