@@ -25,7 +25,7 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { title, status, detail, location, price, created_AT, files, role, activable,properties } = req.body;
+        const { title, status, detail, location, price, created_AT, files, role, activable, properties } = req.body;
         const updatedProduct = await postServices.updateProduct(id, title, status, detail, location, price, created_AT, files, role, activable, properties);
         if (updatedProduct) {
             return res.status(200).json({ result: true, message: 'Update Product Successful', data: updatedProduct });
@@ -50,7 +50,7 @@ const deleteProduct = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error deleting product' });
     }
 };
- // tiềm kiếm theo title
+// tiềm kiếm theo title
 const searchProductByTitle = async (req, res, next) => {
     try {
         const title = req.params.title;
@@ -67,8 +67,25 @@ const searchProductByTitle = async (req, res, next) => {
     }
 };
 
+const postNews = async (req, res) => {
+    try {
+
+        // Assuming 'files' is the name attribute in your form for the file input
+        const filePaths = req.files.map(file => file.path);
+        if (filePaths.length == 0) {
+            return res.status(203).json({ result: true, message: 'image is not undefind' });
+        }
+        if (filePaths.length > 0) {
+            return res.status(200).json({ result: true, message: 'upload image successful', files: filePaths });
+        }
+        return res.status(202).json({ result: false, message: 'upload images fail' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct,searchProductByTitle
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews
 }
