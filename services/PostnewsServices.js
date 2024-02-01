@@ -15,11 +15,11 @@ const addProduct = async (productData) => {
     }
 };
 // edit
-const updateProduct = async (id, title, status, detail, location, price, created_AT, files, role, activable,properties) => {
+const updateProduct = async (id, title, status, detail, location, price, created_AT, files, role, activable, properties) => {
     try {
         const updatedProduct = await postModel.findByIdAndUpdate(
             id,
-            {  title, status, detail, location, price, created_AT, files, role, activable,properties }, { new: true }
+            { title, status, detail, location, price, created_AT, files, role, activable, properties }, { new: true }
         );
         return updatedProduct;
     } catch (error) {
@@ -39,7 +39,7 @@ const deleteProduct = async (id) => {
 // tiềm kiếm theo title
 const searchProductByTitle = async (title) => {
     try {
-        const products = await postModel.find({ title: { $regex: new RegExp(title, 'i') } }); 
+        const products = await postModel.find({ title: { $regex: new RegExp(title, 'i') } });
         return products;
     } catch (error) {
         console.error(error);
@@ -47,8 +47,30 @@ const searchProductByTitle = async (title) => {
     }
 };
 
-
+const postNews = async (title, status, detail, location, price, created_AT, role, activable, properties, userid, brandid, filePaths) => {
+    try {
+        const newProduct = new postModel({
+            title,
+            status,
+            detail,
+            location,
+            price,
+            created_AT,
+            files: filePaths, // Save the file paths here
+            role,
+            activable,
+            properties,
+            userid,
+            brandid
+        });
+        const savedProduct = await newProduct.save();
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct,searchProductByTitle
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews
 }

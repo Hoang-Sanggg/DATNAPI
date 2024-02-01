@@ -14,7 +14,7 @@ const getCategory = async (res) => {
 // get CategoryById Parentid
 const getCategoryByparentId = async (req, res, next) => {
     try {
-        const { parentId } = req.params; 
+        const { parentId } = req.params;
         const categoriesbyparentid = await categoryService.getCategoryByparentId(parentId);
         if (categoriesbyparentid) {
             return res.status(200).json({ result: true, message: 'getcategoryparentId Successful', data: categoriesbyparentid });
@@ -39,8 +39,8 @@ const addCategory = async (req, res) => {
 const updateCategory = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name,img, icon,avaliable} = req.body;
-        const updatedCategory = await categoryService.updateCategory(id, name, img,icon,avaliable);
+        const { name, img, icon, avaliable } = req.body;
+        const updatedCategory = await categoryService.updateCategory(id, name, img, icon, avaliable);
         if (updatedCategory) {
             return res.status(200).json({ result: true, message: 'Update Category Successful', data: updatedCategory });
         }
@@ -80,6 +80,9 @@ const upLoadImg = (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error updating Ads' });
     }
 }
+
+
+
 module.exports = {
-    getCategory,addCategory,updateCategory,deleteCategory,upLoadImg,getCategoryByparentId
+    getCategory, addCategory, updateCategory, deleteCategory, upLoadImg, getCategoryByparentId
 };
