@@ -13,7 +13,7 @@ const categoryRouter = require('./routes/CategoryApi.js');
 const InforRouter = require('./routes/InforAPI');
 const messageRouter = require('./routes/messageApi.js');
 const uploadImageRouter = require('./routes/upload.js');
-
+const savedRouter = require('./routes/savedApi.js')
 
 var app = express();
 app.use(cors()); // Kích hoạt CORS cho tất cả các yêu cầu
@@ -48,6 +48,7 @@ app.use('/api/categories', categoryRouter);
 app.use('/api/infors', InforRouter);
 app.use('/api/message', messageRouter);
 app.use('/api/upload', uploadImageRouter);
+app.use('/api/saved', savedRouter);
 
 
 // catch 404 and forward to error handler
