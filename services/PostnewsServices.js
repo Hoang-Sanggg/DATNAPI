@@ -71,6 +71,22 @@ const postNews = async (title, status, detail, location, price, created_AT, role
     }
 }
 
+const uploadImagesbyID =  async (id, filePaths) => {
+      try {
+        const existingProduct = await postModel.findById(id);
+        const updatedFiles = existingProduct.files.concat(filePaths);
+        const updatedProduct = await postModel.findByIdAndUpdate(
+          id,
+          { files: updatedFiles },
+          { new: true }
+        );
+        return updatedProduct;
+      } catch (error) {
+        return false;
+      }
+    }
+  
+
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID
 }

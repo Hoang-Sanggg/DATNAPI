@@ -85,7 +85,27 @@ const postNews = async (req, res) => {
     }
 }
 
+const uploadImagesbyID =  async (req, res) => {
+      try {
+        const { id } = req.params;
+        const filePaths = req.files.map(file => file.path);
+  
+        const updatedProduct = await postServices.uploadImagesbyID(id, filePaths);
+  
+        if (updatedProduct < 0) {
+            return res.status(203).json({ result: true, message: 'image is not undefind' });
+        }
+        if (updatedProduct) {
+            return res.status(200).json({ result: true, message: 'upload image successful', files: updatedProduct });
+        }
+        return res.status(202).json({ result: false, message: 'upload images fail' });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+    }
+
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID
 }
