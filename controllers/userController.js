@@ -75,6 +75,21 @@ const resetPassword = async (req, res) => {
     }
 };
 
+const getUserById = async (req, res) => {
+    try {
+        const userId = req.query.id;
+        const user = await UserService.getUserById(userId);
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'Người dùng không tồn tại' });
+        }
+
+        return res.status(200).json({ success: true, message: 'Lấy thông tin người dùng thành công', user });
+    } catch (error) {
+        console.error("Error in getUserById :", error.message);
+        return res.status(500).json({ success: false, message: 'Có lỗi khi lấy thông tin người dùng' });
+    }
+};
 
 const getAllUsers = async (req, res, next) => {
     try {
@@ -117,5 +132,5 @@ const deleteUser = async (req, res, next) => {
 };
 
 module.exports = {
-    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword
+    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword,getUserById
 };
