@@ -1,9 +1,19 @@
 const savedModel = require('../models/savedModel');
 
-const createSaved = async (data) => {
+const saveOrNotSave = async (data) => {
     try {
-        const saved = new savedModel(data);
-        saved.save();
+        const dataSaved = await savedModel.find(data);
+        if (dataSaved.length > 0) {
+            await savedModel.findByIdAndDelete(dataSaved[0]._id)
+            return { message: "delete saved succesful" }
+        }
+        if (dataSaved.length == 0) {
+            const saved = new savedModel(data);
+            saved.save();
+            return { message: "creata saved succesful" }
+        }
+        // const saved = new savedModel(data);
+        // saved.save();
         return true
     } catch (error) {
         console.log("DB: error new create saved", error)
@@ -50,5 +60,5 @@ const deleteSaved = async (id) => {
 };
 
 module.exports = {
-    createSaved, getAllSaved, getByIdSaved, deleteSaved
+    saveOrNotSave, getAllSaved, getByIdSaved, deleteSaved
 };
