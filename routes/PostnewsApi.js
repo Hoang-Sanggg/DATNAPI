@@ -4,8 +4,10 @@ const postController = require('../controllers/PostnewsController');
 const postModel = require('../models/PostnewsModels');
 const upload = require('../middleware/uploadPostNews');
 
-//test
+//get
 router.get('/', postController.getProduct);
+// get by idUser
+router.get('/user/:userid', postController.getPostByUserId);
 // router.post('/add-product', testController.addTest);
 // add product
 router.post('/add', postController.addProduct);

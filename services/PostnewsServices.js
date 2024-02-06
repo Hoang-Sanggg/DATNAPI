@@ -4,6 +4,15 @@ const getProduct = async () => {
     const product = await postModel.find();
     return product
 }
+// get postnewsbyidUser
+const getPostByidUser = async (userid) => {
+    try {
+        const postnewsByidUser = await postModel.find({ userid });
+        return postnewsByidUser;
+    } catch (error) {
+        return false;
+    }
+}; 
 //add
 const addProduct = async (productData) => {
     try {
@@ -88,5 +97,5 @@ const uploadImagesbyID =  async (id, filePaths) => {
   
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID,getPostByidUser
 }
