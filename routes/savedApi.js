@@ -5,6 +5,6 @@ const savedController = require('../controllers/savedController')
 
 router.get('/get-all-saved', savedController.getAllSaved);
 
-router.post('/add', savedController.createSaved);
+router.post('/save-or-notSave', savedController.saveOrNotSave);
 
 module.exports = router

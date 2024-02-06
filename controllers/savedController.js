@@ -1,15 +1,15 @@
 const savedService = require('../services/savedService');
 
-const createSaved = async (req, res, next) => {
+const saveOrNotSave = async (req, res, next) => {
     try {
         const { postId, userId } = req.query;
         if (postId == "" || userId == "") return res.status(400).json({ result: false, message: 'postid and userid not null' });
         const requestDataSaved = { postId, userId }
 
-        const createSaved = await savedService.createSaved(requestDataSaved);
+        const saved = await savedService.saveOrNotSave(requestDataSaved);
 
-        if (createSaved) {
-            return res.status(200).json({ result: true, message: 'create saved Succesful' });
+        if (saved) {
+            return res.status(200).json({ result: true, message: saved.message });
         } else {
             return res.status(400).json({ result: false, message: 'addNotification null' });
         }
@@ -40,5 +40,5 @@ const getAllSaved = async (req, res, next) => {
 
 
 module.exports = {
-    createSaved, getAllSaved
+    saveOrNotSave, getAllSaved
 }
