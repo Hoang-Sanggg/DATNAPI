@@ -28,9 +28,9 @@ const DeleteNotification = async (id) => {
           return false
      }
 }
-const UpdateNotification = async (id, title, content, userid, isRead) => {
+const UpdateNotification = async (id,  title, content, userid) => {
      try {
-          const Notification = await NotificationModel.findByIdAndUpdate(id, { title, content, userid, isRead });
+          const Notification = await NotificationModel.findByIdAndUpdate(id, {  title, content, userid });
           return Notification
      }
      catch (error) {

@@ -45,8 +45,8 @@ const DeleteNotification = async (req, res, next) => {
 const UpdateNotification = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { title, content, userid,isRead } = req.body;
-        const Notification = await NotificationServices.UpdateNotification(id, title, content, userid,isRead);
+        const { title, content, userid } = req.body;
+        const Notification = await NotificationServices.UpdateNotification(id, title, content, userid);
         if (Notification) {
             return res.status(200).json({ result: true, message: 'UpdateNotification Succesful', Notification: Notification })
         }
