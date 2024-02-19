@@ -7,6 +7,7 @@ const brandSchema = new Schema({
     nameBrand: { type: String, required: true },
     description: { type: String, required: true },
     avaliable: { type: Boolean, required: true},
+    files: {type: String, require: true},
     idCategory: { type: ObjectId, ref: 'category' },
     idpostnew: { type: ObjectId, ref: 'postnew' },
 });

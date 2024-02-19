@@ -16,6 +16,8 @@ const productSchema = new Schema({
     properties:{type: Object},
     userid: { type: ObjectId, ref: 'User' },
     brandid: { type: ObjectId, ref: 'brand' },
+    idCategory: { type: ObjectId, ref: 'category' },
+
 });
 
 module.exports = mongoose.model.postnew || mongoose.model('postnew', productSchema);
