@@ -8,6 +8,8 @@ const upload = require('../middleware/uploadPostNews');
 router.get('/', postController.getProduct);
 // get by idUser
 router.get('/user/:userid', postController.getPostByUserId);
+// get by idCategory
+router.get('/:idCategory', postController.getPostByCategoryid);
 // router.post('/add-product', testController.addTest);
 // add product
 router.post('/add', postController.addProduct);

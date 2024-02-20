@@ -40,8 +40,8 @@ const addBrandController = async (req, res) => {
 const updateType = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { nameBrand,description,avaliable } = req.body;
-        const updateType = await brandService.updateType(id,nameBrand,description,avaliable);
+        const { nameBrand,description,avaliable,files } = req.body;
+        const updateType = await brandService.updateType(id,nameBrand,description,avaliable,files);
         if (updateType) {
             return res.status(200).json({ result: true, message: 'Update Type Successful', data: updateType });
         }

@@ -13,6 +13,16 @@ const getPostByidUser = async (userid) => {
         return false;
     }
 }; 
+
+// get postnewsbyid Categoory
+const getPostByidCategory = async (idCategory) => {
+    try {
+        const postnewsByidCategory = await postModel.find({ idCategory });
+        return postnewsByidCategory;
+    } catch (error) {
+        return false;
+    }
+}; 
 //add
 const addProduct = async (productData) => {
     try {
@@ -97,5 +107,5 @@ const uploadImagesbyID =  async (id, filePaths) => {
   
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID,getPostByidUser
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID,getPostByidUser,getPostByidCategory
 }

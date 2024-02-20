@@ -27,9 +27,9 @@ const addBrandService = async (brandData) => {
     }
 };
 // edit
-const updateType = async (id, nameBrand,description,avaliable) => {
+const updateType = async (id, nameBrand,description,avaliable,files) => {
     try {
-        const updateType = await brandmodel.findByIdAndUpdate(id, { nameBrand, description,avaliable }, { new: true });
+        const updateType = await brandmodel.findByIdAndUpdate(id, { nameBrand, description,avaliable,files }, { new: true });
         return updateType;
     } catch (error) {
         return false;
