@@ -45,8 +45,10 @@ const getPostByCategoryid = async (req, res, next) => {
 const addProduct = async (req, res) => {
     try {
         const productData = req.body;
+        console.log('check data',productData);
         const savedProduct = await postServices.addProduct(productData);
         res.status(200).json({ result: true, message: 'Product added successfully', data: savedProduct });
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ result: false, message: 'Error adding product' });
