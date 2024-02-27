@@ -1,8 +1,14 @@
 const postModel = require('../models/PostnewsModels');
 
 const getProduct = async () => {
-    const product = await postModel.find();
-    return product
+    try {
+        const product = await postModel.find().populate('userid');
+        return product
+    } catch (error) {
+        console.log("get all produc error: ", error);
+        return false;
+    }
+
 }
 // get postnewsbyidUser
 const getPostByidUser = async (userid) => {
@@ -12,7 +18,7 @@ const getPostByidUser = async (userid) => {
     } catch (error) {
         return false;
     }
-}; 
+};
 
 // get postnewsbyid Categoory
 const getPostByidCategory = async (idCategory) => {
@@ -22,7 +28,7 @@ const getPostByidCategory = async (idCategory) => {
     } catch (error) {
         return false;
     }
-}; 
+};
 //add
 const addProduct = async (productData) => {
     try {
@@ -90,22 +96,22 @@ const postNews = async (title, status, detail, location, price, created_AT, role
     }
 }
 
-const uploadImagesbyID =  async (id, filePaths) => {
-      try {
+const uploadImagesbyID = async (id, filePaths) => {
+    try {
         const existingProduct = await postModel.findById(id);
         const updatedFiles = existingProduct.files.concat(filePaths);
         const updatedProduct = await postModel.findByIdAndUpdate(
-          id,
-          { files: updatedFiles },
-          { new: true }
+            id,
+            { files: updatedFiles },
+            { new: true }
         );
         return updatedProduct;
-      } catch (error) {
+    } catch (error) {
         return false;
-      }
     }
-  
+}
+
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID,getPostByidUser,getPostByidCategory
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory
 }
