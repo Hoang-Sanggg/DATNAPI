@@ -40,7 +40,7 @@ const registerUser = async (req, res) => {
         }
         return res.status(201).json({ success: true, message: 'Đăng ký thành công', user: newUser });
     } catch (error) {
-        console.error(error); // Log the error for debugging
+        console.error(error);
         return res.status(500).json({ success: false, message: 'Lỗi khi đăng ký người dùng' });
     }
 };
