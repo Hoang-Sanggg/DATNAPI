@@ -190,17 +190,22 @@ const deleteUser = async (id) => {
     }
 };
 
-const lockUser = async (userId, isActivate) => {
+const lockUser = async (userId) => {
     try {
-        const user = await UserModel.findByIdAndUpdate(
-            userId, 
-            { isActivate: isActivate }, 
-            { new: true } 
-        );
+        const user = await UserModel.findById(userId);
         if (!user) {
             throw new Error('Người dùng không tồn tại hoặc ID không chính xác');
         }
-        return user;
+
+        const newIsActivate = !user.isActivate;
+
+        const updatedUser = await UserModel.findByIdAndUpdate(
+            userId, 
+            { isActivate: newIsActivate }, 
+            { new: true }
+        );
+
+        return updatedUser;
     } catch (error) {
         console.error('Lỗi khi khóa/mở khóa người dùng:', error);
         throw error;
