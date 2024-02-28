@@ -138,8 +138,9 @@ const deleteUser = async (req, res, next) => {
 };
 
 const lockUser = async (req, res) => {
-    const { userId } = req.params; 
-    const { isActivate } = req.body;
+    const userId = req.query.id; // Correctly access userId from query parameters
+    const { isActivate } = req.body; // Assuming isActivate is still in the body
+
     try {
         const user = await UserService.lockUser(userId, isActivate);
         if (!user) {
@@ -151,6 +152,7 @@ const lockUser = async (req, res) => {
         res.status(500).json({ success: false, message: 'Lỗi khi cập nhật trạng thái người dùng' });
     }
 };
+
 
 module.exports = {
     getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword,getUserById,lockUser

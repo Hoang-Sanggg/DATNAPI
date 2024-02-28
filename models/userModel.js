@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema(
     avatar: { type: String, required: false },
     level: { type: String, required: true, default: 0 },
     balance: { type: Number, required: true, default: 0 },
-    isActivate: { type: Boolean, required: true, default: true },
+    isActivate: { type: Boolean, required: false, default: true },
     createAT: { type: Date, default: Date.now }
   },
 );
