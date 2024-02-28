@@ -10,8 +10,14 @@ const loginUser = async (req, res, next) => {
         if (!user) {
             return res.status(401).json({ success: false, message: 'Email hoặc mật khẩu không đúng' });
         }
+        if (!user.isActivate) {
+            return res.status(403).json({ success: false, message: 'Tài khoản của bạn đã bị khóa' });
+        }
         return res.status(200).json({ success: true, message: 'Đăng nhập thành công', user});
     } catch (error) {
+        if (error.message === 'Tài khoản của bạn đã bị khóa') {
+            return res.status(403).json({ success: false, message: 'Tài khoản của bạn đã bị khóa' });
+        }
         return res.status(500).json({ success: false, message: 'Lỗi khi đăng nhập' });
     }
 };
@@ -131,6 +137,21 @@ const deleteUser = async (req, res, next) => {
     }
 };
 
+const lockUser = async (req, res) => {
+    const { userId } = req.params; 
+    const { isActivate } = req.body;
+    try {
+        const user = await UserService.lockUser(userId, isActivate);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'Người dùng không tồn tại' });
+        }
+        res.json({ success: true, message: `Người dùng đã được ${isActivate ? 'kích hoạt' : 'khóa'}.`, user });
+    } catch (error) {
+        console.error('Error updating user status:', error);
+        res.status(500).json({ success: false, message: 'Lỗi khi cập nhật trạng thái người dùng' });
+    }
+};
+
 module.exports = {
-    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword,getUserById
+    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword,getUserById,lockUser
 };

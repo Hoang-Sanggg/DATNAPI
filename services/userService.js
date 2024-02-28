@@ -10,6 +10,9 @@ const loginUser = async (email, password) => {
         if (!user) {
             throw new Error('Người dùng không tồn tại');
         }
+        if (!user.isActivate) {
+            throw new Error('Tài khoản của bạn đã bị khóa');
+        }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             throw new Error('Mật khẩu không hợp lệ');
@@ -187,8 +190,23 @@ const deleteUser = async (id) => {
     }
 };
 
-
+const lockUser = async (userId, isActivate) => {
+    try {
+        const user = await UserModel.findByIdAndUpdate(
+            userId, 
+            { isActivate: isActivate }, 
+            { new: true } 
+        );
+        if (!user) {
+            throw new Error('Người dùng không tồn tại hoặc ID không chính xác');
+        }
+        return user;
+    } catch (error) {
+        console.error('Lỗi khi khóa/mở khóa người dùng:', error);
+        throw error;
+    }
+};
 
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser,forgotPassword,resetPassword,getUserById
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser,forgotPassword,resetPassword,getUserById,lockUser
 };
