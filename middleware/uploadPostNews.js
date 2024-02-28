@@ -1,32 +1,22 @@
-const path = require('path')
-const multer = require('multer')
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require('multer');
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/imagesposstnews')
-    },
+  cloudinary.config({
+    cloud_name: 'dvpf7galq',
+    api_key: '675784441141495',
+    api_secret: 'Av4uHvhI2wCpq5MZuOXsAwReXdo',
+    secure: true,
+  });
+
+  const storage = new CloudinaryStorage({
+    cloudinary,
+    allowedFormats: ['jpg', 'png'],
     filename: function (req, file, cb) {
-        let ext = path.extname(file.originalname)
-        cb(null, Date.now() + ext)
+      cb(null, file.originalname); 
     }
-})
-
-var upload = multer({
-    storage: storage,
-    fileFilter: function (req, file, callback) {
-        if (
-            file.mimetype == "image/png" ||
-            file.mimetype == "image/jpeg"
-        ) {
-            callback(null, true)
-        } else {
-            console.log("only jpg & png file supported!")
-            callback(null, false)
-        }
-    },
-    limits: {
-        fileSize: 1024 * 1024 * 2
-    }
-})
+  });
+  
+  const upload = multer({ storage });
 
 module.exports = upload;

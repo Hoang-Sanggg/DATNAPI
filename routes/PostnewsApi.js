@@ -3,6 +3,7 @@ const router = express.Router();
 const postController = require('../controllers/PostnewsController');
 const postModel = require('../models/PostnewsModels');
 const upload = require('../middleware/uploadPostNews');
+const uploadCloudiary = require('../middleware/uploadPostNews');
 
 //get
 router.get('/', postController.getProduct);
@@ -20,7 +21,7 @@ router.delete('/delete/:id', postController.deleteProduct);
 // Tìm kiếm sản phẩm theo title
 router.get('/search/:title', postController.searchProductByTitle);
 // save path với id mới(tạo mới bảng)
-router.post('/upload', upload.array('image', 5), postController.postNews);
+router.post('/upload', uploadCloudiary.array('file', 5), postController.postNews);
 // lưu path với id postnews(thêm ảnh vào bảng đã có)
 router.post('/upload/:id', upload.array('image', 5), postController.uploadImagesbyID);
 
