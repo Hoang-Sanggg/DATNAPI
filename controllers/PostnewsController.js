@@ -102,7 +102,6 @@ const searchProductByTitle = async (req, res, next) => {
 
 const postNews = async (req, res) => {
     try {
-
         // Assuming 'files' is the name attribute in your form for the file input
         const filePaths = req.files.map(file => file.path);
         if (filePaths.length == 0) {
@@ -112,6 +111,7 @@ const postNews = async (req, res) => {
             return res.status(200).json({ result: true, message: 'upload image successful', files: filePaths });
         }
         return res.status(202).json({ result: false, message: 'upload images fail' });
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
