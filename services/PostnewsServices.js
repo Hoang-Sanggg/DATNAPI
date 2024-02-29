@@ -10,6 +10,28 @@ const getProduct = async () => {
     }
 
 }
+
+const getPostsHidden = async () => {
+    try {
+        const posts = await postModel.find({ activable: false }).populate('userid');
+        return posts
+    } catch (error) {
+        console.log("get all produc error: ", error);
+        return false;
+    }
+
+}
+const getPostsPresently = async () => {
+    try {
+        const posts = await postModel.find({ activable: true }).populate('userid');
+        return posts
+    } catch (error) {
+        console.log("get all produc error: ", error);
+        return false;
+    }
+
+}
+
 // get postnewsbyidUser
 const getPostByidUser = async (userid) => {
     try {
@@ -111,7 +133,25 @@ const uploadImagesbyID = async (id, filePaths) => {
     }
 }
 
+const isActivable = async (idPosts) => {
+    try {
+
+        const posts = await postModel.findById(idPosts);
+        const newActivable = !posts.activable;
+        const updatePosts = await postModel.findByIdAndUpdate(
+            idPosts,
+            { activable: newActivable },
+            { new: true }
+        );
+        return updatePosts
+    } catch (error) {
+        return false;
+    }
+}
+
+
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory,
+    isActivable, getPostsHidden, getPostsPresently
 }

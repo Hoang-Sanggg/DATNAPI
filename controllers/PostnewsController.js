@@ -3,8 +3,10 @@ const postServices = require('../services/PostnewsServices')
 const getProduct = async (req, res, next) => {
     try {
         const product = await postServices.getProduct();
+        const postsHidden = await postServices.getPostsHidden();
+        const postsPresently = await postServices.getPostsPresently();
         if (product) {
-            return res.status(200).json({ result: true, message: 'getProduct Succesful', data: product })
+            return res.status(200).json({ result: true, message: 'getProduct Succesful', data: product, postsHidden: postsHidden, postsPresently: postsPresently })
         }
     } catch (error) {
         return res.status(500).json({ result: false, message: 'Error getProduct' })
@@ -45,10 +47,10 @@ const getPostByCategoryid = async (req, res, next) => {
 const addProduct = async (req, res) => {
     try {
         const productData = req.body;
-        console.log('check data',productData);
+        console.log('check data', productData);
         const savedProduct = await postServices.addProduct(productData);
         res.status(200).json({ result: true, message: 'Product added successfully', data: savedProduct });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ result: false, message: 'Error adding product' });
@@ -111,20 +113,20 @@ const postNews = async (req, res) => {
             return res.status(200).json({ result: true, message: 'upload image successful', files: filePaths });
         }
         return res.status(202).json({ result: false, message: 'upload images fail' });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 
-const uploadImagesbyID =  async (req, res) => {
-      try {
+const uploadImagesbyID = async (req, res) => {
+    try {
         const { id } = req.params;
         const filePaths = req.files.map(file => file.path);
-  
+
         const updatedProduct = await postServices.uploadImagesbyID(id, filePaths);
-  
+
         if (updatedProduct < 0) {
             return res.status(203).json({ result: true, message: 'image is not undefind' });
         }
@@ -132,13 +134,27 @@ const uploadImagesbyID =  async (req, res) => {
             return res.status(200).json({ result: true, message: 'upload image successful', files: updatedProduct });
         }
         return res.status(202).json({ result: false, message: 'upload images fail' });
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
-      }
     }
+}
+
+const isActivable = async (req, res) => {
+    try {
+        const { idPosts } = req.params;
+
+        const posts = await postServices.isActivable(idPosts);
+
+        return res.status(200).json({ result: true, message: posts.activable ? "Hiện bài đăng thành công" : "Ẩn bài đăng thành côn ", data: posts });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 
 module.exports = {
-    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews,uploadImagesbyID,getPostByUserId,getPostByCategoryid
+    getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByUserId, getPostByCategoryid,
+    isActivable
 }

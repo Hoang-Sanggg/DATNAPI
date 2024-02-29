@@ -1,4 +1,4 @@
-const UserService = require('../services/userService');  
+const UserService = require('../services/userService');
 
 const loginUser = async (req, res, next) => {
     try {
@@ -13,7 +13,7 @@ const loginUser = async (req, res, next) => {
         if (!user.isActivate) {
             return res.status(403).json({ success: false, message: 'Tài khoản của bạn đã bị khóa' });
         }
-        return res.status(200).json({ success: true, message: 'Đăng nhập thành công', user});
+        return res.status(200).json({ success: true, message: 'Đăng nhập thành công', user });
     } catch (error) {
         if (error.message === 'Tài khoản của bạn đã bị khóa') {
             return res.status(403).json({ success: false, message: 'Tài khoản của bạn đã bị khóa' });
@@ -138,15 +138,14 @@ const deleteUser = async (req, res, next) => {
 };
 
 const lockUser = async (req, res) => {
-    const userId = req.query.id; // Correctly access userId from query parameters
-    const { isActivate } = req.body; // Assuming isActivate is still in the body
 
     try {
-        const user = await UserService.lockUser(userId, isActivate);
+        const { userId } = req.query; // Correctly access userId from query parameters
+        const user = await UserService.lockUser(userId);
         if (!user) {
             return res.status(404).json({ success: false, message: 'Người dùng không tồn tại' });
         }
-        res.json({ success: true, message: `Người dùng đã được ${isActivate ? 'kích hoạt' : 'khóa'}.`, user });
+        res.json({ success: true, message: `Người dùng đã được ${user.isActivate ? 'kích hoạt' : 'khóa'}.`, user });
     } catch (error) {
         console.error('Error updating user status:', error);
         res.status(500).json({ success: false, message: 'Lỗi khi cập nhật trạng thái người dùng' });
@@ -155,5 +154,5 @@ const lockUser = async (req, res) => {
 
 
 module.exports = {
-    getAllUsers,addUser,updateUser,deleteUser,loginUser,registerUser, forgotPassword, resetPassword,getUserById,lockUser
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser
 };

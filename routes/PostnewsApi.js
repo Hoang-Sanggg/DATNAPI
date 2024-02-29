@@ -16,6 +16,8 @@ router.get('/:idCategory', postController.getPostByCategoryid);
 router.post('/add', postController.addProduct);
 //edit
 router.post('/edit/:id', postController.updateProduct);
+//activable
+router.post('/activable/:idPosts', postController.isActivable);
 // delete
 router.delete('/delete/:id', postController.deleteProduct);
 // Tìm kiếm sản phẩm theo title

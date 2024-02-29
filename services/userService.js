@@ -75,10 +75,10 @@ const forgotPassword = async (email) => {
 
         // Cấu hình transporter cho nodemailer
         const transporter = nodemailer.createTransport({
-            service: 'Gmail', 
+            service: 'Gmail',
             auth: {
                 user: 'duy768366@gmail.com',
-                pass: 'pdfaiovzkizuvbpd' 
+                pass: 'pdfaiovzkizuvbpd'
             }
         });
 
@@ -88,9 +88,9 @@ const forgotPassword = async (email) => {
             from: 'noreply@yourapp.com',
             subject: 'Quên Mật Khẩu',
             text: `Bạn nhận được email này vì bạn đã yêu cầu đặt lại mật khẩu cho tài khoản của bạn.\n\n` +
-                  `Vui lòng nhấp vào link sau hoặc dán vào trình duyệt của bạn để hoàn thành quá trình đặt lại mật khẩu:\n\n` +
-                  `http://yourapp.com/reset/${resetToken}\n\n` +
-                  `Nếu bạn không yêu cầu điều này, vui lòng bỏ qua email này và mật khẩu của bạn sẽ không thay đổi.\n`
+                `Vui lòng nhấp vào link sau hoặc dán vào trình duyệt của bạn để hoàn thành quá trình đặt lại mật khẩu:\n\n` +
+                `http://yourapp.com/reset/${resetToken}\n\n` +
+                `Nếu bạn không yêu cầu điều này, vui lòng bỏ qua email này và mật khẩu của bạn sẽ không thay đổi.\n`
         };
 
         // Gửi email
@@ -172,7 +172,7 @@ const updateUser = async (id, updatedUserData) => {
         const updatedUser = await UserModel.findOneAndUpdate(
             { _id: id },
             { $set: updatedUserData },
-            { new: true } 
+            { new: true }
         );
         return updatedUser;
     } catch (error) {
@@ -196,12 +196,11 @@ const lockUser = async (userId) => {
         if (!user) {
             throw new Error('Người dùng không tồn tại hoặc ID không chính xác');
         }
-
         const newIsActivate = !user.isActivate;
 
         const updatedUser = await UserModel.findByIdAndUpdate(
-            userId, 
-            { isActivate: newIsActivate }, 
+            userId,
+            { isActivate: newIsActivate },
             { new: true }
         );
 
@@ -213,5 +212,5 @@ const lockUser = async (userId) => {
 };
 
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser,forgotPassword,resetPassword,getUserById,lockUser
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser
 };

@@ -16,7 +16,7 @@ router.post('/resetPassword-user', userController.resetPassword);
 router.post('/add-user', userController.addUser);
 router.post('/update-user', userController.updateUser);
 router.delete('/delete-user', userController.deleteUser);
-router.post('/lock', userController.lockUser);
+router.post('/lock-unlock/user', userController.lockUser);
 
 // Cart routes
 router.get('/carts', cartController.getAllCarts);
