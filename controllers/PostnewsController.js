@@ -172,5 +172,5 @@ const isActivable = async (req, res) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByUserId, getPostByCategoryid,
-    isActivable,getPostByIds
+    isActivable, getPostByIds
 }

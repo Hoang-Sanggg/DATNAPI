@@ -35,7 +35,7 @@ const getPostsPresently = async () => {
 // get postnewsbyid
 const getPostByid = async (id) => {
     try {
-        const postid = await postModel.findById( id );
+        const postid = await postModel.findById(id);
         return postid;
     } catch (error) {
         return false;
@@ -46,7 +46,15 @@ const getPostByid = async (id) => {
 const getPostByidUser = async (userid) => {
     try {
         const postnewsByidUser = await postModel.find({ userid });
-        return postnewsByidUser;
+        const postnewsByidUserHidden = await postModel.find({ userid, activable: false });
+        const postnewsByidUserPresently = await postModel.find({ userid, activable: true });
+        console.log("check data hidden: ", postnewsByidUserHidden, "check data presently", postnewsByidUserPresently)
+        const postById = {
+            "posts": postnewsByidUser,
+            "postsHidden": postnewsByidUserHidden,
+            "postsPresently": postnewsByidUserPresently
+        }
+        return postById;
     } catch (error) {
         return false;
     }
@@ -163,5 +171,5 @@ const isActivable = async (idPosts) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory,
-    isActivable, getPostsHidden, getPostsPresently,getPostByid
+    isActivable, getPostsHidden, getPostsPresently, getPostByid
 }
