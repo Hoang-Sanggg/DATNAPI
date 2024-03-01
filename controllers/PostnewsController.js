@@ -28,6 +28,22 @@ const getPostByUserId = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error getPostByUserId' });
     }
 };
+// get Posstnews by id
+const getPostByIds = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const postById = await postServices.getPostByid(id);
+        // if (postByUserId != userid) {
+        //     return res.status(201).json({ result: false, message: 'fail Userid'});
+        // }
+        if (postById) {
+            return res.status(200).json({ result: true, message: 'getPostById Successful', data: postById });
+        }
+        return res.status(400).json({ result: false, message: 'getPostById null' });
+    } catch (error) {
+        return res.status(500).json({ result: false, message: 'Error getPostById' });
+    }
+};
 // get Posstnews by Userid
 const getPostByCategoryid = async (req, res, next) => {
     try {
@@ -156,5 +172,5 @@ const isActivable = async (req, res) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByUserId, getPostByCategoryid,
-    isActivable
+    isActivable,getPostByIds
 }

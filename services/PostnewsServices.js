@@ -32,6 +32,16 @@ const getPostsPresently = async () => {
 
 }
 
+// get postnewsbyid
+const getPostByid = async (id) => {
+    try {
+        const postid = await postModel.findById( id );
+        return postid;
+    } catch (error) {
+        return false;
+    }
+};
+
 // get postnewsbyidUser
 const getPostByidUser = async (userid) => {
     try {
@@ -153,5 +163,5 @@ const isActivable = async (idPosts) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory,
-    isActivable, getPostsHidden, getPostsPresently
+    isActivable, getPostsHidden, getPostsPresently,getPostByid
 }
