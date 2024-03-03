@@ -10,7 +10,7 @@ router.get('/', postController.getProduct);
 // get by idUser
 router.get('/user/:userid', postController.getPostByUserId);
 // get by id
-router.get('/:id', postController.getPostByIds);
+router.get('/get-by-id/:id', postController.getPostByIds);
 // get by idCategory
 router.get('/:idCategory', postController.getPostByCategoryid);
 // router.post('/add-product', testController.addTest);
