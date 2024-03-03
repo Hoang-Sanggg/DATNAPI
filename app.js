@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 require('./config/DBConnection')
+require('./config/connectionSocket.io.js')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,7 +37,7 @@ app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.send("hello world");
+  res.render('index.ejs');
 });
 
 //tạo đường dẫn tới file trong router

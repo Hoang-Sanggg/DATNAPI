@@ -2,7 +2,7 @@ const postModel = require('../models/PostnewsModels');
 
 const getProduct = async () => {
     try {
-        const product = await postModel.find().populate('userid');
+        const product = await postModel.find().populate(['userid', 'brandid', 'idCategory']);
         return product
     } catch (error) {
         console.log("get all produc error: ", error);
