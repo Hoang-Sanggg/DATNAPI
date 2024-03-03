@@ -63,7 +63,7 @@ const getPostByidUser = async (userid) => {
 // get postnewsbyid Categoory
 const getPostByidCategory = async (idCategory) => {
     try {
-        const postnewsByidCategory = await postModel.find({ idCategory });
+        const postnewsByidCategory = await postModel.find({ idCategory, activable: true });
         return postnewsByidCategory;
     } catch (error) {
         return false;
