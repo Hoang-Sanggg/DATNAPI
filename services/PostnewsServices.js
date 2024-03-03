@@ -13,7 +13,7 @@ const getProduct = async () => {
 
 const getPostsHidden = async () => {
     try {
-        const posts = await postModel.find({ activable: false }).populate('userid');
+        const posts = await postModel.find({ activable: false }).populate(['userid', 'brandid', 'idCategory']);
         return posts
     } catch (error) {
         console.log("get all produc error: ", error);
@@ -23,7 +23,7 @@ const getPostsHidden = async () => {
 }
 const getPostsPresently = async () => {
     try {
-        const posts = await postModel.find({ activable: true }).populate('userid');
+        const posts = await postModel.find({ activable: true }).populate(['userid', 'brandid', 'idCategory']);
         return posts
     } catch (error) {
         console.log("get all produc error: ", error);
