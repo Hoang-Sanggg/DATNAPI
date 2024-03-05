@@ -35,7 +35,7 @@ const getPostsPresently = async () => {
 // get postnewsbyid
 const getPostByid = async (id) => {
     try {
-        const postid = await postModel.findById(id);
+        const postid = await postModel.findById(id).populate(['userid', 'brandid', 'idCategory']);
         return postid;
     } catch (error) {
         return false;
