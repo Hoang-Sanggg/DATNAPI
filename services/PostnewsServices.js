@@ -1,6 +1,5 @@
 const postModel = require('../models/PostnewsModels');
 const VipModel = require('../models/VipModel')
-const moment = require('moment');
 
 const getProduct = async () => {
     try {
@@ -73,7 +72,6 @@ const getPostByidCategory = async (idCategory) => {
         const posts = dataPostsVip.concat(uniquePostNews);
         return posts;
     } catch (error) {
-        console.log(error)
         return false;
     }
 };
