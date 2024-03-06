@@ -1,5 +1,4 @@
 const postModel = require('../models/PostnewsModels');
-const VipModel = require('../models/VipModel')
 
 const getProduct = async () => {
     try {
@@ -65,12 +64,7 @@ const getPostByidUser = async (userid) => {
 const getPostByidCategory = async (idCategory) => {
     try {
         const postnewsByidCategory = await postModel.find({ idCategory, activable: true });
-        const vips = await VipModel.find({ end: { $gte: moment() } }).populate(['vipTypeId', 'postsId']);
-        vips.sort((a, b) => b.vipTypeId.price - a.vipTypeId.price);
-        const dataPostsVip = vips.map(vip => vip.postsId);
-        const uniquePostNews = postnewsByidCategory.filter(item => !dataPostsVip.includes(item))
-        const posts = dataPostsVip.concat(uniquePostNews);
-        return posts;
+        return postnewsByidCategory;
     } catch (error) {
         return false;
     }
