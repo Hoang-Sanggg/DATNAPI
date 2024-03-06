@@ -1,4 +1,5 @@
 const Vip = require('../models/VipModel');
+const moment = require('moment');
 
 // thêm vip
 const createVip = async (vipData) => {
@@ -14,7 +15,11 @@ const getVipById = async (id) => {
 
 // lấy tất cả vip
 const getAllVips = async () => {
-    return await Vip.find().populate('userId');
+
+    const vips = await Vip.find({ end: { $gte: moment() } }).populate(['vipTypeId', 'postsId']);
+    vips.sort((a, b) => b.vipTypeId.price - a.vipTypeId.price);
+    const dataPosts = vips.map(vip => vip.postsId);
+    return dataPosts;
 };
 
 // cập nhật vip

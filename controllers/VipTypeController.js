@@ -24,7 +24,7 @@ const getVipType = async (req, res) => {
 const createVipType = async (req, res) => {
     try {
         const newVipType = await VipTypeService.createVipType(req.body);
-        res.status(201).json(newVipType);
+        return res.status(200).json({ result: true, message: "Create viptype succesfully", newVipType });
     } catch (error) {
         res.status(500).send(error.message);
     }

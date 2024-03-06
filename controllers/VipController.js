@@ -1,12 +1,23 @@
 const vipService = require('../services/VipService');
+const moment = require('moment');
 
 // tạo vip
 const createVip = async (req, res) => {
   try {
-    const vip = await vipService.createVip(req.body);
-    res.status(201).json(vip);
+    const { userId, vipTypeId, postsId } = req.body
+    const start = moment();
+    let numberOfDays = 3;
+    if (vipTypeId == "65e7f8cb8c7aafc04e660219") numberOfDays = 3;
+    if (vipTypeId == "65e7f9b8189e46f83d9b67b2") numberOfDays = 7;
+    if (vipTypeId == "65e7f9c6189e46f83d9b67b4") numberOfDays = 30;
+    const end = moment().add(numberOfDays, "days")
+    const dataVip = { start, end, userId, vipTypeId, postsId }
+
+    const vip = await vipService.createVip(dataVip);
+    res.status(201).json(dataVip);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.log(error)
+    res.status(500).json({ message: "error create vip" });
   }
 };
 
@@ -27,8 +38,9 @@ const getVipById = async (req, res) => {
 const getAllVips = async (req, res) => {
   try {
     const vips = await vipService.getAllVips();
-    res.json(vips);
+    res.status(200).json({ result: true, message: "get all vip successfully", data: vips });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: error.message });
   }
 };
@@ -53,14 +65,14 @@ const deleteVip = async (req, res) => {
     res.status(200).json({ message: 'Vip deleted' });
   } catch (error) {
     res.status(500).
-json({ message: error.message });
-}
+      json({ message: error.message });
+  }
 };
 
 module.exports = {
-createVip,
-getVipById,
-getAllVips,
-updateVip,
-deleteVip
+  createVip,
+  getVipById,
+  getAllVips,
+  updateVip,
+  deleteVip
 };

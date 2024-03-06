@@ -5,6 +5,7 @@ const cartController = require('../controllers/cartController')
 const historyController = require('../controllers/historyController')
 const VipController = require('../controllers/VipController')
 const TransactionHistory = require('../controllers/TransactionController')
+const vipTypesController = require('../controllers/VipTypeController')
 
 // User routes
 router.get('/users', userController.getAllUsers);
@@ -38,10 +39,15 @@ router.post('/update-transactions/:id', TransactionHistory.updateTransactionHist
 router.delete('/delete-transactions', TransactionHistory.deleteTransactionHistory);
 
 // VipController routes
-router.get('/vips', VipController.getAllVips);
+router.get('/posts-vips', VipController.getAllVips);
 router.post('/add-vips', VipController.createVip);
 router.post('/update-vips/:id', VipController.updateVip);
 router.delete('/delete-vips/:id', VipController.deleteVip);
+
+
+//vipTypeController routers
+router.get('/viptypes', vipTypesController.getAllVipTypes)
+router.post('/viptypes/add', vipTypesController.createVipType)
 
 
 module.exports = router
