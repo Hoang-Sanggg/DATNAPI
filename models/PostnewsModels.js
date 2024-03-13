@@ -13,7 +13,7 @@ const productSchema = new Schema({
     files: [{ type: String, require: true }],
     role: { type: String, require: true },
     activable: { type: Boolean },
-    properties: { type: Object },
+    properties: [{ type: String }],
     userid: { type: ObjectId, ref: 'user' },
     brandid: { type: ObjectId, ref: 'brand' },
     idCategory: { type: ObjectId, ref: 'category' },
