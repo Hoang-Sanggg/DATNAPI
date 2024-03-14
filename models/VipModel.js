@@ -9,7 +9,7 @@ const VipSchema = new mongoose.Schema({
   end: { type: Date },
   userId: { type: ObjectId, ref: "user" },
   vipTypeId: { type: ObjectId, ref: "vipType" },
-  postsId: { type: ObjectId, ref: "postnew" },
+  // postsId: { type: ObjectId, ref: "postnew" },
 });
 
 module.exports = mongoose.model.vip || mongoose.model('vip', VipSchema);

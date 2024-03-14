@@ -14,6 +14,7 @@ const InforRouter = require('./routes/InforAPI');
 const messageRouter = require('./routes/messageApi.js');
 const uploadImageRouter = require('./routes/upload.js');
 const savedRouter = require('./routes/savedApi.js')
+const stripePayRouter = require('./routes/stripePayApi.js')
 
 var app = express();
 app.use(cors()); // Kích hoạt CORS cho tất cả các yêu cầu
@@ -50,6 +51,7 @@ app.use('/api/infors', InforRouter);
 app.use('/api/message', messageRouter);
 app.use('/api/upload', uploadImageRouter);
 app.use('/api/saved', savedRouter);
+app.use('/api/stripe', stripePayRouter);
 
 
 // catch 404 and forward to error handler

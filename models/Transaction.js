@@ -4,9 +4,11 @@ const ObjectId = mongoose.ObjectId;
 
 const TransactionHistorySchema = new mongoose.Schema({
   id: { type: ObjectId },
-  amount: { type: Number, required: true, default: 0 },
-  description: { type: String, required: true },
+  amount: { type: Number, required: true, },
+  description: { type: Object, required: true },
   userId: { type: ObjectId, ref: "user" },
+  postId: { type: ObjectId, ref: "postnew" },
+  paid: { type: Boolean, required: true },
   createAt: { type: Date, default: Date.now }
 });
 
