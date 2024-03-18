@@ -117,7 +117,16 @@ const searchProductByTitle = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Internal Server Error' });
     }
 };
-
+// get time end
+const getVipPostNews = async (req, res) => {
+    try {
+      const vips = await postServices.getTimeEndPostNews();
+      res.status(200).json({ result: true, message: "get vip Postnew successfully", data: vips });
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ message: error.message });
+    }
+  };
 const postNews = async (req, res) => {
     try {
         // Assuming 'files' is the name attribute in your form for the file input
@@ -172,5 +181,5 @@ const isActivable = async (req, res) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByUserId, getPostByCategoryid,
-    isActivable, getPostByIds
+    isActivable, getPostByIds,getVipPostNews
 }
