@@ -18,21 +18,22 @@ router.post('/add-user', userController.addUser);
 router.post('/update-user', userController.updateUser);
 router.delete('/delete-user', userController.deleteUser);
 router.post('/lock-unlock/user', userController.lockUser);
+router.post('/user/vip/:userId/:balance', userController.vipBalance);
 
 // Cart routes
-router.get('/carts', cartController.getAllCarts);
-router.post('/add-cart', cartController.addCart);
-router.post('/update-cart', cartController.updateCart);
-router.delete('/delete-cart', cartController.deleteCart);
+// router.get('/carts', cartController.getAllCarts);
+// router.post('/add-cart', cartController.addCart);
+// router.post('/update-cart', cartController.updateCart);
+// router.delete('/delete-cart', cartController.deleteCart);
 
 // History routes
-router.get('/historys', historyController.getAllHistory);
-router.get('/user/history', historyController.getHistoryByUserID);
-router.post('/add-history', historyController.addHistory);
-router.post('/update-history', historyController.updateHistory);
-router.delete('/delete-history', historyController.deleteHistory);
+// router.get('/historys', historyController.getAllHistory);
+// router.get('/user/history', historyController.getHistoryByUserID);
+// router.post('/add-history', historyController.addHistory);
+// router.post('/update-history', historyController.updateHistory);
+// router.delete('/delete-history', historyController.deleteHistory);
 
-// TransactionHistory routes
+// Transaction routes
 router.get('/transactions', TransactionHistory.getAllTransactionHistories);
 router.post('/add-transactions', TransactionHistory.createTransactionHistory);
 router.post('/update-transactions/:id', TransactionHistory.updateTransactionHistory);

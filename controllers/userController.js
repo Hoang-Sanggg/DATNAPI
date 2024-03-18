@@ -152,7 +152,20 @@ const lockUser = async (req, res) => {
     }
 };
 
+const vipBalance = async () => {
+    try {
+        const { userId, balance } = req.params; // Correctly access userId from query parameters
+        const user = await UserService.vipBalance(userId, balance);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'Mua vip thất bại' });
+        }
+        res.json({ success: true, message: `mua vip thành công`, user });
+    } catch (error) {
+        console.error('Error updating user status:', error);
+        res.status(500).json({ success: false, message: 'Lỗi khi cập nhật trạng thái người dùng' });
+    }
+}
 
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser, vipBalance
 };

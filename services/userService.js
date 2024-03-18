@@ -211,6 +211,22 @@ const lockUser = async (userId) => {
     }
 };
 
+const vipBalance = async (userId, balance) => {
+    try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+            console.log("không tìm thấy người dùng, id không đúng")
+            return false
+        }
+        // updateBalance = user
+
+        // return updatedUser;
+    } catch (error) {
+        console.error('Lỗi khi khóa/mở khóa người dùng:', error);
+        throw error;
+    }
+}
+
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser, vipBalance
 };
