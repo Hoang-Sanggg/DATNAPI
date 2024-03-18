@@ -1,4 +1,5 @@
 const postModel = require('../models/PostnewsModels');
+const moment = require('moment');
 
 const getProduct = async () => {
     try {
@@ -111,6 +112,16 @@ const searchProductByTitle = async (title) => {
         return false;
     }
 };
+// Time end
+const getTimeEndPostNews = async () => {
+    try {
+        const vips = await postModel.find({ endVip: { $gte: moment() } })
+        return vips;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+};
 
 const postNews = async (title, status, detail, location, price, created_AT, role, activable, properties, userid, brandid, filePaths) => {
     try {
@@ -171,5 +182,5 @@ const isActivable = async (idPosts) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory,
-    isActivable, getPostsHidden, getPostsPresently, getPostByid
+    isActivable, getPostsHidden, getPostsPresently, getPostByid,getTimeEndPostNews
 }
