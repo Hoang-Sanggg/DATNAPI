@@ -152,7 +152,7 @@ const lockUser = async (req, res) => {
     }
 };
 
-const vipBalance = async () => {
+const vipBalance = async (req, res) => {
     try {
         const { userId, balance } = req.params; // Correctly access userId from query parameters
         const user = await UserService.vipBalance(userId, balance);

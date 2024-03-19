@@ -218,12 +218,23 @@ const vipBalance = async (userId, balance) => {
             console.log("không tìm thấy người dùng, id không đúng")
             return false
         }
-        // updateBalance = user
+        if (user.balance < balance) {
+            console.log("người dùng không đủ tiền")
+            return false
+        }
+        updatedBalance = user.balance - balance
+        console.log("check update balance: ", updatedBalance, "check balance: ", balance, "check user ID: ", userId)
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId },
+            { balance: updatedBalance },
+            { new: true }
+        );
+        return updatedUser;
 
         // return updatedUser;
     } catch (error) {
-        console.error('Lỗi khi khóa/mở khóa người dùng:', error);
-        throw error;
+        console.error('Lỗi khi trừ tiền người dùng:', error);
+        return false;
     }
 }
 
