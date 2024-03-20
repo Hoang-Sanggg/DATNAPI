@@ -157,12 +157,12 @@ const vipBalance = async (req, res) => {
         const { userId, balance } = req.params; // Correctly access userId from query parameters
         const user = await UserService.vipBalance(userId, balance);
         if (!user) {
-            return res.status(404).json({ success: false, message: 'Mua vip thất bại' });
+            return res.status(404).json({ result: false, message: 'Mua vip thất bại' });
         }
-        res.json({ success: true, message: `mua vip thành công`, user });
+        res.status(200).json({ result: true, message: `mua vip thành công`, data: user });
     } catch (error) {
         console.error('Error updating user status:', error);
-        res.status(500).json({ success: false, message: 'Lỗi khi cập nhật trạng thái người dùng' });
+        res.status(500).json({ result: false, message: 'Lỗi khi cập nhật trạng thái người dùng' });
     }
 }
 

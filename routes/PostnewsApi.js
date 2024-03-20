@@ -31,6 +31,9 @@ router.post('/upload', uploadCloudiary.array('file', 5), postController.postNews
 // lưu path với id postnews(thêm ảnh vào bảng đã có)
 router.post('/upload/:id', upload.array('image', 5), postController.uploadImagesbyID);
 
+//create vip
+router.post('/create_vip_posts/:id/:numberOfDays', postController.createVipPosts)
+
 
 
 

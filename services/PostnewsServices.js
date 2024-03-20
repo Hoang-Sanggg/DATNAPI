@@ -178,9 +178,26 @@ const isActivable = async (idPosts) => {
     }
 }
 
+const createVipPosts = async (id, numberOfDays) => {
+    try {
+        let now = moment();
+        let endVip = now.add(numberOfDays, 'days');
+        const updatedPosts = await postModel.findOneAndUpdate(
+            { _id: id },
+            { endVip: endVip },
+            { new: true }
+        );
+        return updatedPosts
+
+    } catch (error) {
+        console.log("services: create vip posts error", error)
+        return false
+    }
+}
+
 
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByidUser, getPostByidCategory,
-    isActivable, getPostsHidden, getPostsPresently, getPostByid,getTimeEndPostNews
+    isActivable, getPostsHidden, getPostsPresently, getPostByid, getTimeEndPostNews, createVipPosts
 }

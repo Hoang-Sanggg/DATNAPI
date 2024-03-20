@@ -120,13 +120,13 @@ const searchProductByTitle = async (req, res, next) => {
 // get time end
 const getVipPostNews = async (req, res) => {
     try {
-      const vips = await postServices.getTimeEndPostNews();
-      res.status(200).json({ result: true, message: "get vip Postnew successfully", data: vips });
+        const vips = await postServices.getTimeEndPostNews();
+        res.status(200).json({ result: true, message: "get vip Postnew successfully", data: vips });
     } catch (error) {
-      console.log(error)
-      res.status(500).json({ message: error.message });
+        console.log(error)
+        res.status(500).json({ message: error.message });
     }
-  };
+};
 const postNews = async (req, res) => {
     try {
         // Assuming 'files' is the name attribute in your form for the file input
@@ -178,8 +178,22 @@ const isActivable = async (req, res) => {
     }
 }
 
+const createVipPosts = async (req, res) => {
+    try {
+        const { id, numberOfDays } = req.params;
+        const posts = await postServices.createVipPosts(id, numberOfDays);
+        if (posts) {
+            return res.status(200).json({ result: true, message: "create vip posts successfully", data: posts })
+        }
+        return res.status(400).json({ result: false, message: "create vip posts unsuccessful" })
+    } catch (error) {
+        console.log("error: ", error)
+        return res.status(500).json({ result: false, message: 'error create vip post news' })
+    }
+}
+
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByUserId, getPostByCategoryid,
-    isActivable, getPostByIds,getVipPostNews
+    isActivable, getPostByIds, getVipPostNews, createVipPosts
 }
