@@ -17,6 +17,7 @@ const productSchema = new Schema({
     userid: { type: ObjectId, ref: 'user' },
     brandid: { type: ObjectId, ref: 'brand' },
     idCategory: { type: ObjectId, ref: 'category' },
+    isVip: { type: Boolean, default: false },
     startVip: { type: Date, default: Date.now },
     endVip: { type: Date, default: Date.now },
 
