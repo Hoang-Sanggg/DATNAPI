@@ -83,8 +83,8 @@ const resetPassword = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const userId = req.query.id;
-        const user = await UserService.getUserById(userId);
+        const { id } = req.params;
+        const user = await UserService.getUserById(id);
 
         if (!user) {
             return res.status(404).json({ success: false, message: 'Người dùng không tồn tại' });
