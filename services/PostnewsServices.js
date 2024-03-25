@@ -267,8 +267,7 @@ const createVipPosts = async (id, numberOfDays) => {
     let endVip = now.add(numberOfDays, "days");
     const updatedPosts = await postModel.findOneAndUpdate(
       { _id: id },
-      { endVip: endVip },
-      { isVip: true },
+      { $set: { endVip: endVip, isVip: true } },
       { new: true }
     );
     return updatedPosts;
