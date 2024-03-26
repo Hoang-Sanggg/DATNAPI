@@ -13,8 +13,9 @@ const UserSchema = new mongoose.Schema(
     level: { type: String, required: true, default: 0 },
     balance: { type: Number, required: true, default: 0 },
     isActivate: { type: Boolean, required: false, default: true },
+    socketId: { type: String },
     createAT: { type: Date, default: Date.now }
-    
+
   },
 );
 

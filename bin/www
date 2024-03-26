@@ -7,8 +7,11 @@
 var app = require('../app');
 var debug = require('debug')('datn-webadmin:server');
 const socketIo = require('socket.io');
+const userModel = require('../models/userModel')
+const messageModel = require('../models/messagesModel')
 var http = require('http');
 require('dotenv').config();
+
 
 /**
  * Get port from environment and store in Express.
@@ -22,14 +25,49 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-const io = socketIo(server);
+console.log(`Server is running on port ${port}`);
 
+const io = socketIo(server);
 io.on('connection', (socket) => {
-  console.log('A user connected');
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
+  console.log('Client connected:', socket.id);
+
+  // Lưu socketId của người dùng vào MongoDB khi họ kết nối
+  socket.on('set-socketId', async (_id) => {
+    try {
+      const user = await userModel.findById(_id);
+      if (user) {
+        user.socketId = socket.id;
+        await user.save();
+      }
+      console.log(`SocketId set for user ${_id}: ${socket.id}`);
+    } catch (error) {
+      console.error('Error setting socketId:', error);
+    }
   });
-})
+
+  // Gửi tin nhắn từ người dùng A đến người dùng B
+  socket.on('send-message', async (data) => {
+    try {
+      const { senderId, receiverId, content } = data;
+      console.log("check data send message: ", data)
+      // const message = await messageModel.create({ senderId, receiverId, content });
+      const receiverUser = await userModel.findById(receiverId);
+      if (receiverUser) {
+        io.to(receiverUser.socketId).emit('receive-message', content);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  });
+
+  // Xử lý khi người dùng ngắt kết nối
+  socket.on('disconnect', async () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
+
+
+
 
 /**
  * Listen on provided port, on all network interfaces.

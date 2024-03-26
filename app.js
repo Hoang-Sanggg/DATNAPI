@@ -25,7 +25,6 @@ app.use((req, res, next) => {
 });
 
 require('./config/DBConnection')
-require('./config/connectionSocket.io.js')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
