@@ -21,10 +21,56 @@ const deleteTransactionHistory = async (id) => {
   return TransactionModel.findByIdAndDelete(id);
 };
 
+const buyVipPosts = async (data) => {
+  try {
+    const newVipPosts = await TransactionModel.create(data);
+    console.log("check data newVipPosts: ", newVipPosts)
+    return true;
+  } catch (error) {
+    console.log("buy vip posts services error: ", error)
+    return false
+  }
+}
+
+const getVipPostsTransactions = async (userId) => {
+  try {
+    const dataVipPosts = await TransactionModel.find({ userId: userId, postsId: { $ne: null } }).populate(['postsId']);
+    return dataVipPosts
+  } catch (error) {
+    console.log('get vip post transactions error: ', error)
+    return false;
+  }
+}
+
+const getByIdTransaction = async (id) => {
+  try {
+    return await TransactionModel.findById(id)
+  } catch (error) {
+    console.log("get by id transaction services error: ", error)
+    return false
+  }
+}
+
+
+
+const getRechargeTransaction = async (userId) => {
+  try {
+    const dataRecharge = await TransactionModel.find({ userId: userId, postsId: { $eq: null } }).populate(['postsId']);
+    return dataRecharge
+  } catch (error) {
+    console.log('get vip post transactions error: ', error)
+    return false;
+  }
+}
+
 module.exports = {
   createTransactionHistory,
   getAllTransactionHistories,
   getTransactionHistoryById,
   updateTransactionHistory,
-  deleteTransactionHistory
+  deleteTransactionHistory,
+  buyVipPosts,
+  getVipPostsTransactions,
+  getByIdTransaction,
+  getRechargeTransaction
 };

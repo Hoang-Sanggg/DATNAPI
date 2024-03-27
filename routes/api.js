@@ -38,6 +38,10 @@ router.get('/transactions', TransactionHistory.getAllTransactionHistories);
 router.post('/add-transactions', TransactionHistory.createTransactionHistory);
 router.post('/update-transactions/:id', TransactionHistory.updateTransactionHistory);
 router.delete('/delete-transactions', TransactionHistory.deleteTransactionHistory);
+router.post('/transaction/buy_vip_posts', TransactionHistory.buyVipPosts)
+router.get('/transaction/get_by_id/:id', TransactionHistory.getByIdTransaction)
+router.get('/transaction/get_vip_posts/:userId', TransactionHistory.getVipPostsTransactions)
+router.get('/transaction/get_recharge/:userId', TransactionHistory.getRechargeTransaction)
 
 // VipController routes
 router.get('/posts-vips', VipController.getAllVips);

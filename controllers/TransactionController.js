@@ -54,10 +54,79 @@ const deleteTransactionHistory = async (req, res) => {
     }
 };
 
+const buyVipPosts = async (req, res, next) => {
+    try {
+        const { amount, userId, postsId } = req.body
+        const paid = true;
+        const description = {
+            content: `Mua vip ${amount / 3000} ngày với giá ${amount} vnd`
+        }
+        const data = { amount, description, userId, paid, postsId }
+        console.log("check data buy vip posts: ", data)
+        const newVipPosts = await transactionService.buyVipPosts(data)
+        if (newVipPosts) {
+            return res.status(200).json({ result: true, message: "transaction buy vip posts successfully" });
+        }
+        return res.status(400).json({ result: false, message: "transaction buy vip posts unsuccessfully" });
+    } catch (error) {
+        console.log("error buy vip posts: ", error)
+        return res.status(500).json({ result: false, message: "error buy vip posts" });
+    }
+}
+
+const getVipPostsTransactions = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const data = await transactionService.getVipPostsTransactions(userId)
+        if (data) {
+            return res.status(200).json({ result: true, message: "get vip posts transactions successfully", data: data });
+        }
+        return res.status(400).json({ result: false, message: "get vip posts transactions unsuccessfully" });
+
+    } catch (error) {
+        console.log("error get vip posts transactions: ", error)
+        return res.status(500).json({ result: false, message: "error get vip posts transaction" });
+    }
+}
+
+const getByIdTransaction = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const transaction = await transactionService.getByIdTransaction(id);
+        if (transaction) {
+            return res.status(200).json({ result: true, message: "get by id transaction successfully", data: transaction });
+        }
+        return res.status(400).json({ result: false, message: "get by id transaction unsuccessfully" });
+
+    } catch (error) {
+        console.log("get by id transaction error: ", error)
+        return res.status(500).json({ result: false, message: "error get by id transaction" });
+    }
+}
+
+const getRechargeTransaction = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const data = await transactionService.getRechargeTransaction(userId)
+        if (data) {
+            return res.status(200).json({ result: true, message: "get vip posts transactions successfully", data: data });
+        }
+        return res.status(400).json({ result: false, message: "get vip posts transactions unsuccessfully" });
+
+    } catch (error) {
+        console.log("error get vip posts transactions: ", error)
+        return res.status(500).json({ result: false, message: "error get vip posts transaction" });
+    }
+}
+
 module.exports = {
     createTransactionHistory,
     getAllTransactionHistories,
     getTransactionHistoryById,
     updateTransactionHistory,
-    deleteTransactionHistory
+    deleteTransactionHistory,
+    buyVipPosts,
+    getVipPostsTransactions,
+    getByIdTransaction,
+    getRechargeTransaction
 };

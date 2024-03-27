@@ -8,9 +8,6 @@ const NotificationSchema = new Schema({
     content: { type: String, require: true },
     userid: { type: ObjectId, ref: 'user' },
 },
-    {
-        versionKey: false
-    }
 );
 
 module.exports = mongoose.model.Notification || mongoose.model('Notification', NotificationSchema);

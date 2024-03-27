@@ -7,7 +7,7 @@ const TransactionHistorySchema = new mongoose.Schema({
   amount: { type: Number, required: true, },
   description: { type: Object, required: true },
   userId: { type: ObjectId, ref: "user" },
-  postId: { type: ObjectId, ref: "postnew" },
+  postsId: { type: ObjectId, ref: "postnew" },
   paid: { type: Boolean, required: true },
   createAt: { type: Date, default: Date.now }
 });

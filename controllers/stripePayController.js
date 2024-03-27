@@ -16,7 +16,8 @@ const getTransaction = async (req, res, next) => {
 
 const createPayment = async (req, res) => {
     try {
-        const { amount, userId, content } = req.params;
+        const { amount, userId } = req.params;
+        const content = `Nạp ${amount} vào tài khoản`
         console.log("check params ", req.params);
         const paymentIntent = await stripe.paymentIntents.create({
             currency: "VND",
@@ -25,6 +26,12 @@ const createPayment = async (req, res) => {
 
         });
 
+        const description = {
+            clientSecretId: paymentIntent.id,
+            clientSecret: paymentIntent.client_secret,
+            content: content
+        }
+        console.log("check description: ", description)
         // Send publishable key and PaymentIntent details to client
         res.send({
             clientSecretId: paymentIntent.id, clientSecret: paymentIntent.client_secret
