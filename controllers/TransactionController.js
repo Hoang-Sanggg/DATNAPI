@@ -119,6 +119,21 @@ const getRechargeTransaction = async (req, res, next) => {
     }
 }
 
+const updatePaidTransaction = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const data = await transactionService.updatePaidTransaction(id)
+        if (data) {
+            return res.status(200).json({ result: true, message: "update paid transactions successfully" });
+        }
+        return res.status(400).json({ result: false, message: "update paid transactions unsuccessfully" });
+
+    } catch (error) {
+        console.log("error get vip posts transactions: ", error)
+        return res.status(500).json({ result: false, message: "error get vip posts transaction" });
+    }
+}
+
 module.exports = {
     createTransactionHistory,
     getAllTransactionHistories,
@@ -128,5 +143,6 @@ module.exports = {
     buyVipPosts,
     getVipPostsTransactions,
     getByIdTransaction,
-    getRechargeTransaction
+    getRechargeTransaction,
+    updatePaidTransaction
 };

@@ -63,6 +63,27 @@ const getRechargeTransaction = async (userId) => {
   }
 }
 
+const createRechargeTransaction = async (data) => {
+  try {
+    const newVipPosts = await TransactionModel.create(data);
+    console.log("check data newVipPosts: ", newVipPosts)
+    return true;
+  } catch (error) {
+    console.log("buy vip posts services error: ", error)
+    return false
+  }
+}
+
+const updatePaidTransaction = async (id) => {
+  try {
+    const transaction = await TransactionModel.updateOne({ _id: id }, { paid: true });
+    return true;
+  } catch (error) {
+    console.log("update paid transaction services error: ", error)
+    return false
+  }
+}
+
 module.exports = {
   createTransactionHistory,
   getAllTransactionHistories,
@@ -72,5 +93,7 @@ module.exports = {
   buyVipPosts,
   getVipPostsTransactions,
   getByIdTransaction,
-  getRechargeTransaction
+  getRechargeTransaction,
+  createRechargeTransaction,
+  updatePaidTransaction
 };

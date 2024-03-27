@@ -42,6 +42,7 @@ router.post('/transaction/buy_vip_posts', TransactionHistory.buyVipPosts)
 router.get('/transaction/get_by_id/:id', TransactionHistory.getByIdTransaction)
 router.get('/transaction/get_vip_posts/:userId', TransactionHistory.getVipPostsTransactions)
 router.get('/transaction/get_recharge/:userId', TransactionHistory.getRechargeTransaction)
+router.post('/transaction/update_paid/:id', TransactionHistory.updatePaidTransaction)
 
 // VipController routes
 router.get('/posts-vips', VipController.getAllVips);

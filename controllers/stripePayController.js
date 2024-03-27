@@ -1,4 +1,5 @@
 require('dotenv').config();
+const transactionService = require('../services/TransactionService')
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
     apiVersion: "2022-08-01",
@@ -25,17 +26,17 @@ const createPayment = async (req, res) => {
             automatic_payment_methods: { enabled: true },
 
         });
-
+        const postsId = null
+        const paid = false
         const description = {
             clientSecretId: paymentIntent.id,
             clientSecret: paymentIntent.client_secret,
             content: content
         }
-        console.log("check description: ", description)
+        const data = { amount, description, userId, postsId, paid }
+        const transaction = await transactionService.createRechargeTransaction(data)
         // Send publishable key and PaymentIntent details to client
-        res.send({
-            clientSecretId: paymentIntent.id, clientSecret: paymentIntent.client_secret
-        });
+        return res.status(200).json({ result: true, message: "create payment successfully" });
     } catch (e) {
         return res.status(400).send({
             error: {
