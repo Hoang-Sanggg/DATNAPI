@@ -121,8 +121,8 @@ const getRechargeTransaction = async (req, res, next) => {
 
 const updatePaidTransaction = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const data = await transactionService.updatePaidTransaction(id)
+        const { clientSecret } = req.params;
+        const data = await transactionService.updatePaidTransaction(clientSecret)
         if (data) {
             return res.status(200).json({ result: true, message: "update paid transactions successfully" });
         }

@@ -74,9 +74,9 @@ const createRechargeTransaction = async (data) => {
   }
 }
 
-const updatePaidTransaction = async (id) => {
+const updatePaidTransaction = async (clientSecret) => {
   try {
-    const transaction = await TransactionModel.updateOne({ _id: id }, { paid: true });
+    const transaction = await TransactionModel.updateOne({ 'description.clientSecret': clientSecret }, { paid: true });
     return true;
   } catch (error) {
     console.log("update paid transaction services error: ", error)
