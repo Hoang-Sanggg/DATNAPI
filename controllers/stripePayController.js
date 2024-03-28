@@ -19,7 +19,6 @@ const createPayment = async (req, res) => {
     try {
         const { amount, userId } = req.params;
         const content = `Nạp ${amount} vào tài khoản`
-        console.log("check params ", req.params);
         const paymentIntent = await stripe.paymentIntents.create({
             currency: "VND",
             amount: amount,
@@ -36,7 +35,7 @@ const createPayment = async (req, res) => {
         const data = { amount, description, userId, postsId, paid }
         const transaction = await transactionService.createRechargeTransaction(data)
         // Send publishable key and PaymentIntent details to client
-        return res.status(200).json({ result: true, message: "create payment successfully" });
+        return res.status(200).json({ result: true, message: "create payment successfully", clientSecret: paymentIntent.client_secret });
     } catch (e) {
         return res.status(400).send({
             error: {
