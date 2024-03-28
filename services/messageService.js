@@ -26,6 +26,21 @@ const newMessage = async (messageData) => {
     }
 }
 
+const getMessageByReceiver = async (receiverId) => {
+    try {
+        const messageReceiver = await messageModel.find({ receiverId });
+        const messageSender = await messageModel.find({ senderId: receiverId });
+        const messages = messageSender.concat(messageReceiver);
+        messages.sort(function (a, b) {
+            return new Date(a.createAt) - new Date(b.createAt);
+        });
+        return messages;
+    } catch (error) {
+        console.log("error get message by userId service: ", error)
+        return false
+    }
+}
+
 module.exports = {
-    getMessage, newMessage
+    getMessage, newMessage, getMessageByReceiver
 }
