@@ -50,10 +50,10 @@ io.on('connection', (socket) => {
     try {
       const { senderId, receiverId, content } = data;
       console.log("check data send message: ", data)
-      await messageModel.create({ senderId, receiverId, content });
+      const newMessage = await messageModel.create({ senderId, receiverId, content });
       const receiverUser = await userModel.findById(receiverId);
       if (receiverUser) {
-        io.to(receiverUser.socketId).emit('receive-message', content);
+        io.to(receiverUser.socketId).emit('receive-message', newMessage);
       }
     } catch (error) {
       console.error('Error sending message:', error);
