@@ -1,5 +1,5 @@
 const transactionService = require('../services/TransactionService');
-
+const userService = require('../services/userService')
 const createTransactionHistory = async (req, res) => {
     try {
         const transactionHistory = await transactionService.createTransactionHistory(req.body);
@@ -124,6 +124,7 @@ const updatePaidTransaction = async (req, res, next) => {
         const { clientSecret } = req.params;
         const data = await transactionService.updatePaidTransaction(clientSecret)
         if (data) {
+            const updatedBalance = await userService.rechargeBalance(data.userId, data.amount)
             return res.status(200).json({ result: true, message: "update paid transactions successfully" });
         }
         return res.status(400).json({ result: false, message: "update paid transactions unsuccessfully" });

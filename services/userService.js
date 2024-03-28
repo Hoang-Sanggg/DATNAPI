@@ -238,6 +238,32 @@ const vipBalance = async (userId, balance) => {
     }
 }
 
+const rechargeBalance = async (userId, balance) => {
+    try {
+        const user = await UserModel.findById(userId);
+        if (!user) {
+            console.log("không tìm thấy người dùng, id không đúng")
+            return false
+        }
+        if (user.balance < balance) {
+            console.log("người dùng không đủ tiền")
+            return false
+        }
+        updatedBalance = user.balance + balance
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId },
+            { balance: updatedBalance },
+            { new: true }
+        );
+        return updatedUser;
+
+        // return updatedUser;
+    } catch (error) {
+        console.error('Lỗi khi trừ tiền người dùng:', error);
+        return false;
+    }
+}
+
 module.exports = {
-    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser, vipBalance
+    getAllUsers, addUser, updateUser, deleteUser, loginUser, registerUser, forgotPassword, resetPassword, getUserById, lockUser, vipBalance, rechargeBalance
 };
