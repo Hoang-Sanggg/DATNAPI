@@ -19,7 +19,7 @@ const newMessage = async (req, res) => {
         const messageData = req.query;
         const messages = await messageService.newMessage(messageData);
         if (messages) {
-            return res.status(200).json({ result: true, message: 'addMessage Successful' })
+            return res.status(200).json({ result: true, message: 'addMessage Successful', data: messages })
         }
         return res.status(400).json({ result: false, message: 'addMessage null' })
 
