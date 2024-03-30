@@ -41,6 +41,21 @@ const getMessageByReceiver = async (req, res, next) => {
 
     }
 }
+
+const seenMessage = async (req, res) => {
+    try {
+        const { senderId, receiverId } = req.query
+        const messages = await messageService.getMessage(senderId, receiverId);
+        if (messages) {
+            return res.status(200).json({ result: true, message: 'getMessage Successful', messages: messages })
+        }
+        return res.status(400).json({ result: false, message: 'getMessage null' })
+
+    } catch (error) {
+        return res.status(500).json({ result: false, message: 'Error getMessage' })
+    }
+}
+
 module.exports = {
-    getMessage, newMessage, getMessageByReceiver
+    getMessage, newMessage, getMessageByReceiver, seenMessage
 }
