@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
       const senderUser = await userModel.findById(senderId);
       if (receiverUser && senderId) {
         io.to(receiverUser.socketId).emit('receive-message', newMessage);
-        io.to(senderUser.socketId).emit('receive-message', newMessage);
+        io.to(senderUser.socketId).emit('sender-message', newMessage);
       }
     } catch (error) {
       console.error('Error sending message:', error);
