@@ -41,6 +41,23 @@ const getMessageByReceiver = async (receiverId) => {
     }
 }
 
+const seenMessage = async (senderId, receiverId) => {
+    try {
+
+        return await messageModel.findOneAndUpdate(
+            {
+                senderId: senderId,
+                receiverId: receiverId,
+                seen: false
+            },
+            { $set: { seen: true } },
+            { new: true }
+        )
+    } catch (error) {
+        return false
+    }
+}
+
 module.exports = {
-    getMessage, newMessage, getMessageByReceiver
+    getMessage, newMessage, getMessageByReceiver, seenMessage
 }
