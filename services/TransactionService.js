@@ -41,6 +41,16 @@ const getVipPostsTransactions = async (userId) => {
     return false;
   }
 }
+const getAllBuyVipTransactions = async () => {
+  try {
+    const dataVipPosts = await TransactionModel.find({ postsId: { $ne: null } }).populate(['postsId', 'userId']);
+    return dataVipPosts
+  } catch (error) {
+    console.log('get vip post transactions error: ', error)
+    return false;
+  }
+}
+
 
 const getByIdTransaction = async (id) => {
   try {
@@ -94,5 +104,6 @@ module.exports = {
   getByIdTransaction,
   getRechargeTransaction,
   createRechargeTransaction,
-  updatePaidTransaction
+  updatePaidTransaction,
+  getAllBuyVipTransactions
 };

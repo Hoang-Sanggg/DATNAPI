@@ -41,6 +41,7 @@ router.delete('/delete-transactions', TransactionHistory.deleteTransactionHistor
 router.post('/transaction/buy_vip_posts', TransactionHistory.buyVipPosts)
 router.get('/transaction/get_by_id/:id', TransactionHistory.getByIdTransaction)
 router.get('/transaction/get_vip_posts/:userId', TransactionHistory.getVipPostsTransactions)
+router.get('/transaction/get_all_buy_vip', TransactionHistory.getAllBuyVipTransactions)
 router.get('/transaction/get_recharge/:userId', TransactionHistory.getRechargeTransaction)
 router.post('/transaction/update_paid/:clientSecret', TransactionHistory.updatePaidTransaction)
 
