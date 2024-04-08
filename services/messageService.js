@@ -44,7 +44,7 @@ const getMessageByReceiver = async (receiverId) => {
 const seenMessage = async (senderId, receiverId) => {
     try {
 
-        return await messageModel.findOneAndUpdate(
+        return await messageModel.findAndUpdate(
             {
                 senderId: senderId,
                 receiverId: receiverId,
