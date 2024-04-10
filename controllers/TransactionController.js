@@ -88,6 +88,19 @@ const getVipPostsTransactions = async (req, res, next) => {
         return res.status(500).json({ result: false, message: "error get vip posts transaction" });
     }
 }
+const getAllBuyVipTransactions = async (req, res, next) => {
+    try {
+        const data = await transactionService.getAllBuyVipTransactions()
+        if (data) {
+            return res.status(200).json({ result: true, message: "get vip posts transactions successfully", data: data });
+        }
+        return res.status(400).json({ result: false, message: "get vip posts transactions unsuccessfully" });
+
+    } catch (error) {
+        console.log("error get vip posts transactions: ", error)
+        return res.status(500).json({ result: false, message: "error get vip posts transaction" });
+    }
+}
 
 const getByIdTransaction = async (req, res, next) => {
     try {
@@ -145,5 +158,6 @@ module.exports = {
     getVipPostsTransactions,
     getByIdTransaction,
     getRechargeTransaction,
-    updatePaidTransaction
+    updatePaidTransaction,
+    getAllBuyVipTransactions
 };

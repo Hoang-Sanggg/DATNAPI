@@ -63,6 +63,10 @@
             receiverId: receiverId,
             content: message
           });
+          socket.emit('see-message', {
+            senderId: senderId,
+            receiverId: receiverId
+          });
           messageInput.value = '';
         }
       });
