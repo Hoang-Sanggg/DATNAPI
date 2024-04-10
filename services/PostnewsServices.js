@@ -78,27 +78,28 @@ const getPostByidUser = async (userid) => {
 };
 
 // get postnewsbyid Categoory
-const getPostByidCategory = async (idCategory) => {
+const getPostByidCategory = async (idCategory, page) => {
   try {
     const currentDate = new Date();
-
-    // Lấy tất cả các bài viết trong danh mục
+    const perPage = 10;
+    const skip = (page - 1) * perPage;
+    
     const allPosts = await postModel.find({
       idCategory: idCategory,
       activable: true,
-    });
+    }).skip(skip).limit(perPage);
 
-    // Kiểm tra và cập nhật trạng thái isVip của các bài viết
+ 
     await Promise.all(allPosts.map(async (post) => {
       if (post.isVip && post.endVip < currentDate) {
         post.isVip = false;
         await post.save();
       }
     }));
-
-    // Sắp xếp các bài viết sao cho các bài viết VIP sẽ hiển thị trước, sau đó là các bài viết thông thường
+   
+    
     const sortedPosts = allPosts.sort((a, b) => {
-      // Các điều kiện sắp xếp ở đây giữ nguyên như cách bạn đã viết trong bài viết gốc
+     
       if (a.isVip && a.endVip >= currentDate && (!b.isVip || b.endVip < currentDate)) {
         return -1; // a sẽ được đưa lên trước
       } else if (b.isVip && b.endVip >= currentDate && (!a.isVip || a.endVip < currentDate)) {
@@ -114,6 +115,7 @@ const getPostByidCategory = async (idCategory) => {
     return false;
   }
 };
+
 
 //add
 const addProduct = async (productData) => {
