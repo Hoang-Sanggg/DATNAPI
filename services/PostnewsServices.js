@@ -80,26 +80,27 @@ const getPostByidUser = async (userid) => {
 // get postnewsbyid Categoory
 const getPostByidCategory = async (idCategory, page) => {
   try {
+    console.log("check page: ", page)
     const currentDate = new Date();
     const perPage = 10;
     const skip = (page - 1) * perPage;
-    
+
     const allPosts = await postModel.find({
       idCategory: idCategory,
       activable: true,
     }).skip(skip).limit(perPage);
 
- 
+
     await Promise.all(allPosts.map(async (post) => {
       if (post.isVip && post.endVip < currentDate) {
         post.isVip = false;
         await post.save();
       }
     }));
-   
-    
+
+
     const sortedPosts = allPosts.sort((a, b) => {
-     
+
       if (a.isVip && a.endVip >= currentDate && (!b.isVip || b.endVip < currentDate)) {
         return -1; // a sẽ được đưa lên trước
       } else if (b.isVip && b.endVip >= currentDate && (!a.isVip || a.endVip < currentDate)) {
