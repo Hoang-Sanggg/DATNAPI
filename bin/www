@@ -66,10 +66,10 @@ io.on('connection', (socket) => {
   socket.on('see-message', async (data) => {
     try {
       const { senderId, receiverId } = data;
-      const seenMessage = await messageServices.seenMessage(senderId, receiverId)
+      await messageServices.seenMessage(senderId, receiverId)
       const senderUser = await userModel.findById(senderId);
       if (senderUser) {
-        io.to(senderUser.socketId).emit('seen-message', seenMessage);
+        io.to(senderUser.socketId).emit('seen-message');
       }
     } catch (error) {
       console.error('Error sending message:', error);

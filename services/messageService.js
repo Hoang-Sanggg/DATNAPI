@@ -44,15 +44,14 @@ const getMessageByReceiver = async (receiverId) => {
 const seenMessage = async (senderId, receiverId) => {
     try {
 
-        return await messageModel.findOneAndUpdate(
+        await messageModel.updateMany(
             {
                 senderId: senderId,
                 receiverId: receiverId,
                 seen: false
             },
-            { $set: { seen: true } },
-            { new: true }
-        )
+            { $set: { seen: true } }
+        );
     } catch (error) {
         return false
     }

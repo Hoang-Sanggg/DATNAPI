@@ -48,10 +48,8 @@ const getPostByIds = async (req, res, next) => {
 const getPostByCategoryid = async (req, res, next) => {
     try {
         const { idCategory } = req.params;
-        const postByCateId = await postServices.getPostByidCategory(idCategory);
-        // if (postByUserId != userid) {
-        //     return res.status(201).json({ result: false, message: 'fail Userid'});
-        // }
+        const page = req.params.page || 1; // Lấy tham số page từ query, mặc định là 1 nếu không có
+        const postByCateId = await postServices.getPostByidCategory(idCategory, page);
         if (postByCateId) {
             return res.status(200).json({ result: true, message: 'getPostByCateId Successful', data: postByCateId });
         }
@@ -60,6 +58,7 @@ const getPostByCategoryid = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error getPostByCateId' });
     }
 };
+
 const addProduct = async (req, res) => {
     try {
         const productData = req.body;

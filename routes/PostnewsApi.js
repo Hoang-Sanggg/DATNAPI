@@ -12,7 +12,7 @@ router.get('/user/:userid', postController.getPostByUserId);
 // get by id
 router.get('/get-by-id/:id', postController.getPostByIds);
 // get by idCategory
-router.get('/:idCategory', postController.getPostByCategoryid);
+router.get('/:idCategory/:page', postController.getPostByCategoryid);
 // router.post('/add-product', testController.addTest);
 // get time end
 router.get('/vip/endvip', postController.getVipPostNews);
