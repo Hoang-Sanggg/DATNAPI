@@ -55,7 +55,7 @@ const getAllBuyVipTransactions = async () => {
 const getByIdTransaction = async (id) => {
   try {
     // check
-    return await TransactionModel.find({ userId: id })
+    return await TransactionModel.findById(id)
   } catch (error) {
     console.log("get by id transaction services error: ", error)
     return false
