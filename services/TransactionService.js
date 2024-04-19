@@ -76,8 +76,8 @@ const getRechargeTransaction = async (userId) => {
 
 const createRechargeTransaction = async (data) => {
   try {
-    const newVipPosts = await TransactionModel.create(data);
-    return true;
+    const newRechargePosts = await TransactionModel.create(data);
+    return newRechargePosts;
   } catch (error) {
     console.log("buy vip posts services error: ", error)
     return false
