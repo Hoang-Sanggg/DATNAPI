@@ -15,7 +15,7 @@ router.get('/get-by-id/:id', postController.getPostByIds);
 router.get('/:idCategory/:page', postController.getPostByCategoryid);
 // router.post('/add-product', testController.addTest);
 // get time end
-router.get('/vip/endvip', postController.getVipPostNews);
+router.get('/vip/endVip', postController.getVipPostNews);
 // add product
 router.post('/add', postController.addProduct);
 //edit
