@@ -215,9 +215,8 @@ const deleteProduct = async (id) => {
 // tiềm kiếm theo title
 const searchProductByTitle = async (title) => {
   try {
-    const products = await postModel.find({
-      title: { $regex: new RegExp(title, "i") },
-    });
+    const products = await postModel.find({ title: { $regex: title, $options: 'i' } });
+    console.log(title)
     return products;
   } catch (error) {
     console.error(error);

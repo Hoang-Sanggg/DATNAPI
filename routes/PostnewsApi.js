@@ -8,6 +8,8 @@ const uploadCloudiary = require('../middleware/uploadPostNews');
 //get
 router.get('/', postController.getProduct);
 // get by idUser
+// Tìm kiếm sản phẩm theo title
+router.get('/search/:title', postController.searchProductByTitle);
 router.get('/user/:userid', postController.getPostByUserId);
 // get by id
 router.get('/get-by-id/:id', postController.getPostByIds);
@@ -24,8 +26,9 @@ router.post('/edit/:id', postController.updateProduct);
 router.post('/activable/:idPosts', postController.isActivable);
 // delete
 router.delete('/delete/:id', postController.deleteProduct);
-// Tìm kiếm sản phẩm theo title
-router.get('/search/:title', postController.searchProductByTitle);
+
+
+
 // save path với id mới(tạo mới bảng)
 router.post('/upload', uploadCloudiary.array('file', 5), postController.postNews);
 // lưu path với id postnews(thêm ảnh vào bảng đã có)
