@@ -49,7 +49,19 @@ const addCategories = async (categoryData) => {
          return false;
      }
  };
+ // tiềm kiếm theo Name
+const searchCategoryByName = async (name) => {
+    try {
+      const category = await categorylModel.find({
+        name: { $regex: new RegExp(name, "i") },
+      });
+      return category;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
 
 module.exports = {
-    getCategory,addCategories,updateCategory,deleteCategory,getCategoryByparentId
+    getCategory,addCategories,updateCategory,deleteCategory,getCategoryByparentId,searchCategoryByName
 }
