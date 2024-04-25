@@ -88,7 +88,7 @@ const getPostByidCategory = async (idCategory, page) => {
       idCategory: idCategory,
       activable: true,
       isVip: true
-    }).skip(skip).limit(perPage);
+    }).skip(skip).limit(perPage).populate(["userid", "brandid"]);
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -112,7 +112,7 @@ const getPostByidCategory = async (idCategory, page) => {
         idCategory: idCategory,
         activable: true,
         isVip: false
-      }).skip(normalSkip).limit(remainingPostsCount).sort({ created_AT: -1 });
+      }).skip(normalSkip).limit(remainingPostsCount).sort({ created_AT: -1 }).populate(["userid", "brandid"]);
       shuffledPosts.push(...normalPosts);
     }
 
