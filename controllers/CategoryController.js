@@ -80,9 +80,24 @@ const upLoadImg = (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error updating Ads' });
     }
 }
+// tiềm kiếm theo name
+const searchCategoryByname = async (req, res, next) => {
+    try {
+        const name = req.params.name;
+        const category = await categoryService.searchCategoryByName(name);
 
+        if (category.length > 0) {
+            return res.status(200).json({ result: true, message: 'Search successful', data: category });
+        } else {
+            return res.status(400).json({ result: false, message: 'No products found with the given title' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ result: false, message: 'Internal Server Error' });
+    }
+};
 
 
 module.exports = {
-    getCategory, addCategory, updateCategory, deleteCategory, upLoadImg, getCategoryByparentId
+    getCategory, addCategory, updateCategory, deleteCategory, upLoadImg, getCategoryByparentId,searchCategoryByname
 };
