@@ -23,5 +23,8 @@ router.post('/edit/:id', categoryController.updateCategory);
 // upload-image
 router.post('/upload-img', upload.single('image'), categoryController.upLoadImg);
 
+// search
+router.get('/search/:name', categoryController.searchCategoryByname);
+
 
 module.exports = router
