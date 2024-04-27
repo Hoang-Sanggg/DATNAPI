@@ -154,6 +154,52 @@ const getPostByidCategory = async (idCategory, page) => {
     return false;
   }
 };
+// get postnewsbyid Categoory
+const getPostByBrandId = async (idCategory,brandid, page) => {
+  try {
+    const currentDate = new Date();
+    const perPage = 10;
+    const skip = (page - 1) * perPage;
+
+    const vipPosts = await postModel.find({
+      idCategory: idCategory,
+      brandid: brandid,
+      activable: true,
+      isVip: true
+    }).skip(skip).limit(perPage).populate(["idCategory","userid", "brandid"]);
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+    const totalVipPosts = await postModel.countDocuments({ isVip: true });
+    const totalPages = Math.ceil(totalVipPosts / perPage);
+
+    const shuffledPosts = shuffleArray(vipPosts);
+    if (vipPosts.length < perPage) {
+      const remainingPostsCount = perPage - vipPosts.length;
+      let normalSkip;
+      if (page - totalPages == 0) {
+        normalSkip = 0
+      } else {
+        normalSkip = (page - 1) * perPage - totalVipPosts
+      }
+      const normalPosts = await postModel.find({
+        idCategory: idCategory,
+        brandid: brandid,
+        activable: true,
+        isVip: false
+      }).skip(normalSkip).limit(remainingPostsCount).sort({ created_AT: -1 }).populate(["idCategory","userid", "brandid"]);
+      shuffledPosts.push(...normalPosts);
+    }
+    return shuffledPosts;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
 
 
 //add
@@ -333,4 +379,5 @@ module.exports = {
   getPostByid,
   getTimeEndPostNews,
   createVipPosts,
+  getPostByBrandId,
 };

@@ -58,7 +58,21 @@ const getPostByCategoryid = async (req, res, next) => {
         return res.status(500).json({ result: false, message: 'Error getPostByCateId' });
     }
 };
-
+// get Posstnews by Userid
+const getPostByBrandid = async (req, res, next) => {
+    try {
+        const { brandid } = req.params;
+        const { idCategory } = req.params;
+        const page = req.params.page || 1; // Lấy tham số page từ query, mặc định là 1 nếu không có
+        const postByBrand = await postServices.getPostByBrandId(idCategory,brandid, page);
+        if (postByBrand) {
+            return res.status(200).json({ result: true, message: 'getPostByBrandID Successful', data: postByBrand });
+        }
+        return res.status(400).json({ result: false, message: 'getPostByBrandID null' });
+    } catch (error) {
+        return res.status(500).json({ result: false, message: 'Error getPostByBrandID' });
+    }
+};
 const addProduct = async (req, res) => {
     try {
         const productData = req.body;
@@ -195,5 +209,5 @@ const createVipPosts = async (req, res) => {
 
 module.exports = {
     getProduct, addProduct, updateProduct, deleteProduct, searchProductByTitle, postNews, uploadImagesbyID, getPostByUserId, getPostByCategoryid,
-    isActivable, getPostByIds, getVipPostNews, createVipPosts,
+    isActivable, getPostByIds, getVipPostNews, createVipPosts,getPostByBrandid,
 }
