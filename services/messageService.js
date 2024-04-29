@@ -57,6 +57,32 @@ const seenMessage = async (senderId, receiverId) => {
     }
 }
 
+const messageCommunicateUser = async (userId) => {
+    try {
+        const messages = await messageModel.find({
+            $or: [
+                { senderId: userId },
+                { receiverId: userId }
+            ]
+        }).sort({ createAt: -1 }).populate(["senderId", "receiverId"]);
+        const latestMessages = {};
+
+        messages.forEach(message => {
+            const counterpartId = (message.senderId == userId) ? message.receiverId : message.senderId;
+            if (!latestMessages[counterpartId] || message.createAt > latestMessages[counterpartId].createAt) {
+                latestMessages[counterpartId] = message;
+            }
+        });
+
+
+        // Chuyển đổi object latestMessages thành mảng để trả về dưới dạng JSON
+        const result = Object.values(latestMessages);
+        return result
+    } catch (error) {
+        console.log("error message communicate user services: ", error)
+        return false
+    }
+}
 module.exports = {
-    getMessage, newMessage, getMessageByReceiver, seenMessage
+    getMessage, newMessage, getMessageByReceiver, seenMessage, messageCommunicateUser
 }

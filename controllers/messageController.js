@@ -56,6 +56,20 @@ const seenMessage = async (req, res) => {
     }
 }
 
+
+const messageCommunicateUser = async (req, res) => {
+    try {
+        const { userId } = req.query
+        const messages = await messageService.messageCommunicateUser(userId);
+        if (messages) {
+            return res.status(200).json({ result: true, message: 'getMessage news Successful', messages: messages })
+        }
+        return res.status(400).json({ result: false, message: 'getMessage null' })
+
+    } catch (error) {
+        return res.status(500).json({ result: false, message: 'Error getMessage' })
+    }
+}
 module.exports = {
-    getMessage, newMessage, getMessageByReceiver, seenMessage
+    getMessage, newMessage, getMessageByReceiver, seenMessage, messageCommunicateUser
 }

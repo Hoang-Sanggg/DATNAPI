@@ -6,6 +6,7 @@ router.get('/get-messages-receiver/:receiverId', messageController.getMessageByR
 router.get('/get-messages', messageController.getMessage)
 router.post('/new-message', messageController.newMessage)
 router.post('/seen-message', messageController.seenMessage)
+router.get('/message-communicate-user', messageController.messageCommunicateUser)
 
 
 
