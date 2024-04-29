@@ -93,6 +93,16 @@ const updatePaidTransaction = async (clientSecret) => {
     return false
   }
 }
+const getByUserId = async (userId) => {
+  try {
+    const dataRecharge = await TransactionModel.find({ userId: userId }).populate(['postsId']);
+    return dataRecharge
+  } catch (error) {
+    console.log('get by user services error: ', error)
+    return false;
+  }
+}
+
 
 module.exports = {
   createTransactionHistory,
@@ -106,5 +116,6 @@ module.exports = {
   getRechargeTransaction,
   createRechargeTransaction,
   updatePaidTransaction,
-  getAllBuyVipTransactions
+  getAllBuyVipTransactions,
+  getByUserId
 };

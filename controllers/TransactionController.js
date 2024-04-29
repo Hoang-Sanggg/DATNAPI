@@ -148,6 +148,22 @@ const updatePaidTransaction = async (req, res, next) => {
     }
 }
 
+const getByUserId = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const data = await transactionService.getByUserId(userId)
+        if (data) {
+            return res.status(200).json({ result: true, message: "get all transactions by user successfully", data: data });
+        }
+        return res.status(400).json({ result: false, message: "get all transactions by user unsuccessfully" });
+
+    } catch (error) {
+        console.log("error get vip posts transactions: ", error)
+        return res.status(500).json({ result: false, message: "error all transactions by user" });
+    }
+}
+
+
 module.exports = {
     createTransactionHistory,
     getAllTransactionHistories,
@@ -159,5 +175,6 @@ module.exports = {
     getByIdTransaction,
     getRechargeTransaction,
     updatePaidTransaction,
-    getAllBuyVipTransactions
+    getAllBuyVipTransactions,
+    getByUserId
 };
