@@ -68,7 +68,7 @@ const messageCommunicateUser = async (userId) => {
         const latestMessages = {};
 
         messages.forEach(message => {
-            const counterpartId = (message.senderId == userId) ? message.receiverId : message.senderId;
+            const counterpartId = (message.senderId._id == userId) ? message.receiverId._id : message.senderId._id;
             if (!latestMessages[counterpartId] || message.createAt > latestMessages[counterpartId].createAt) {
                 latestMessages[counterpartId] = message;
             }
@@ -77,6 +77,7 @@ const messageCommunicateUser = async (userId) => {
 
         // Chuyển đổi object latestMessages thành mảng để trả về dưới dạng JSON
         const result = Object.values(latestMessages);
+        console.log("check sl message: ", result.length)
         return result
     } catch (error) {
         console.log("error message communicate user services: ", error)
