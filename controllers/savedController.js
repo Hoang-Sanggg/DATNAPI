@@ -9,7 +9,7 @@ const saveOrNotSave = async (req, res, next) => {
         const saved = await savedService.saveOrNotSave(requestDataSaved);
 
         if (saved) {
-            return res.status(200).json({ result: true, message: saved.message });
+            return res.status(200).json({ result: true, message: saved.message, saved: saved.saved });
         } else {
             return res.status(400).json({ result: false, message: 'addNotification null' });
         }

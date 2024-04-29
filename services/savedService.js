@@ -5,12 +5,12 @@ const saveOrNotSave = async (data) => {
         const dataSaved = await savedModel.find(data);
         if (dataSaved.length > 0) {
             await savedModel.findByIdAndDelete(dataSaved[0]._id)
-            return { message: "delete saved succesful" }
+            return { message: "delete saved succesful", saved: false }
         }
         if (dataSaved.length == 0) {
             const saved = new savedModel(data);
             saved.save();
-            return { message: "creata saved succesful" }
+            return { message: "creata saved succesful", saved: true }
         }
         // const saved = new savedModel(data);
         // saved.save();
