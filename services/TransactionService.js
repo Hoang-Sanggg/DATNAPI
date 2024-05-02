@@ -44,6 +44,7 @@ const getVipPostsTransactions = async (userId) => {
 const getAllBuyVipTransactions = async () => {
   try {
     const dataVipPosts = await TransactionModel.find({ postsId: { $ne: null } }).populate(['postsId', 'userId']);
+    console.log(dataVipPosts.length)
     return dataVipPosts
   } catch (error) {
     console.log('get vip post transactions error: ', error)

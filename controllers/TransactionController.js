@@ -56,7 +56,7 @@ const deleteTransactionHistory = async (req, res) => {
 
 const buyVipPosts = async (req, res, next) => {
     try {
-        const { amount, userId, postsId } = req.body
+        const { amount, userId, postsId } = req.query
         const paid = true;
         const description = {
             content: `Mua vip ${amount / 3000} ngày với giá ${amount} vnd`

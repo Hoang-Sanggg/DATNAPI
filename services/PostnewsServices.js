@@ -60,12 +60,6 @@ const getPostByidUser = async (userid) => {
       userid,
       activable: true,
     });
-    console.log(
-      "check data hidden: ",
-      postnewsByidUserHidden,
-      "check data presently",
-      postnewsByidUserPresently
-    );
     const postById = {
       posts: postnewsByidUser,
       postsHidden: postnewsByidUserHidden,
@@ -155,7 +149,7 @@ const getPostByidCategory = async (idCategory, page) => {
   }
 };
 // get postnewsbyid Categoory
-const getPostByBrandId = async (idCategory,brandid, page) => {
+const getPostByBrandId = async (idCategory, brandid, page) => {
   try {
     const currentDate = new Date();
     const perPage = 10;
@@ -166,7 +160,7 @@ const getPostByBrandId = async (idCategory,brandid, page) => {
       brandid: brandid,
       activable: true,
       isVip: true
-    }).skip(skip).limit(perPage).populate(["idCategory","userid", "brandid"]);
+    }).skip(skip).limit(perPage).populate(["idCategory", "userid", "brandid"]);
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -191,7 +185,7 @@ const getPostByBrandId = async (idCategory,brandid, page) => {
         brandid: brandid,
         activable: true,
         isVip: false
-      }).skip(normalSkip).limit(remainingPostsCount).sort({ created_AT: -1 }).populate(["idCategory","userid", "brandid"]);
+      }).skip(normalSkip).limit(remainingPostsCount).sort({ created_AT: -1 }).populate(["idCategory", "userid", "brandid"]);
       shuffledPosts.push(...normalPosts);
     }
     return shuffledPosts;
