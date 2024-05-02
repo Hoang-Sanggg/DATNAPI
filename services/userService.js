@@ -245,10 +245,6 @@ const rechargeBalance = async (userId, balance) => {
             console.log("không tìm thấy người dùng, id không đúng")
             return false
         }
-        if (user.balance < balance) {
-            console.log("người dùng không đủ tiền")
-            return false
-        }
         updatedBalance = user.balance + balance
         const updatedUser = await UserModel.findOneAndUpdate(
             { _id: userId },
