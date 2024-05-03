@@ -98,7 +98,7 @@ const getPostByidCategory = async (idCategory, page) => {
       const remainingPostsCount = perPage - vipPosts.length;
 
       let normalSkip;
-      if (page - totalPages == 0) {
+      if (page - totalPages <= 0) {
         normalSkip = 0
       } else if (page - totalPages > 0) {
         normalSkip = (page - 1) * perPage - totalVipPosts
