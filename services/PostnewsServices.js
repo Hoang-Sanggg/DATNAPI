@@ -96,12 +96,15 @@ const getPostByidCategory = async (idCategory, page) => {
     const shuffledPosts = shuffleArray(vipPosts);
     if (vipPosts.length < perPage) {
       const remainingPostsCount = perPage - vipPosts.length;
+
       let normalSkip;
       if (page - totalPages == 0) {
         normalSkip = 0
-      } else {
+      } else if (page - totalPages > 0) {
         normalSkip = (page - 1) * perPage - totalVipPosts
+        console.log("check data:", page, normalSkip, totalPages)
       }
+
       const normalPosts = await postModel.find({
         idCategory: idCategory,
         activable: true,
