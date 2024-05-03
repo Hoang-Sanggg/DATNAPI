@@ -178,7 +178,7 @@ const getPostByBrandId = async (idCategory, brandid, page) => {
     if (vipPosts.length < perPage) {
       const remainingPostsCount = perPage - vipPosts.length;
       let normalSkip;
-      if (page - totalPages == 0) {
+      if (page - totalPages <= 0) {
         normalSkip = 0
       } else {
         normalSkip = (page - 1) * perPage - totalVipPosts
